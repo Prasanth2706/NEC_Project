@@ -1,0 +1,50 @@
+.tool_selection_bottom_part {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14rem;
+}
+
+.tool_selection_bottom_part {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tool_selection_bottom_part p {
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #6a6a6a;
+    font-weight: normal;
+}
+
+.tool_area {
+    width: 1312px;
+    height: 834px;
+    margin-left: 5rem;
+}
+
+.job_area {
+    background: white;
+    width: 92%;
+    margin: 2rem auto;
+}
+
+.job_wrap {
+    background-color: #f5f6f9;
+}
+
+.job_topbar {
+    margin-left: 5rem
+}
+
+.tool_selection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tools_detail{
+
+    padding: 1rem 2rem;
+}

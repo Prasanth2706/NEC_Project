@@ -1,0 +1,14 @@
+.jobs_sec{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.job_arrow{
+    width: 16px;
+    margin-left: 10px;
+    height: 18px;
+}
+.create_new{
+    margin-left: 10px;
+}

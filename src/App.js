@@ -6,6 +6,7 @@ import Connection from './pages/connectionTable';
 import ConnectionDetail from './pages/connectionDetail';
 import ConnnectionProps from './pages/newConnection';
 import Jobs from './pages/Jobstable';
+import ToolSelection from './pages/toolSelection';
 
 function App() {
   return (
@@ -15,13 +16,17 @@ function App() {
           path='/'
           element={<Home />}
         ></Route>
-         <Route
+        <Route
           path='/connectionProps'
-          element={<ConnnectionProps/>}
+          element={<ConnnectionProps />}
         ></Route>
-         <Route
+        <Route
           path='/connectiondetail'
           element={<ConnectionDetail />}
+        ></Route>
+        <Route
+          path='/toolselection'
+          element={<ToolSelection />}
         ></Route>
         <Route
           path='/connections'
@@ -29,7 +34,7 @@ function App() {
         ></Route>
         <Route
           path='/jobs'
-          element={<Jobs/>}
+          element={<Jobs />}
         ></Route>
         <Route
           path='/signup'

@@ -11,10 +11,10 @@ const SignUp = () => {
         <div className='homeinfo'>
             <div className='left-part' >
                 <img src={wallpaper} alt="images" className='loginImage' />
-                <h1 className='Lorem-ipsum'>LOREM IPSUM</h1>
+                <h1 className='Lorem-ipsum'>NEC</h1>
             </div>
             <div className='right-part'>
-                <Heading title={"Welcome to Lorem Ipsums!"} />
+                <Heading title={"Welcome to NEC!"} />
                 <div className='details'>
                     <Textarea label={"User Name"} placeholder={"e.g. John Joe"} />
                     <Textarea label={"Email/ User Name"} placeholder={"e.g. John Joe"} />
