@@ -1,0 +1,26 @@
+.test_connection{
+    margin-left: 2rem;
+}
+
+.previous_step{
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    width: 174px;
+    height: 44px;
+    color: #0066eb;
+}
+
+.test_connection{
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0066eb;
+    height: 44px;
+    width: 158px;
+
+}
+.test_connection:hover{
+    background-color: #fff;
+}

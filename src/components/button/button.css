@@ -1,0 +1,23 @@
+.log{
+    width: 446px;
+    height: 55px;
+    padding: 18px 201px 18px 202px;
+    border-radius: 8px;
+    background-color: #0066eb;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+}
+.signup{
+    width: 456px;
+    height: 55px;
+    padding: 18px 201px 18px 202px;
+    border-radius: 8px;
+    background-color: #0066eb;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+
+}

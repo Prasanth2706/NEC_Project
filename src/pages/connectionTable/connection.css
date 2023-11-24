@@ -1,0 +1,46 @@
+.connection-table{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.table-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 59rem;
+}
+.joblist_Table{
+    margin: 4rem;
+    background-color: white;
+    height: 48rem;
+
+}
+/* .job_table{
+    background-color : "grey";
+    padding: 2rem;
+} */
+
+
+.job_table{
+    background-color: #f5f6f9;
+    padding: 2rem;
+}
+
+.main_connection_table{
+    padding: 1rem;
+}
+
+.editicon{
+    width: 24px;
+    height: 24px;
+}
+
+.deleteicon{
+    margin-left: 1rem;
+    width: 24px;
+    height: 24px;
+
+}
