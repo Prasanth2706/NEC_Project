@@ -1,0 +1,22 @@
+.status-shape {
+    width: 32px;
+    height: 32px;
+    margin: 0 0.5px 12px 35px;
+    padding: 5px;
+    background-color: #1fa72a;
+    border-radius: 30px;
+    display: inline-flex;
+}
+.status-num {
+    margin: 6px 0 0 10px;
+    color: white;
+    position: absolute;
+}
+.line{
+    background-color:black;
+    border-radius: 2px solid black;
+    
+}
+.status{
+    text-align: center;
+}

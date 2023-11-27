@@ -1,0 +1,37 @@
+.Rectangle-Copy {
+    /* width: 1312px; */
+    height: 834px;
+    /* margin: 32px 64px 0; */
+    padding: 32px;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  .migration-header{
+    /* width: 265px; */
+    height: 31px;
+    /* margin: 64px 54px 64px 0; */
+    font-family: Futura;
+    font-size: 30px;
+    font-weight: bold;
+    color: #222;
+  }
+
+  .migration-content {
+    width: 139px;
+    height: 200px;
+    /* margin: 0 182px 24px; */
+    margin-left: 43rem;
+    margin-top: 5rem;
+  }
+
+  .migration-footer {
+    width: 503px;
+    height: 108px;
+    /* margin: 24px 0 0; */
+    font-family: Helvetica;
+    font-size: 24px;
+    line-height: 1.5;
+    text-align: center;
+    color: #222;
+    margin-left: 35rem;
+  }

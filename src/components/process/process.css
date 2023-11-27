@@ -1,0 +1,21 @@
+.Oval {
+    width: 32px;
+    height: 32px;
+    margin: 0 0.5px 12px 35px;
+    padding: 7px 12px 8px;
+    background-color: #1fa72a;
+  }
+  .Rectangle-Copy {
+    width: 1312px;
+    height: 834px;
+    margin: 32px 64px 0;
+    padding: 32px;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  .Line-2 {
+    width: 231px;
+    height: 1px;
+    margin: 15.5px 32px 27.5px 0.5px;
+    border: solid 2px #c1c1c1;
+  }

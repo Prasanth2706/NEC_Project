@@ -6,6 +6,10 @@ import Connection from './pages/connectionTable';
 import ConnectionDetail from './pages/connectionDetail';
 import ConnnectionProps from './pages/newConnection';
 import Jobs from './pages/Jobstable';
+import MigrationStatus from './pages/migrationStatus';
+import { MigrationInitiated,MigrationFailed,MigrationSuccess} from './pages/migrationStatus/migrationService';
+import { ConnectionFailed, ConnectionSuccess,MigrationSuccess as Msuccess , MigrationFailed as Mfailed } from './components/popup/popup';
+
 
 function App() {
   return (
@@ -34,6 +38,14 @@ function App() {
         <Route
           path='/signup'
           element={<SignUp />}
+        ></Route>
+        <Route
+          path='/migration'
+          element={<MigrationInitiated/>}
+        ></Route>
+        <Route
+          path='/connectionsuccess'
+          element={<Mfailed/>}
         ></Route>
       </Routes>
     </div>

@@ -8,7 +8,7 @@ import './bottomButtons.css'
 const BottomButton = (props) => {
     return (
         <div>
-            <Button className={props.className === 'previous_step' ? 'previous_step' : props.className === 'test_connection' ? 'test_connection' : 'close'
+            <Button onClick={props.onClick} className={props.className === 'previous_step' ? 'previous_step' : props.className === 'test_connection' ? 'test_connection' : 'close'
             } icon={props.name === 'close' ? <CloseOutlined /> : props.name === 'Previous Step' ? <LeftOutlined /> : null}>{props.name}</Button>
         </div>
     );
