@@ -1,4 +1,4 @@
-.status-shape {
+/* .status-shape {
     width: 32px;
     height: 32px;
     margin: 0 0.5px 12px 35px;
@@ -19,4 +19,39 @@
 }
 .status{
     text-align: center;
-}
+} */
+
+
+.status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+  }
+  
+  .status-shape {
+    display: flex;
+    align-items: center;
+  }
+  
+  .status-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    /* background-color: white; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    font-weight: bold;
+    border: 1px solid grey;
+  }
+  
+  .line {
+    width: 40rem;
+    height: 2px;
+    background-color: #ccc; /* Color for lines */
+  }
