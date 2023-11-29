@@ -1,15 +1,18 @@
 import { Button } from 'antd';
 import React from 'react';
-import { CloseOutlined, LeftOutlined } from '@ant-design/icons';
+import { CloseOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import './bottomButtons.css'
+import { useNavigate } from "react-router-dom"
+
 
 
 
 const BottomButton = (props) => {
+    const navigate = useNavigate();
     return (
-        <div>
-            <Button className={props.className === 'previous_step' ? 'previous_step' : props.className === 'test_connection' ? 'test_connection' : 'close'
-            } icon={props.name === 'close' ? <CloseOutlined /> : props.name === 'Previous Step' ? <LeftOutlined /> : null}>{props.name}</Button>
+        <div onClick={props.name === 'next' ? () => navigate('/tooldetail')  : undefined}>
+            {props.IconSide === 'right' ? <Button className='next'>{props.name} <RightOutlined /> </Button > : <Button className={props.className === 'previous_step' ? 'previous_step' : props.className === 'run' ? 'run' : props.className === 'next' ? 'next' : props.className === 'test_connection' ? 'test_connection' : 'close'
+            } icon={props.name === 'Close' ? <CloseOutlined /> : props.name === 'Previous Step' ? <LeftOutlined /> : null}>{props.name}</Button>}
         </div>
     );
 };

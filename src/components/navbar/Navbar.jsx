@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./navbar.css";
-import notify from '../../Assets/notify.png'
-import downArrow from "../../Assets/downarrow.png"
+
+import { Images } from "../../assets/Images";
 
 const Navbar = () => {
   const [activePage, setActivePage] = useState("jobs");
@@ -44,14 +44,15 @@ const Navbar = () => {
 
       <div className="right-section">
         <div className="notification-icon">
-          <img src={notify} class="Group" alt="notify"/>
+          {/* <img src={notify} class="Group" alt="notify"/> */}
+          <img src={Images.notify} alt="" />
         </div>
         <div className="profile">
           <div className="profile-image"> </div>
           <div class="Oval"></div>
           <span className="profile-name">Jasmin Mishra</span>
           <span className="dropdown-icon">
-            <img src={downArrow} class="Group" alt="downarrow"/>
+            <img src={Images.downarrow} class="Group" alt="downarrow"/>
           </span>
         </div>
       </div>

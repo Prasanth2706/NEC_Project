@@ -24,3 +24,32 @@
 .test_connection:hover{
     background-color: #fff;
 }
+
+.close{
+    width: 135px;
+    height: 44px;
+    padding: 10px 32px;
+    border-radius: 4px;
+    margin-left: 2rem;
+    /* background-color: #0066eb; */
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px #0066eb;
+}
+.next{
+    width: 127px;
+    height: 44px;
+    padding: 10px 32px;
+    margin-left: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+    background-color: #0066eb;
+}
+.run{
+    width: 127px;
+    height: 44px;
+    margin-left: 2rem;
+    padding: 13px 49px 14px 50px;
+    border-radius: 4px;
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+    background-color: #dadada;
+}

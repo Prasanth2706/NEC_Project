@@ -1,0 +1,55 @@
+.tool_detail_wrap{
+    padding: 1rem 2rem;
+    background-color: white;
+    /* height: 47rem; */
+    padding: 2rem 5rem;
+    background-color: #f5f6f9;
+}
+
+.tool_detail_area   {
+    padding: 1rem 2rem;
+    background-color: white;
+    /* height: 47rem; */
+}
+.main_detail{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    align-items: center;
+
+}
+.main_detial_row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.toolDetail_bottom_button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 2rem;
+
+    justify-content: space-between;
+}
+
+.toolDetail_bottom_part{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 19rem;
+    align-items: center;
+}
+
+.toolDetail_bottom_part p{
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #6a6a6a;
+    font-weight: normal;
+}
+.database_area{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5rem;
+}

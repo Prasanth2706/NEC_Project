@@ -3,12 +3,10 @@ import TableHeading from '../../components/tableHeading'
 import Filter from '../../components/filter'
 import Search from '../../components/search/search'
 import CreateNew from '../../components/createNewButton'
-import editImage from '../../Assets/group.png'
-
 import { Table } from 'antd'
 import './connection.css'
 import Navbar from '../../components/navbar/Navbar'
-import ver from '../../Assets/delete.png'
+import { Images } from '../../assets/Images'
 
 const Connection = () => {
   const conectionColumns = [
@@ -34,7 +32,7 @@ const Connection = () => {
       key: '1',
       name: '[\\SVM0\\\SVM0\Finace\CsPolicy\CsPolicy.xml]',
       type: 'FlatFile',
-      image: [<img src={editImage} className='editicon' onClick={() => console.log('enter1')} alt="edit" />, <img src={ver} className='deleteicon'  onClick={() => console.log('enter2')} alt="edit" />],
+      image: [<img src={Images.edit} className='editicon' onClick={() => console.log('enter1')} alt="edit" />, <img src={Images.delete} className='deleteicon' onClick={() => console.log('enter2')} alt="edit" />],
 
 
     }

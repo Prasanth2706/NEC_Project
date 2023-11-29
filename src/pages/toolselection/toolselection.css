@@ -1,0 +1,35 @@
+.main_tool_area{
+    padding: 1rem 2rem;
+    background-color: white;
+    height: 47rem;
+}
+.job_wrap{
+    padding: 2rem 5rem;
+    background-color: #f5f6f9;
+}
+
+.main_tool_detail{
+    display: flex;
+    flex-direction: row;
+    margin-top: -2rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.job_bottom_part{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14rem;
+}
+.job_bottom_button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.job_bottom_part p{
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #6a6a6a;
+    font-weight: normal;
+}

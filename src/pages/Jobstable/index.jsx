@@ -3,12 +3,13 @@ import TableHeading from '../../components/tableHeading'
 import Filter from '../../components/filter'
 import Search from '../../components/search/search'
 import CreateNew from '../../components/createNewButton'
-import editImage from '../../Assets/group.png'
+// import editImage from '../../Assets/group.png'
 
 import { Badge, Table } from 'antd'
 import './jobstable.css'
 import Navbar from '../../components/navbar/Navbar'
-import ver from '../../Assets/delete.png'
+import { Images } from '../../assets/Images'
+// import ver from '../../Assets/delete.png'
 
 const Jobs = () => {
     const JobsColumns = [

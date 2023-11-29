@@ -10,7 +10,6 @@
 
 .rightarrow {
     margin-right: 6px;
-
 }
 
 .main_connection_detail {
@@ -51,6 +50,7 @@
 .connection_bottom_button {
     display: flex;
     flex-direction: row;
+
     align-items: center;
 }
 
@@ -107,7 +107,7 @@
     margin: 0 320px 9px 0;
     opacity: 0.54;
     font-family: Poppins;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
     /* font-stretch: normal; */
     color: #000;

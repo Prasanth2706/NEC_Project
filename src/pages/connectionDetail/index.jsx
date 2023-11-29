@@ -23,7 +23,7 @@ const ConnectionDetail = () => {
                         <a href="sd">Save as Draft</a>
                     </div>
                     <div className='connection_input'>
-                        <Textarea label={"Connection Name"} placeholder={"Lorem Connection"} className={"connection"} />
+                        <Textarea label={"Connection Name"} placeholder={"Lorem Connection"} className={"connection"} typevalue ={"text"}/>
                         <div className='dropdown'>
                             <span className='drop_title'>
                                 Database Type
