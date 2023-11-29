@@ -6,9 +6,7 @@ import correctIcon from '../../Assets/correct.svg';
 import wrongIcon from '../../Assets/wrong.png'
 import successAnimation from '../../Assets/Animation - 1701147458535.gif'
 
-
-
-const ConnectionSuccess = () => {
+const ConnectionSuccess = (props) => {
   const data = {title:"Connection test successful.", icon:correctIcon,
   image:successImage,
   paragraph:"Thanks for being patient, connection test is successfully completed"

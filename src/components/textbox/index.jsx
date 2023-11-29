@@ -2,20 +2,21 @@ import React, { useState } from 'react'
 import './textbox.css'
 
 const Textarea = (props) => {
+    const {onChange, label, placeholder} = props
     const [value, setValue] = useState();
-    const handleEmailChange = (e) => {
-        setValue(e.target.value);
-    };
+    // const handleEmailChange = (e) => {
+    //     setValue(e.target.value);
+    // };
 
     return (
         <div className='mail'>
-            <label className={props.label === 'Confirm Password' ? 'ConfirmPassword' : props.label === 'Connection Name' ? 'connection' : 'label'} >{props.label}</label>
+            <label className={onChange === 'Confirm Password' ? 'ConfirmPassword' : label === 'Connection Name' ? 'connection' : 'label'} >{props.label}</label>
             <input
                 type='email'
                 value={value}
-                onChange={handleEmailChange}
+                onChange={onChange}
                 required
-                placeholder={props.placeholder}
+                placeholder={placeholder}
                 className='email-input'
             />
         </div>

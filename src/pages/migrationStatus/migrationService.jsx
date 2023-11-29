@@ -1,6 +1,5 @@
 import React from "react";
 import failedImage from "../../Assets/404-error-page-not-found-with-people-connecting-a-plug-rafiki.png";
-// import successImage from "../../Assets/done-rafiki-2.png"
 import MigrationStatus from ".";
 import successImage from "../../Assets/Animation - 1701147458535.gif";
 

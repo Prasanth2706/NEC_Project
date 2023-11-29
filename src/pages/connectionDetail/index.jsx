@@ -1,5 +1,5 @@
 import { RightOutlined } from '@ant-design/icons'
-import React from 'react'
+import React, { useState } from 'react'
 import TableHeading from '../../components/tableHeading'
 import Textarea from '../../components/textbox'
 import Dropdown from '../../components/dropdown'
@@ -8,6 +8,10 @@ import Navbar from '../../components/navbar/Navbar'
 import './connectionDetail.css'
 // import PopupCard from '../../components/popup/popupcard'
 import { ConnectionSuccess, ConnectionFailed } from '../../components/popup/popup';
+import PopupCard from '../../components/popup/popupcard'
+import successAnimation from '../../Assets/Animation - 1701147458535.gif'
+import successImage from "../../Assets/done-rafiki-2.png"
+import correctIcon from '../../Assets/correct.svg';
 
 
 // function TestDetails(){
@@ -16,6 +20,29 @@ import { ConnectionSuccess, ConnectionFailed } from '../../components/popup/popu
 // }
 
 const ConnectionDetail = () => {
+
+    const [isPopupVisible, setPopupVisible] = useState(false);
+    const [data,setData] = useState(false);
+
+  const handleButtonClick = () => {
+    setPopupVisible(true);
+  };
+  const connectiondata = {title:"Connection test successful.", icon:correctIcon,
+  image:successImage,
+  paragraph:"Thanks for being patient, connection test is successfully completed"
+}
+
+  const handlePopupClose = () => {
+    setPopupVisible(false);
+  };
+
+  const clickData = () => {
+    setData(true);
+    console.log("Data ==> ", data);
+  };
+
+
+
     return (
         <>
             <Navbar />
@@ -56,10 +83,13 @@ const ConnectionDetail = () => {
                         <p>Started creating on: 25-02-2022  |  12.00 PM</p>
                         <div className='connection_bottom_button'>
                             <BottomButton name={"Previous Step"} className={"previous_step"} />
-                            <BottomButton  name={"Test Connection"} className={"test_connection"} />
+                            <BottomButton onClick={clickData} name={"Test Connection"} className={"test_connection"} />  
                         </div>
                     </div>
                 </div>
+
+                <PopupCard data = {connectiondata} display={data} closingPopUp={()=>{setData(!data)}}/>
+
             </div>
         </>
     )
