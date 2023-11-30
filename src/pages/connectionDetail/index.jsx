@@ -1,5 +1,5 @@
 import { RightOutlined } from '@ant-design/icons'
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import TableHeading from '../../components/tableHeading'
 import Textarea from '../../components/textbox'
 import Dropdown from '../../components/dropdown'
@@ -12,17 +12,79 @@ import PopupCard from '../../components/popup/popupcard'
 import successAnimation from '../../Assets/Animation - 1701147458535.gif'
 import successImage from "../../Assets/done-rafiki-2.png"
 import correctIcon from '../../Assets/correct.svg';
+import axios from 'axios';
 
 
-// function TestDetails(){
-//     console.log("welcome");
-//     return <ConnectionSuccess/>
-// }
 
 const ConnectionDetail = () => {
 
     const [isPopupVisible, setPopupVisible] = useState(false);
     const [data,setData] = useState(false);
+
+    const [name, setName] = useState("");
+    const [type, setType] = useState("");
+    const [host, setHost] = useState("");
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [database, setDatabase] = useState("");
+    const [tableName, setTableName] = useState("");
+    
+
+
+    const handleConnection = () => {
+
+        axios
+        .post("http://localhost:5000/testconnection?dhjasjasdj&", {
+          name: name,
+          type: type,
+          host: host,
+          username: userName,
+          password: password,
+          database: database,
+          tableName:tableName,
+
+        })
+        .then(
+          (response) => {
+            // localStorage.setItem(
+            //   "access-token",
+            //   response?.data?.result?.accessToken
+            // );
+            // localStorage.setItem(
+            //   "refresh-token",
+            //   response?.data?.result?.refreshToken
+            // );
+            console.log(response, "response");
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+    }
+
+    const handleNameChange = (e) => {   
+        setName(e.target.value);
+    };
+    const handleTypeChange = (e) => {
+        setType(e.target.value);
+    };
+    const handleHostChange = (e) => {
+        setHost(e.target.value);
+    };
+    const handleUserNameChange = (e) => {
+        setUserName(e.target.value);
+    };
+    const handlePassChange = (e) => {
+        setPassword(e.target.value);
+    };
+    const handleDatabaseChange = (e) => {
+        setDatabase(e.target.value);
+    };
+    const handleTableNameChange =(e) => {
+        setTableName(e.target.value);
+    }
+
 
   const handleButtonClick = () => {
     setPopupVisible(true);
@@ -40,7 +102,6 @@ const ConnectionDetail = () => {
     setData(true);
     console.log("Data ==> ", data);
   };
-
 
 
     return (
@@ -83,7 +144,7 @@ const ConnectionDetail = () => {
                         <p>Started creating on: 25-02-2022  |  12.00 PM</p>
                         <div className='connection_bottom_button'>
                             <BottomButton name={"Previous Step"} className={"previous_step"} />
-                            <BottomButton onClick={clickData} name={"Test Connection"} className={"test_connection"} />  
+                            <BottomButton onClick={clickData} name={"Test Connection"} className={"test_connection"} onChange={handleConnection}/>  
                         </div>
                     </div>
                 </div>

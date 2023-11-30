@@ -15,7 +15,7 @@ const Navbar = () => {
     <header className="main-header">
       <div className="left-section">
         <div className="logo"></div>
-        <span class="LOGOIPSUM">LOGOIPSUM</span>
+        <span class="LOGOIPSUM">NEC</span>
       </div>
 
       <div className="center-section">
@@ -53,6 +53,7 @@ const Navbar = () => {
           <span className="dropdown-icon">
             <img src={downArrow} class="Group" alt="downarrow"/>
           </span>
+          {/* <span className="profile-name">Logout</span> */}
         </div>
       </div>
     </header>
