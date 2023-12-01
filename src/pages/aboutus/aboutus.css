@@ -1,0 +1,23 @@
+.heading{
+     font-family: Futura;
+     font-size: 30px;
+     font-weight: bold;
+     color: #222;
+     margin-top: 1rem;
+}
+.content{
+    width: 503px;
+    height: 108px;
+    font-family: Helvetica;
+    font-size: 24px;
+    line-height: 1.5;
+    text-align: center;
+    color: #222;
+    margin-left: 35rem;
+    margin-top: 12rem;
+}
+.connection_bottom_part{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20rem;
+}

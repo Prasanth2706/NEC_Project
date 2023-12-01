@@ -9,6 +9,7 @@ import Jobs from './pages/Jobstable';
 import MigrationStatus from './pages/migrationStatus';
 import { MigrationInitiated,MigrationFailed,MigrationSuccess} from './pages/migrationStatus/migrationService';
 import { ConnectionFailed, ConnectionSuccess,MigrationSuccess as Msuccess , MigrationFailed as Mfailed } from './components/popup/popup';
+import AboutUs from './pages/aboutus/aboutus';
 
 
 function App() {
@@ -47,7 +48,12 @@ function App() {
           path='/connectionsuccess'   
           element={<ConnectionSuccess/>}
         ></Route>
+        <Route
+          path='/aboutus'   
+          element={<AboutUs/>}
+        ></Route>
       </Routes>
+      
     </div>
   );
 }
