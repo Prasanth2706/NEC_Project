@@ -45,13 +45,18 @@
 .connection_bottom_part {
     display: flex;
     justify-content: space-between;
-    margin-top: 14rem;
+    margin-top: 6rem;
 }
 
 .connection_bottom_button {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+.user
+{
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -111,4 +116,8 @@
     font-weight: normal;
     /* font-stretch: normal; */
     color: #000;
+}
+.port{
+    display: flex;
+    justify-content: space-between;
 }

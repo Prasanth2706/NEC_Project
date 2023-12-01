@@ -41,7 +41,7 @@ function App() {
         ></Route>
         <Route
           path='/migration'
-          element={<MigrationInitiated/>}
+          element={<MigrationFailed/>}
         ></Route>
         <Route
           path='/connectionsuccess'   
