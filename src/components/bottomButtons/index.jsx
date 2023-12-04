@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom"
 
 
 const BottomButton = (props) => {
-    console.log(props)
+    console.log(props,"props")
     const navigate = useNavigate();
     return (
-        <div onClick={props.name === 'next' ? () => navigate('/tooldetail')  : ''}>
+        <div onClick={props.name === 'next' ? () => navigate('/tooldetail')  : props.onClick}>
             {props.IconSide === 'right' ? <Button className='next'>{props.name} <RightOutlined /> </Button > : <Button className={props.className === 'previous_step' ? 'previous_step' : props.className === 'run' ? 'run' : props.className === 'next' ? 'next' : props.className === 'test_connection' ? 'test_connection' : 'close'
             } icon={props.name === 'Close' ? <CloseOutlined /> : props.name === 'Previous Step' ? <LeftOutlined /> : null}>{props.name}</Button>}
         </div>

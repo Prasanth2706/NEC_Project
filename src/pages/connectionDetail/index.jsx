@@ -25,7 +25,6 @@ const ConnectionDetail = () => {
     const [tableName, setTableName] = useState("");
 
     const handleConnection = () => {
-        debugger
         const accessToken = localStorage.getItem("access-token");
         console.log(accessToken, "accessToken");
         axios
@@ -155,7 +154,6 @@ const ConnectionDetail = () => {
                             <Dropdown
                                 value={type}
                                 handleTypeChange={handleTypeChange}
-                                handleConnection={handleConnection}
                             />
                         </div>
                     </div>
@@ -214,10 +212,9 @@ const ConnectionDetail = () => {
                                 className={"previous_step"}
                             />
                             <BottomButton
-                                onClick={hello}
                                 name={"Test Connection"}
                                 className={"test_connection"}
-                                onChange={handleConnection}
+                                onClick={handleConnection}
                             />
                         </div>
                     </div>
