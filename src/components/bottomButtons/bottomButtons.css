@@ -19,9 +19,22 @@
     background-color: #0066eb;
     height: 44px;
     width: 158px;
-
 }
 .test_connection:hover{
+    background-color: #fff;
+}
+
+.save_connection{
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    margin-left: 2rem;
+    background-color: #0066eb;
+    height: 44px;
+    width: 158px;
+}
+.save_connection:hover{
     background-color: #fff;
 }
 

@@ -2,6 +2,8 @@
     padding: 1rem 2rem;
     background-color: white;
     height: 47rem;
+    display: flex;
+    flex-direction: column;
 }
 .job_wrap{
     padding: 2rem 5rem;
@@ -20,7 +22,8 @@
 .job_bottom_part{
     display: flex;
     justify-content: space-between;
-    margin-top: 14rem;
+    margin-top: auto;
+    /* margin-top: 14rem; */
 }
 .job_bottom_button{
     display: flex;

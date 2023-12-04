@@ -23,6 +23,9 @@ const ConnectionDetail = () => {
     const [password, setPassword] = useState("");
     const [database, setDatabase] = useState("");
     const [tableName, setTableName] = useState("");
+    const [fullConnectionProps, setFullConnectionProps] = useState(false)
+    const [enableSaveButton, setenableSaveButton] = useState(false)
+    const [connectionDetailBottom, setConnectionDetailBottom] = useState(true)
 
     const handleConnection = () => {
         const accessToken = localStorage.getItem("access-token");
@@ -52,6 +55,7 @@ const ConnectionDetail = () => {
                     console.log(response, "response");
                     if (response.status === 200) {
                         setData(true);
+                        setenableSaveButton(true)
                         console.log("hello");
                     }
                 },
@@ -60,7 +64,55 @@ const ConnectionDetail = () => {
                         console.log(error, "this is Error ");
                         setData(true);
                         setIsError(true);
+                        setenableSaveButton(false)
                     }
+                }
+            );
+        // setData(true);
+    };
+
+
+
+    const handleSaveConnection = () => {
+        const accessToken = localStorage.getItem("access-token");
+        console.log(accessToken, "accessToken");
+        axios
+            .post(
+                "http://localhost:5000/testconnection?",
+                {
+                    name: name,
+                    type: type,
+                    port: port,
+                    host: host,
+                    username: userName,
+                    password: password,
+                    database: database,
+                    tableName: tableName,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-auth-token": accessToken,
+                    },
+                }
+            )
+            .then(
+                (response) => {
+                    console.log(response, "response");
+                    // if (response.status === 200) {
+                    //     // setData(true);
+                    //     setenableSaveButton(true)
+                    //     console.log("hello");
+                    // }
+                },
+                (error) => {
+
+                    // if (error.response.status === 400) {
+                    console.log(error, "this is Error ");
+                    //     setData(true);
+                    //     setIsError(true);
+                    //     setenableSaveButton(false)
+                    // }
                 }
             );
         // setData(true);
@@ -71,6 +123,8 @@ const ConnectionDetail = () => {
     };
     const handleTypeChange = (value) => {
         setType(value);
+        setFullConnectionProps(true);
+        setConnectionDetailBottom(false)
     };
     const handleHostChange = (e) => {
         setHost(e.target.value);
@@ -156,68 +210,79 @@ const ConnectionDetail = () => {
                                 handleTypeChange={handleTypeChange}
                             />
                         </div>
-                    </div>
 
-                    <div className="sub_connection_detail">
-                        <TableHeading title={"MySQL Connection Properties:"} />
                     </div>
-                    <div className="connection_props">
-                        <Textarea
-                            label={"User Name"}
-                            placeholder={"Admin"}
-                            value={userName}
-                            onChange={handleUserNameChange}
-                        />
-                        <Textarea
-                            label={"Password"}
-                            placeholder={"password"}
-                            value={password}
-                            onChange={handlePassChange}
-                        />
-                    </div>
-                    <div className="port">
-                        <Textarea
-                            label={"Port"}
-                            placeholder={"3306"}
-                            value={port}
-                            onChange={handlePortChange}
-                        />
-                        <Textarea
-                            label={"Host"}
-                            placeholder={"127.0.0.1"}
-                            value={host}
-                            onChange={handleHostChange}
-                        />
-                    </div>
-                    <div className="user">
-                        <Textarea
-                            label={"Tablename"}
-                            placeholder={"order_details"}
-                            value={tableName}
-                            onChange={handleTableNameChange}
-                        />
-                        <Textarea
-                            label={"Database"}
-                            placeholder={"pmtool"}
-                            value={database}
-                            onChange={handleDatabaseChange}
-                        />
-                    </div>
-
-                    <div className="connection_bottom_part">
-                        <p>Started creating on: 25-02-2022 | 12.00 PM</p>
-                        <div className="connection_bottom_button">
-                            <BottomButton
-                                name={"Previous Step"}
-                                className={"previous_step"}
+                    {connectionDetailBottom && <div className='connectionprop_bottom_button'>
+                        <BottomButton name={"Close"} className={"previous_step"} />
+                        <BottomButton name={"Test Connection"} className={"test_connection"} />
+                    </div>}
+                    {fullConnectionProps && <div className='second_sub_connection_detail'>
+                        <div className="sub_connection_detail">
+                            <TableHeading title={"MySQL Connection Properties:"} />
+                        </div>
+                        <div className="connection_props">
+                            <Textarea
+                                label={"User Name"}
+                                placeholder={"Admin"}
+                                value={userName}
+                                onChange={handleUserNameChange}
                             />
-                            <BottomButton
-                                name={"Test Connection"}
-                                className={"test_connection"}
-                                onClick={handleConnection}
+                            <Textarea
+                                label={"Password"}
+                                placeholder={"password"}
+                                value={password}
+                                onChange={handlePassChange}
                             />
                         </div>
-                    </div>
+                        <div className="port">
+                            <Textarea
+                                label={"Port"}
+                                placeholder={"3306"}
+                                value={port}
+                                onChange={handlePortChange}
+                            />
+                            <Textarea
+                                label={"Host"}
+                                placeholder={"127.0.0.1"}
+                                value={host}
+                                onChange={handleHostChange}
+                            />
+                        </div>
+                        <div className="user">
+                            <Textarea
+                                label={"Tablename"}
+                                placeholder={"order_details"}
+                                value={tableName}
+                                onChange={handleTableNameChange}
+                            />
+                            <Textarea
+                                label={"Database"}
+                                placeholder={"pmtool"}
+                                value={database}
+                                onChange={handleDatabaseChange}
+                            />
+                        </div>
+
+                        <div className="connection_bottom_part">
+                            <p>Started creating on: 25-02-2022 | 12.00 PM</p>
+                            <div className="connection_bottom_button">
+                                <BottomButton
+                                    name={"Previous Step"}
+                                    className={"previous_step"}
+                                />
+                                <BottomButton
+                                    name={"Test Connection"}
+                                    className={"test_connection"}
+                                    onClick={handleConnection}
+                                />
+                                {enableSaveButton && <BottomButton
+                                    name={"Save Connection"}
+                                    className={"save_connection"}
+                                    onClick={handleSaveConnection}
+                                />}
+                            </div>
+                        </div>
+                    </div>}
                 </div>
 
                 {data && (
