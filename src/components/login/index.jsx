@@ -2,7 +2,7 @@ import React from 'react'
 import './login.css'
 const Login = (props) => {
     return (
-        <div>
+        <div onClick={props.onClick}>
             <a href="##">{props.value}</a>
         </div>
     )

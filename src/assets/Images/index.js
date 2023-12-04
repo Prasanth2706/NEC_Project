@@ -14,5 +14,8 @@ export const Images={
     eye: require('./eye.png'),
     awsimage: require('./awsimage.png'),
     bitmap: require('./bitmap.png'),
-    tickIcon:require('./tick.png')
+    animation: require('./animation.gif'),
+    tickIcon:require('./tick.png'),
+    upload: require('./upload.png'),
+    xmlIcon: require('./xml.svg')
 }

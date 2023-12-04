@@ -1,20 +1,21 @@
-// import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './statusbar.css';
-// import { Images } from '../../assets/Images';
+import { Images } from '../../assets/Images';
 
-const StatusBar = () => {
+const StatusBar = ({stepIndicator}) => {
+    console.log(stepIndicator,'step')
     // {{stepIndicator.step1 ? <img src={Images.tickIcon} /> : 1}}
     // <div className='line' style={stepIndicator.step1 ? { backgroundColor: 'green' } : {}}></div>
 
-   
+
     return (
         <>
             <div className='status-bar'>
                 <div className='status-shape'>
-                    <div className='status-num' style={{ backgroundColor: 'green', color: 'white' }}>1</div>
+                    <div className='status-num' style={{ backgroundColor: 'green', color: 'white' }}>{ stepIndicator?.step1 ? <img src={Images.tickIcon} /> : 1 }</div>
                 </div>
 
-                <div className='line' ></div>
+                <div className='line'style={stepIndicator?.step1 ? { backgroundColor: 'green' } : {}} ></div>
 
                 <div className='status-shape'>
                     <div on className='status-num'  >2</div>

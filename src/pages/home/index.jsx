@@ -7,11 +7,15 @@ import Account from "../../components/register";
 import axios from "axios";
 import Login from "../../components/login";
 import { Images } from "../../assets/Images";
+import { useNavigate } from "react-router-dom";
+import PasswordInput from "../../components/passwordInput";
 // import {observer} from 'mobx-react-lite';
 // import { Observer } from 'mobx-react-lite'
 // import ProjectStore from '../../Apistore'
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,6 +45,17 @@ const Home = () => {
   };
 
   const handleForgotPassword = () => {
+    axios.post('http://localhost:5000/forgotpassword', {
+      email: emailOrUsername,
+    })
+      .then(
+        (response) => {
+          console.log(response, "response");
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     console.log(`sending password reset email to ${emailOrUsername}`);
   };
 
@@ -55,10 +70,10 @@ const Home = () => {
     <div className="homeinfo">
       <div className="left-part">
         <img src={Images.wallpaper} alt="" className="left_image" />
-        <h1 className="Lorem-ipsum">LOREM IPSUM</h1>
+        <h1 className="Lorem-ipsum">NEC Project</h1>
       </div>
       <div className="right-part">
-        <Heading title={"Welcome to Lorem Ipsum!"} />
+        <Heading title={"Welcome to NEC"} />
         <div className="details">
           <Textarea
             label={"Email/ User Name"}
@@ -67,10 +82,17 @@ const Home = () => {
             value={emailOrUsername}
             onChange={handleChange}
           />
-          <Textarea
+          {/* <Textarea
             label={"password"}
             placeholder={"Enter Password"}
             typevalue={"password"}
+            value={password}
+            onChange={handlePassChange}
+          /> */}
+
+          <PasswordInput
+            label={"Password"}
+            placeholder={"Enter Password"}
             value={password}
             onChange={handlePassChange}
           />
@@ -81,7 +103,7 @@ const Home = () => {
         <Button name={"Login"} className={"log"} onChange={handleLogin} />
         <div className="account">
           <Account name={"Don't have an account?"} />
-          <Login value={"Register now"} />
+          <Login value={"Register now"} onClick={() => navigate('/signup')} />
         </div>
       </div>
     </div>

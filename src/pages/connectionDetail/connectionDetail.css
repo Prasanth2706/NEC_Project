@@ -24,6 +24,8 @@
     padding: 1rem 2rem;
     background-color: white;
     height: 47rem;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -44,7 +46,7 @@
 .connection_bottom_part {
     display: flex;
     justify-content: space-between;
-    margin-top: 14rem;
+    margin-top: auto;
 }
 
 .connection_bottom_button {
@@ -54,7 +56,16 @@
     align-items: center;
 }
 
+.user {
+    display: flex;
+    justify-content: space-between;
 
+}
+
+.port {
+    display: flex;
+    justify-content: space-between;
+}
 
 .outer_wrap {
     padding: 2rem 5rem;

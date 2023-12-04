@@ -1,17 +1,21 @@
-.tool_detail_wrap{
+.tool_detail_wrap {
     padding: 1rem 2rem;
     background-color: white;
     /* height: 47rem; */
     padding: 2rem 5rem;
     background-color: #f5f6f9;
+
 }
 
-.tool_detail_area   {
+.tool_detail_area {
     padding: 1rem 2rem;
     background-color: white;
-    /* height: 47rem; */
+    display: flex;
+    flex-direction: column;
+    height: 47rem;
 }
-.main_detail{
+
+.main_detail {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -19,13 +23,15 @@
     align-items: center;
 
 }
-.main_detial_row{
+
+.main_detial_row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-.toolDetail_bottom_button{
+
+.toolDetail_bottom_button {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -34,22 +40,73 @@
     justify-content: space-between;
 }
 
-.toolDetail_bottom_part{
+.toolDetail_bottom_part {
     display: flex;
     justify-content: space-between;
-    margin-top: 19rem;
+    /* margin-top: 19rem; */
     align-items: center;
+    position: sticky;
+    bottom: 0;
+    margin-top: auto;
 }
 
-.toolDetail_bottom_part p{
+.toolDetail_bottom_part p {
     font-family: Helvetica;
     font-size: 14px;
     color: #6a6a6a;
     font-weight: normal;
 }
-.database_area{
+
+.database_area {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 5rem;
+}
+
+.file_details {
+    display: flex;
+    flex-direction: row;
+    width: 25rem;
+    height: 20px;
+    border: dashed 2px #d4d3d6;
+    padding: 19px 19px 24px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.file_img {
+    height: 32px;
+    width: 32px;
+}
+
+.file_name {
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica;
+    font-size: 12px;
+    font-weight: bold;
+    color: #222;
+    width: 100%
+}
+
+.file_size {
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica;
+    font-size: 10px;
+    font-weight: normal;
+
+    color: #6a6a6a;
+}
+
+.file_area {
+    display: flex;
+    justify-content: space-between;
+    width: 5rem;
+}
+
+.file_specs {
+    margin-left: 10px;
 }

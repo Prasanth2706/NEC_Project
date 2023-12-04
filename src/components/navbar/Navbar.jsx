@@ -3,7 +3,7 @@ import "./navbar.css";
 
 import { Images } from "../../assets/Images";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [activePage, setActivePage] = useState("jobs");
 
   const handlePageChange = (page) => {
@@ -50,7 +50,7 @@ const Navbar = () => {
         <div className="profile">
           <div className="profile-image"> </div>
           <div class="Oval"></div>
-          <span className="profile-name">Jasmin Mishra</span>
+          <span className="profile-name">{props.emailOrUsername}</span>
           <span className="dropdown-icon">
             <img src={Images.downarrow} class="Group" alt="downarrow"/>
           </span>

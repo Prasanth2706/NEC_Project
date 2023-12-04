@@ -10,6 +10,7 @@ import { Images } from '../../assets/Images'
 
 const Connection = () => {
   const conectionColumns = [
+
     {
       title: 'Name',
       dataIndex: 'name',
@@ -18,12 +19,19 @@ const Connection = () => {
     {
       title: 'Type',
       dataIndex: 'type',
+      className: 'edit'
     },
     {
       dataIndex: 'image',
+      align: 'right',
+      width: "100%",
+
     },
     {
       dataIndex: 'image1',
+      // align: 'right'
+
+
     }
   ]
 
@@ -37,6 +45,8 @@ const Connection = () => {
 
     }
   ]
+
+  
 
   return (
 
