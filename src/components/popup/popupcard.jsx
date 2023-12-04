@@ -6,7 +6,7 @@ import closeIcon from "../../Assets/group-21.png";
 import correctIcon from "../../Assets/correct.svg";
 
 const PopupCard = (props) => {
-
+  console.log(props, "props popup");
   // const [isPopupVisible, setPopupVisible] = useState(false);
 
   // const handleButtonClick = () => {
@@ -17,32 +17,38 @@ const PopupCard = (props) => {
   //   setPopupVisible(false);
   // };
 
-
-
   return (
-  
     <>
-      {
-        props.display &&
-      <div className="overlay">
-        <div className="popup">
-          <div class="header">
-            <div>
-              {props.data.title}
-             {props.data.icon &&  <img src={props.data.icon} alt="Image" className="success-icon"/>}
+      {props.display && (
+        <div className="overlay">
+          <div className="popup">
+            <div class="header">
+              <div>
+                {props.data.title}
+                {props.data.icon && (
+                  <img
+                    src={props.data.icon}
+                    alt="Image"
+                    className="success-icon"
+                  />
+                )}
+              </div>
+              <img
+                src={closeIcon}
+                alt="Image"
+                className="closeicon"
+                onClick={props.closingPopUp}
+              />
             </div>
-            <img src={closeIcon} alt="Image" className="closeicon" onClick={props.closingPopUp}/>
-          </div>
 
-          <div className="content">
-            <img src={props.data.image} alt="Image" />
+            <div className="content">
+              <img src={props.data.image} alt="Image" />
+            </div>
+            <p class="footer">{props.data.paragraph}</p>
           </div>
-          <p class="footer">{props.data.paragraph}</p>
         </div>
-      </div>
-    }
+      )}
     </>
-
   );
 };
 

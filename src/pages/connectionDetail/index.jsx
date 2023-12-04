@@ -6,6 +6,9 @@ import Dropdown from "../../components/dropdown";
 import BottomButton from "../../components/bottomButtons";
 import Navbar from "../../components/navbar/Navbar";
 import "./connectionDetail.css";
+import wrongIcon from "../../Assets/wrong.png";
+import failedImage from "../../Assets/404-error-page-not-found-with-people-connecting-a-plug-rafiki.png";
+
 // import PopupCard from '../../components/popup/popupcard'
 import {
   ConnectionSuccess,
@@ -21,9 +24,10 @@ const ConnectionDetail = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [data, setData] = useState(false);
 
+  const [isError, setIsError] = useState(false);
+  console.log(data, isError, "logs");
   const [name, setName] = useState("");
   const [type, setType] = useState("");
-  console.log(type, "sucess");
   const [port, setPort] = useState("");
   const [host, setHost] = useState("");
   const [userName, setUserName] = useState("");
@@ -36,7 +40,7 @@ const ConnectionDetail = () => {
     console.log(accessToken, "accessToken");
     axios
       .post(
-        "http://localhost:5000/testconnection?dhjasjasdj&",
+        "http://localhost:5000/testconnection?",
         {
           name: name,
           type: type,
@@ -56,20 +60,21 @@ const ConnectionDetail = () => {
       )
       .then(
         (response) => {
-          // localStorage.setItem(
-          //   "access-token",
-          //   response?.data?.result?.accessToken
-          // );
-          // localStorage.setItem(
-          //   "refresh-token",
-          //   response?.data?.result?.refreshToken
-          // );
           console.log(response, "response");
+          if (response.status === 200) {
+            setData(true);
+            console.log("hello");
+          }
         },
         (error) => {
-          console.log(error);
+          if (error.response.status === 400) {
+            console.log("this is Error ");
+            setData(true);
+            setIsError(true);
+          }
         }
       );
+    // setData(true);
   };
 
   const handleNameChange = (e) => {
@@ -108,13 +113,23 @@ const ConnectionDetail = () => {
       "Thanks for being patient, connection test is successfully completed",
   };
 
+  const connectiondataIsError = {
+    title: "Connection test failed.",
+    icon: wrongIcon,
+    image: failedImage,
+    paragraph: (
+      <>
+        Sorry, Due to some unfortunate error the connect test is failed. Please
+        check once or <a href="#">Create New Coonection.</a>
+      </>
+    ),
+  };
+
   const handlePopupClose = () => {
     setPopupVisible(false);
   };
 
-  const getType=(value)=>{
-
-  }
+  const getType = (value) => {};
 
   const clickData = () => {
     setData(true);
@@ -145,7 +160,11 @@ const ConnectionDetail = () => {
             />
             <div className="dropdown">
               <span className="drop_title">Database Type</span>
-              <Dropdown value={type} handleTypeChange={handleTypeChange} handleConnection = {handleConnection}/>
+              <Dropdown
+                value={type}
+                handleTypeChange={handleTypeChange}
+                handleConnection={handleConnection}
+              />
             </div>
           </div>
 
@@ -207,18 +226,23 @@ const ConnectionDetail = () => {
                 name={"Test Connection"}
                 className={"test_connection"}
                 onChange={handleConnection}
+                // onClick={handleButtonClick}
               />
             </div>
           </div>
         </div>
 
-        <PopupCard
-          data={connectiondata}
-          display={data}
-          closingPopUp={() => {
-            setData(!data);
-          }}
-        />
+        {data && (
+          <PopupCard
+            data={isError ? connectiondataIsError:connectiondata}
+            display={data}
+            isError={isError}
+            closingPopUp={() => {
+              setData(false);
+              setIsError(false);
+            }}
+          />
+        )}
       </div>
     </>
   );

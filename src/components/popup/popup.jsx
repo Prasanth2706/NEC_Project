@@ -19,7 +19,7 @@ return (
 )
 }
 
-const ConnectionFailed = () => {
+const ConnectionFailed = (props) => {
   const data = {title:"Connection test failed.",icon:wrongIcon,
   image:failedImage,
   paragraph: (
