@@ -22,7 +22,7 @@ const PopupCard = (props) => {
                                 )}
                             </div>
                             <img
-                                src={Images.cutimage}
+                                src={Images.closeicon}
                                 alt="Image"
                                 className="closeicon"
                                 onClick={props.closingPopUp}

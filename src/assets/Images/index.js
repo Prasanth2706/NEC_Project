@@ -17,5 +17,7 @@ export const Images={
     animation: require('./animation.gif'),
     tickIcon:require('./tick.png'),
     upload: require('./upload.png'),
+    // okIcon: require('/okIcon.svg'),
+    // oktick: require('/oktick.svg'),
     xmlIcon: require('./xml.svg')
 }
