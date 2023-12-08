@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TableHeading from '../../components/tableHeading'
 import Filter from '../../components/filter'
 import Search from '../../components/search/search'
@@ -9,9 +9,32 @@ import { Badge, Table } from 'antd'
 import './jobstable.css'
 import Navbar from '../../components/navbar/Navbar'
 import { Images } from '../../assets/Images'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 // import ver from '../../Assets/delete.png'
 
 const Jobs = () => {
+    const navigate = useNavigate()
+    const [jobsData, setJobsData] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const accessToken = localStorage.getItem("access-token");
+
+            try {
+                const response = await axios.get('http://localhost:5000/listjobs', {
+                    headers: { "x-auth-token": accessToken }
+                });
+                console.log(response, 'fsdfsfwervwefcwe')
+                setJobsData(response?.data?.jobs)
+            } catch (error) {
+                console.log(error, 'job-error')
+            }
+        }
+        fetchData();
+    }, [])
+
     const JobsColumns = [
         {
             title: 'Instance Name',
@@ -36,21 +59,9 @@ const Jobs = () => {
         },
         {
             dataIndex: 'detail',
-            
-        }
-
-    ]
-
-    const JobsData = [
-        {
-            key: '1',
-            name: '[\\SVM0\\\SVM0\Finace\CsPolicy\CsPolicy.xml]',
-            startTime: '25-02-2022  |  12.00 PM',
-            endtime: '25-02-2022  |  12.00 PM',
-            status: 'In Progress',
-            detail: 'View Details'
 
         }
+
     ]
 
     return (
@@ -66,11 +77,11 @@ const Jobs = () => {
                         <div className='table_info_details'>
                             <Filter />
                             <Search />
-                            <CreateNew />
+                            <CreateNew onClick = {()=>navigate('/toolselection')}/>
                         </div>
                     </div>
                     <div className='main_connection_info_table'>
-                        <Table columns={JobsColumns} dataSource={JobsData} />
+                        <Table columns={JobsColumns} dataSource={jobsData} />
                     </div>
                 </div>
             </div>

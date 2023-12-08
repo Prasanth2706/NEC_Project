@@ -1,4 +1,4 @@
-export const Images={
+export const    Images={
     notify:require('./notify.svg'),
     delete: require('./delete.png'),
     filter: require('./filter.png'),

@@ -51,6 +51,7 @@ const SignUp = () => {
         }).then((response) => {
             localStorage.setItem("access-token", response?.result?.accessToken);
             localStorage.setItem("refresh-token", response?.result?.refreshToken)
+            navigate('/jobs')
             console.log(response, 'response of api')
         },
             (error) => {
@@ -58,7 +59,6 @@ const SignUp = () => {
             }
         )
     }
-
 
     return (
         <div className='homeinfo'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CreateJob from '../../components/createJob'
 import Navbar from '../../components/navbar/Navbar'
 import ToolOption from '../../components/toolOption'
@@ -13,6 +13,17 @@ import StatusBar from '../../components/statusBar'
 const ToolSelection = () => {
 
     const [selectedTool, setSelectedTool] = useState('');
+  
+
+
+    useEffect(()=>{
+        localStorage.removeItem('step1')
+        localStorage.removeItem('step2');
+        localStorage.removeItem('step3');
+        localStorage.removeItem('migration');
+    },[])
+
+
     // const [selectTab, setSelectTab] = useState('false');
 
     const handleToolOptionClick = (toolTitle) => {
@@ -23,6 +34,14 @@ const ToolSelection = () => {
     //     setSelectTab(true)
     // }
 
+    const handleRunClick = () => {
+        localStorage.setItem('step1',true)
+        // setStepIndicator({
+        //     ...stepIndicator,
+        //     step1: true
+        // })
+    }
+
     return (
         <>
             <Navbar />
@@ -32,7 +51,7 @@ const ToolSelection = () => {
                 </div>
                 <div className='main_tool_area'>
                     <div className='tool_tabs'>
-                        <StatusBar />
+                        <StatusBar render={'render'} />
                     </div>
 
                     <div className='main_tool_detail'>
@@ -41,7 +60,7 @@ const ToolSelection = () => {
                     </div>
                     <div className='tool_selection_option'>
                         <ToolOption className={selectedTool === 'Data Stage to Glue' ? 'first_tool_option' : 'tool_option'} image={Images.awsimage} title={"Data Stage to Glue"} value={"Use data stage to glue tool to initiate migration."} selectedTool='Data Stage to Glue'
-                          onChange={handleToolOptionClick} />
+                            onChange={handleToolOptionClick} />
                         <ToolOption className={selectedTool === 'Data Stage to Informatica' ? 'first_tool_option' : 'tool_option'}
                             image={Images.bitmap} title={"Data Stage to Informatica"} value={"Use data stage to informatica tool to initiate migration."} selectedTool='Data Stage to Informatica'
                             onChange={handleToolOptionClick} />
@@ -50,7 +69,7 @@ const ToolSelection = () => {
                         <p>Started creating on: 25-02-2022  |  12.00 PM</p>
                         <div className='job_bottom_button'>
                             <BottomButton name={"Close"} />
-                            <BottomButton name={"next"} className={"next"} IconSide={'right'} />
+                            <BottomButton name={"Next"} className={"next"} IconSide={'right'} onClick={handleRunClick}  />
                         </div>
                     </div>
                     {/* </div> */}

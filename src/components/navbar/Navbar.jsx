@@ -15,7 +15,7 @@ const Navbar = (props) => {
     <header className="main-header">
       <div className="left-section">
         <div className="logo"></div>
-        <span class="LOGOIPSUM">LOGOIPSUM</span>
+        <span class="LOGOIPSUM">NEC</span>
       </div>
 
       <div className="center-section">
@@ -50,9 +50,9 @@ const Navbar = (props) => {
         <div className="profile">
           <div className="profile-image"> </div>
           <div class="Oval"></div>
-          <span className="profile-name">{props.emailOrUsername}</span>
+          <span className="profile-name">{localStorage.getItem('username')}</span>
           <span className="dropdown-icon">
-            <img src={Images.downarrow} class="Group" alt="downarrow"/>
+            <img src={Images.downarrow} class="Group" alt="downarrow" />
           </span>
         </div>
       </div>

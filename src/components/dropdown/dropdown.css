@@ -5,6 +5,7 @@
     padding: 19px 318px 19px 24px; */
     border-radius: 10px;
     /* border: solid 1px #d4d3d6; */
+    
     background-color: #fff;
 }
 .dropselect{
@@ -15,6 +16,14 @@
     align-items: center;
     width: 28rem;
     padding: 19px;
+    /* width: 554px; */
+    height: 61px;
+    margin: 8px 0 0;
+    padding: 21px 24px;
+    border-radius: 10px;
+    border: solid 1px #d4d3d6;
+    background-color: #fff;
+  
 }
 
 .drop_title{

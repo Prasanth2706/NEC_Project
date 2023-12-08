@@ -25,6 +25,7 @@ const Home = () => {
       .post("http://localhost:5000/login", {
         email: emailOrUsername,
         password: password,
+        username: emailOrUsername,
       })
       .then(
         (response) => {
@@ -36,6 +37,9 @@ const Home = () => {
             "refresh-token",
             response?.data?.result?.refreshToken
           );
+          localStorage.setItem("username",
+            response?.data?.result?.username)
+            navigate('/jobs')
           console.log(response, "response");
         },
         (error) => {
@@ -70,7 +74,7 @@ const Home = () => {
     <div className="homeinfo">
       <div className="left-part">
         <img src={Images.wallpaper} alt="" className="left_image" />
-        <h1 className="Lorem-ipsum">NEC Project</h1>
+        <h1 className="Lorem-ipsum">NEC</h1>
       </div>
       <div className="right-part">
         <Heading title={"Welcome to NEC"} />

@@ -4,10 +4,11 @@ import { Button } from 'antd';
 import './createnew.css';
 
 
-const CreateNew = () => {
+const CreateNew = (props) => {
+
     return (
         
-        <Button className='createnew' type="primary" icon={<PlusOutlined />} >
+        <Button className='createnew' type="primary" icon={<PlusOutlined />} onClick={(props.onClick)}>
             Create New
         </Button>)
 }

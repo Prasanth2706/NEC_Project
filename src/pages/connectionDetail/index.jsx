@@ -167,9 +167,12 @@ const ConnectionDetail = () => {
             </>
         ),
     };
-    const hello = () => {
-        console.log('working')
-    }
+
+    // const dropDownValue = ['MySql']
+
+    // const hello = () => {
+    //     console.log('working')
+    // }
     // const handlePopupClose = () => {
     //     setPopupVisible(false);
     // };
@@ -208,6 +211,8 @@ const ConnectionDetail = () => {
                             <Dropdown
                                 value={type}
                                 handleTypeChange={handleTypeChange}
+                                name={name}
+                                // items = {dropDownValue}
                             />
                         </div>
 

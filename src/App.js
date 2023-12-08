@@ -8,6 +8,9 @@ import ConnnectionProps from './pages/newConnection';
 import Jobs from './pages/Jobstable';
 import ToolSelection from './pages/toolselection';
 import ToolDetail from './pages/toolDetail';
+import MigrationInitiated from './pages/migrationStatus/MigrationInitiated';
+import PopupCard from './components/popup/popupcard';
+
 
 function App() {
   return (
@@ -19,15 +22,24 @@ function App() {
         ></Route>
         <Route
           path='/connectionProps'
-          element={<ConnnectionProps />}
+          element={<ConnnectionProps />}PopupCard
+        ></Route>
+        <Route
+          path='/migration'
+          element={<MigrationInitiated/>}
+        ></Route>
+        <Route
+          path='/toolselection'
+          element={<ToolSelection />}
         ></Route>
           <Route
-          path='/toolselection'
-          element={<ToolSelection/>}
+          path='/popup'
+          element={<PopupCard />}
         ></Route>
-         <Route
+
+        <Route
           path='/tooldetail'
-          element={<ToolDetail/>}
+          element={<ToolDetail />}
         ></Route>
         <Route
           path='/connectiondetail'

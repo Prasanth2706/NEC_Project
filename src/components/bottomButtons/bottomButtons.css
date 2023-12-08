@@ -1,8 +1,8 @@
-.test_connection{
+.test_connection {
     margin-left: 2rem;
 }
 
-.previous_step{
+.previous_step {
     font-family: Helvetica;
     font-size: 14px;
     font-weight: bold;
@@ -11,7 +11,7 @@
     color: #0066eb;
 }
 
-.test_connection{
+.test_connection {
     font-family: Helvetica;
     font-size: 14px;
     font-weight: bold;
@@ -20,11 +20,12 @@
     height: 44px;
     width: 158px;
 }
-.test_connection:hover{
+
+.test_connection:hover {
     background-color: #fff;
 }
 
-.save_connection{
+.save_connection {
     font-family: Helvetica;
     font-size: 14px;
     font-weight: bold;
@@ -34,35 +35,59 @@
     height: 44px;
     width: 158px;
 }
-.save_connection:hover{
+
+.save_connection:hover {
     background-color: #fff;
 }
 
-.close{
+.close {
     width: 135px;
     height: 44px;
     padding: 10px 32px;
     border-radius: 4px;
     margin-left: 2rem;
     /* background-color: #0066eb; */
-    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2); */
     border: solid 1px #0066eb;
 }
-.next{
+
+.next {
     width: 127px;
     height: 44px;
     padding: 10px 32px;
     margin-left: 2rem;
     border-radius: 4px;
+    color: white;
     box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
     background-color: #0066eb;
 }
-.run{
+.back_to_home{
+    width: 148px;
+    height: 44px;
+    color: white;
+    /* margin: 159.4px 0 0 170px; */
+    padding: 13px 27px 14px;
+    border-radius: 4px;
+    margin-left: 2rem;
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+    background-color: #0066eb;
+}
+.run {
     width: 127px;
     height: 44px;
     margin-left: 2rem;
     padding: 13px 49px 14px 50px;
+    color: white;
+    border-radius: 4px;
+    /* background-color: #dadada; */
+    background-color: #0066eb;
+
+}
+
+.disable {
+    background-color: #dadada;
+    color:#9b9b9b;
     border-radius: 4px;
     box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
-    background-color: #dadada;
+    border: none;
 }
