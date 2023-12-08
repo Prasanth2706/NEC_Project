@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './dropdown.css'
 
 const Dropdown = ({ props, data, selectedData }) => {
+  console.log(data,'asvasdvadvaw')
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleSelectChange = (e) => {
@@ -9,6 +10,7 @@ const Dropdown = ({ props, data, selectedData }) => {
     props?.handleTypeChange(e.target.value)
     data.map((data) => {
       if (data.name === e.target.value) {
+
         selectedData(data.id)
       }
     })
@@ -20,11 +22,11 @@ const Dropdown = ({ props, data, selectedData }) => {
     <div>
       <div className='drop'>
         {/* <p className='drop_title'>{props.title}</p> */}
-        <select className='dropselect' id="dropdown" value={selectedOption} onChange={handleSelectChange}>
+        <select className='dropselect ' id="dropdown" value={selectedOption} onChange={handleSelectChange}>
 
           {data?.map((connection) => {
             return (
-              <option>{connection.name}</option>
+              <option>{connection}</option>
             )
           })}
           {/* <option value="PostgresSQL">PostgresSQL</option>

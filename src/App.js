@@ -1,6 +1,6 @@
 import './App.css';
 import Home from './pages/home';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import SignUp from './pages/signup';
 import Connection from './pages/connectionTable';
 import ConnectionDetail from './pages/connectionDetail';
@@ -12,7 +12,10 @@ import MigrationInitiated from './pages/migrationStatus/MigrationInitiated';
 import PopupCard from './components/popup/popupcard';
 
 
+
 function App() {
+
+
   return (
     <div className='App'>
       <Routes>
@@ -22,17 +25,17 @@ function App() {
         ></Route>
         <Route
           path='/connectionProps'
-          element={<ConnnectionProps />}PopupCard
+          element={<ConnnectionProps />} 
         ></Route>
         <Route
           path='/migration'
-          element={<MigrationInitiated/>}
+          element={<MigrationInitiated />}
         ></Route>
         <Route
           path='/toolselection'
           element={<ToolSelection />}
         ></Route>
-          <Route
+        <Route
           path='/popup'
           element={<PopupCard />}
         ></Route>

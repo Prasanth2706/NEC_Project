@@ -11,12 +11,15 @@ import Navbar from '../../components/navbar/Navbar'
 import { Images } from '../../assets/Images'
 import { useEffect } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 // import ver from '../../Assets/delete.png'
+
+    
 
 const Jobs = () => {
     const navigate = useNavigate()
     const [jobsData, setJobsData] = useState([])
+
 
     useEffect(() => {
         const fetchData = async () => {

@@ -212,6 +212,7 @@ const ConnectionDetail = () => {
                                 value={type}
                                 handleTypeChange={handleTypeChange}
                                 name={name}
+                                data={['MY SQL']}
                                 // items = {dropDownValue}
                             />
                         </div>

@@ -7,7 +7,7 @@ import Account from "../../components/register";
 import axios from "axios";
 import Login from "../../components/login";
 import { Images } from "../../assets/Images";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/passwordInput";
 // import {observer} from 'mobx-react-lite';
 // import { Observer } from 'mobx-react-lite'
@@ -18,6 +18,11 @@ const Home = () => {
 
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  console.log(localStorage.getItem("access-token"), "hello")
+  if (localStorage.getItem("access-token")) {
+    return <Navigate to="/jobs" />;
+  }
 
   const handleLogin = () => {
     // console.log(`logging username and password: ${emailOrUsername} ${password}`);
@@ -39,10 +44,11 @@ const Home = () => {
           );
           localStorage.setItem("username",
             response?.data?.result?.username)
-            navigate('/jobs')
+          navigate('/jobs')
           console.log(response, "response");
         },
         (error) => {
+          alert('User does not exist, click register now for creating new id.')
           console.log(error);
         }
       );

@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import { useRef } from 'react'
 // import axios from 'axios'
 
-const ToolDetail = () => {
+const ToolDetail = (props) => {
 
     const [selectedFile, setSelectedFile] = useState(null)
     const [selectedDropValue, setSelectesDropValue] = useState(null)
@@ -25,6 +25,7 @@ const ToolDetail = () => {
     const [fileSize, setFileSize] = useState('0kb')
     const [fileDetail, setFileDetail] = useState(null)
     const [connectionData, setConnectionData] = useState()
+    const [connection,setConnection]=useState();
     // const [migrationSuccess, setMigrationSuccess] = useState(false)
 
 
@@ -78,12 +79,14 @@ const ToolDetail = () => {
 
     const selectedData = (id) => {
 
+
         setSelectesDropValue(id);
     }
 
 
     const url = window.location.href;
     useEffect(() => {
+        // debugger
         const handleVisibilityChange = async () => {
             const accessToken = localStorage.getItem("access-token");
 
@@ -103,7 +106,6 @@ const ToolDetail = () => {
                         // setMigrationSuccess(true)
                         localStorage.setItem('step3', true)
                         navigate('/popup', { state: { migrationSuccess: 'Success' } })
-
                         console.log(response, 'clhsdc')
                     }).catch(error => {
                         // setMigrationSuccess(false)
@@ -124,7 +126,7 @@ const ToolDetail = () => {
 
 
     const navigate = useNavigate();
-    const handleRunClik = () => {
+    const handleRunClick = () => {
 
         const accessToken = localStorage.getItem("access-token");
         // axios.post('http://localhost:5000/createjob', {
@@ -179,6 +181,13 @@ const ToolDetail = () => {
             headers: { "x-auth-token": accessToken }
         })
         setConnectionData(response?.data?.connections)
+        let dropDown = []
+        response?.data?.connections?.map((connect)=>{
+
+                dropDown.push(connect.name);
+            
+        })
+        setConnection(dropDown);
         // setSelectesDropValue(response?.data?.connections?.type)
 
     }
@@ -187,7 +196,7 @@ const ToolDetail = () => {
         handleGetConnection();
     }, [])
 
-
+  
     return (
         <>
             <Navbar />
@@ -235,11 +244,11 @@ const ToolDetail = () => {
                         <div className='database_area'>
                             <div className='database_area_dropOne'>
                                 <span className="drop_title">Source Database</span>
-                                <Dropdown title={"Source Database"} data={connectionData ? connectionData : null} selectedData={selectedData} />
+                                <Dropdown title={"Source Database"} data={connection} selectedData={selectedData} />
                             </div>
                             <div className='database_area_dropTwo'>
                                 <span className="drop_title">Target Database</span>
-                                <Dropdown title={"Target Database"} data={connectionData ? connectionData : null} selectedData={selectedData} />
+                                <Dropdown title={"Target Database"} data={connection} selectedData={selectedData} />
                             </div>
                         </div>
                     </div>}
@@ -247,7 +256,7 @@ const ToolDetail = () => {
                         <p>Started creating on: 25-02-2022  |  12.00 PM</p>
                         <div className='toolDetail_bottom_button'>
                             <BottomButton name={"Previous Step"} className={"previous_step"} onClick={handlePrevios} />
-                            <BottomButton name={"Run"} className={imageUploaded && 'disable' ? 'run' : ''} onClick={handleRunClik} />
+                            <BottomButton name={"Run"} className={imageUploaded && 'disable' ? 'run' : ''} onClick={handleRunClick} />
                             {/* {runButtonEnabled && <button onClick={handleRunClick}>run</button>} */}
                         </div>
                     </div>
