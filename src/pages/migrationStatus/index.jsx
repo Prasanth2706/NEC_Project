@@ -37,7 +37,7 @@ const MigrationStatus = (props) => {
 
 
                             <div className="migration-content">
-                                <img src={props.data.image} alt="Image" />
+                                <img className="migration_image" src={props.data.image} alt="Image" />
                             </div>
                             <p class="migration-footer">
                                 {props.data.paragraph}

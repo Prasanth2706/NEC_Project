@@ -13,15 +13,15 @@ import StatusBar from '../../components/statusBar'
 const ToolSelection = () => {
 
     const [selectedTool, setSelectedTool] = useState('');
-  
 
 
-    useEffect(()=>{
+
+    useEffect(() => {
         localStorage.removeItem('step1')
         localStorage.removeItem('step2');
         localStorage.removeItem('step3');
         localStorage.removeItem('migration');
-    },[])
+    }, [])
 
 
     // const [selectTab, setSelectTab] = useState('false');
@@ -35,7 +35,7 @@ const ToolSelection = () => {
     // }
 
     const handleRunClick = () => {
-        localStorage.setItem('step1',true)
+        localStorage.setItem('step1', true)
         // setStepIndicator({
         //     ...stepIndicator,
         //     step1: true
@@ -69,7 +69,7 @@ const ToolSelection = () => {
                         <p>Started creating on: 25-02-2022  |  12.00 PM</p>
                         <div className='job_bottom_button'>
                             <BottomButton name={"Close"} />
-                            <BottomButton name={"Next"} className={"next"} IconSide={'right'} onClick={handleRunClick}  />
+                            <BottomButton name={"Next"} className={"next"} IconSide={'right'} onClick={handleRunClick} />
                         </div>
                     </div>
                     {/* </div> */}

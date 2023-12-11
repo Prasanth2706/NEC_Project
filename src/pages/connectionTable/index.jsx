@@ -13,23 +13,28 @@ import { useNavigate } from 'react-router-dom'
 const Connection = () => {
 
   const navigate = useNavigate()
-  const [ConnectionData,setConnectionData] = useState([])
+  const [ConnectionData, setConnectionData] = useState([])
   useEffect(() => {
-    const   fetchData = async () => {
-        const accessToken = localStorage.getItem("access-token");
+    const fetchData = async () => {
+      const accessToken = localStorage.getItem("access-token");
 
-        try {
-            const response = await axios.get('http://localhost:5000/connections?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MDE3NzkyNzYsImV4cCI6MTcwMTc4MDQ3Nn0.xnUqcgP3889NYQ9nkpuQzx5UMz7JzHY_H1XKkLeEs14', {
-                headers: { "x-auth-token": accessToken }
-            });
-            console.log(response, 'connectiondata')
-            setConnectionData(response?.data?.connections)
-        } catch (error) {
-            console.log(error, 'connectionerror')
-        }
+      try {
+        const response = await axios.get('http://localhost:5000/connections?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MDE3NzkyNzYsImV4cCI6MTcwMTc4MDQ3Nn0.xnUqcgP3889NYQ9nkpuQzx5UMz7JzHY_H1XKkLeEs14', {
+          headers: { "x-auth-token": accessToken }
+        });
+        console.log(response, 'connectiondata')
+        setConnectionData(response?.data?.connections)
+      } catch (error) {
+        console.log(error, 'connectionerror')
+      }
     }
     fetchData();
-}, [])
+  }, [])
+
+  // useEffect(() => {
+  // const image = [<img src={Images.edit} className='editicon' onClick={() => console.log('enter1')} alt="edit" />, <img src={Images.delete} className='deleteicon' onClick={() => console.log('enter2')} alt="edit" />]
+
+  // },[fetchData()])
 
   const conectionColumns = [
 
@@ -46,13 +51,13 @@ const Connection = () => {
     {
       dataIndex: 'image',
       align: 'right',
+      title: 'deleteIcon',
       width: "100%",
-
     },
     {
       dataIndex: 'image1',
       // align: 'right'
-
+      title: 'deleteIcon',
 
     }
   ]
@@ -68,7 +73,7 @@ const Connection = () => {
   //   }
   // ]
 
-  
+
 
   return (
 
@@ -83,7 +88,7 @@ const Connection = () => {
             <div className='table-details'>
               <Filter />
               <Search />
-              <CreateNew onClick = {()=>navigate('/connectiondetail')}/>
+              <CreateNew onClick={() => navigate('/connectiondetail')} />
             </div>
           </div>
           <div className='main_connection_table'>

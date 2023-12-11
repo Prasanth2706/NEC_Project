@@ -1,5 +1,5 @@
-export const    Images={
-    notify:require('./notify.svg'),
+export const Images = {
+    notify: require('./notify.svg'),
     delete: require('./delete.png'),
     filter: require('./filter.png'),
     rightArrow: require('./rightArrow.png'),
@@ -15,8 +15,11 @@ export const    Images={
     awsimage: require('./awsimage.png'),
     bitmap: require('./bitmap.png'),
     animation: require('./animation.gif'),
-    tickIcon:require('./tick.png'),
+    tickIcon: require('./tick.png'),
     upload: require('./upload.png'),
+    success: require('./Success.png'),
+    error: require('./Error.png'),
+    // successs:require('./Successpng.png'),
     // okIcon: require('/okIcon.svg'),
     // oktick: require('/oktick.svg'),
     xmlIcon: require('./xml.svg')

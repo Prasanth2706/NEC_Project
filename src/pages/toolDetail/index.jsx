@@ -25,7 +25,7 @@ const ToolDetail = (props) => {
     const [fileSize, setFileSize] = useState('0kb')
     const [fileDetail, setFileDetail] = useState(null)
     const [connectionData, setConnectionData] = useState()
-    const [connection,setConnection]=useState();
+    const [connection, setConnection] = useState();
     // const [migrationSuccess, setMigrationSuccess] = useState(false)
 
 
@@ -77,10 +77,14 @@ const ToolDetail = (props) => {
         setTaskname(e.target.value)
     }
 
-    const selectedData = (id) => {
-
-
-        setSelectesDropValue(id);
+    const selectedData = (value) => {
+        debugger
+        console.log(value,'valueofdrop')
+        connectionData?.map((connect) => {
+            if (value === connect.name) {
+                setSelectesDropValue(connect?.id)
+            }
+        });
     }
 
 
@@ -182,10 +186,10 @@ const ToolDetail = (props) => {
         })
         setConnectionData(response?.data?.connections)
         let dropDown = []
-        response?.data?.connections?.map((connect)=>{
+        response?.data?.connections?.map((connect) => {
 
-                dropDown.push(connect.name);
-            
+            dropDown.push(connect.name);
+
         })
         setConnection(dropDown);
         // setSelectesDropValue(response?.data?.connections?.type)
@@ -196,7 +200,7 @@ const ToolDetail = (props) => {
         handleGetConnection();
     }, [])
 
-  
+
     return (
         <>
             <Navbar />
@@ -263,8 +267,6 @@ const ToolDetail = (props) => {
 
 
                 </div>
-
-
             </div>
 
 

@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import './dropdown.css'
 
 const Dropdown = ({ props, data, selectedData }) => {
-  console.log(data,'asvasdvadvaw')
+  console.log(data, 'asvasdvadvaw')
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleSelectChange = (e) => {
+    selectedData(e.target.value)
+
     setSelectedOption(e.target.value);
     props?.handleTypeChange(e.target.value)
-    data.map((data) => {
-      if (data.name === e.target.value) {
-
-        selectedData(data.id)
-      }
-    })
+    // data.map((data) => {
+    //   if (data.name === e.target.value) {
+    //   }
+    // })
   };
   useEffect(() => {
     console.log(data, "iuadhauh")

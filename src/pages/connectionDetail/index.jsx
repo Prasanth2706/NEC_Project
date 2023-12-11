@@ -213,10 +213,9 @@ const ConnectionDetail = () => {
                                 handleTypeChange={handleTypeChange}
                                 name={name}
                                 data={['MY SQL']}
-                                // items = {dropDownValue}
+                            // items = {dropDownValue}
                             />
                         </div>
-
                     </div>
                     {connectionDetailBottom && <div className='connectionprop_bottom_button'>
                         <BottomButton name={"Close"} className={"previous_step"} />
@@ -268,7 +267,6 @@ const ConnectionDetail = () => {
                                 onChange={handleDatabaseChange}
                             />
                         </div>
-
                         <div className="connection_bottom_part">
                             <p>Started creating on: 25-02-2022 | 12.00 PM</p>
                             <div className="connection_bottom_button">
@@ -290,7 +288,6 @@ const ConnectionDetail = () => {
                         </div>
                     </div>}
                 </div>
-
                 {data && (
                     <PopupCard
                         data={isError ? connectiondataIsError : connectiondata}

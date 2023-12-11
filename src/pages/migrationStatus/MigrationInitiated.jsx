@@ -51,13 +51,13 @@ const MigrationInitiated = () => {
 
   const success = {
     title: "Migration attempt successful.",
-    image: Images.animation,
+    image: Images.success,
     paragraph:
       "Thanks for being patient, data migration is successful. It will be updated in the job list.",
   }
   const failed = {
     title: "Migration attempt failed.",
-    image: Images.animation,
+    image: Images.error,
     paragraph: (
       <>
         Sorry! There might be some error during the process. We recommend you to

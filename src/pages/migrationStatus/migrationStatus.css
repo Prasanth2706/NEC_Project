@@ -19,13 +19,16 @@
     margin-top: 3rem;
     margin-left: 47rem;
     height: 100%;
+    /* height: 10rem; */
 }
 .migration_bottom_section{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-
+.migration_image{
+    height: 10rem;
+}
 
 .migration-footer {
     width: 503px;
