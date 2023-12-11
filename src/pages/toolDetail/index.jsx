@@ -12,7 +12,6 @@ import FileUploadButton from '../../components/fileuploadbutton/FileUploadButton
 import FileUpload from '../../components/fileupload'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { useRef } from 'react'
 // import axios from 'axios'
 
 const ToolDetail = (props) => {
@@ -78,7 +77,6 @@ const ToolDetail = (props) => {
     }
 
     const selectedData = (value) => {
-        debugger
         console.log(value,'valueofdrop')
         connectionData?.map((connect) => {
             if (value === connect.name) {
@@ -86,7 +84,14 @@ const ToolDetail = (props) => {
             }
         });
     }
+    // const handleRemove = () =>{
+    //     setFileDetail(null)   
+    //     }
 
+    const fileRemove = (value) => {
+        setFileDetail(value)
+        setImageUploaded(false)
+    }
 
     const url = window.location.href;
     useEffect(() => {
@@ -159,6 +164,7 @@ const ToolDetail = (props) => {
             },).then(response => {
                 // setMigrationSuccess(true)
                 localStorage.setItem('step3', true)
+                console.log(response,'tooldetailresponse')
                 navigate('/migration', { state: { migrationSuccess: 'Success' } })
 
                 console.log(response, 'clhsdc')
@@ -222,7 +228,7 @@ const ToolDetail = (props) => {
                         {/* <Textarea label={"Upload XML File"} image = {Images.upload} placeholder={"Drag and Drop files here or choose file "} typevalue="file" className={"image_input"} onChange={handleImageUpload}
                         /> */}
                         {fileDetail ? (
-                            <FileUpload fileDetail={fileDetail} images={Images.delete} />
+                            <FileUpload fileDetail={fileDetail} images={Images.delete} fileRemove = {fileRemove}/>
                         ) : (
                             <FileUploadButton
                                 label={"Upload XML File"}

@@ -1,6 +1,9 @@
 import React from 'react'
 
-const FileUpload = ({fileDetail,images}) => {
+const FileUpload = ({fileDetail,images,fileRemove}) => {
+    const handleRemove = () =>{
+    fileRemove(null)   
+    }
     // console.log(props,'porps')
     return (
 
@@ -15,7 +18,7 @@ const FileUpload = ({fileDetail,images}) => {
                 </div>
             </div>
 
-            <img className='file_img' src={images} alt="" />
+            <img className='file_img' src={images} alt="" onClick={handleRemove}/>
         </div>
 
     )
