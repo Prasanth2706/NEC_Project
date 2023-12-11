@@ -15,7 +15,9 @@ const SignUp = () => {
     const [userName, setUsername] = useState('')
     const [UsernameOrEmail, setUsernameOrEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [showError, setShowError] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [apiResult,setApiResult] = useState('')
 
     const handleUsername = (e) => {
         setUsername(e.target.value)
@@ -51,11 +53,15 @@ const SignUp = () => {
         }).then((response) => {
             localStorage.setItem("access-token", response?.result?.accessToken);
             localStorage.setItem("refresh-token", response?.result?.refreshToken)
+
             navigate('/jobs')
             console.log(response, 'response of api')
         },
             (error) => {
                 console.log(error, 'error')
+                setShowError(true)
+                console.log(error.message,'apierror')
+                setApiResult(error.response?.data?.errors)
             }
         )
     }
@@ -71,8 +77,7 @@ const SignUp = () => {
                 <div className='details'>
                     <Textarea label={"User Name"} placeholder={"e.g. John Joe"} typevalue={"text"} value={userName} onChange={handleUsername} />
                     <Textarea label={"Email/ User Name"} placeholder={"e.g. John Joe"} typevalue={"email"} value={UsernameOrEmail} onChange={handleNameorMail} />
-                    {/* <Textarea label={"password"} placeholder={"Enter Password"} typevalue={"password"} value={password} onChange={handlePassword} /> */}
-                    {/* <Textarea label={"Confirm Password"} placeholder={"Enter Password"} typevalue={"password"} value={confirmPassword} onChange={handleConfirmPassword} /> */}
+
                     <PasswordInput
                         label={"Password"}
                         placeholder={"Enter Password"}
@@ -86,6 +91,9 @@ const SignUp = () => {
                         onChange={handleConfirmPassword}
                     />
                 </div>
+                {showError && <div style={{ color: 'red' }}>
+                    <p>*{apiResult}</p>
+                </div>}
                 <div className='forgot-pass'>
                     <p>Forgot Password?</p>
                 </div>

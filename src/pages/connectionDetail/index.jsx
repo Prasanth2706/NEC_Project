@@ -121,8 +121,8 @@ const ConnectionDetail = () => {
     const handleNameChange = (e) => {
         setName(e.target.value);
     };
-    const handleTypeChange = (value) => {
-        setType(value);
+    const   handleTypeChange = (value) => {
+        // setType(value);
         setFullConnectionProps(true);
         setConnectionDetailBottom(false)
     };
@@ -209,15 +209,15 @@ const ConnectionDetail = () => {
                         <div className="dropdown">
                             <span className="drop_title">Database Type</span>
                             <Dropdown
-                                value={type}
-                                handleTypeChange={handleTypeChange}
+                                // value={type}
+                                selectedData={handleTypeChange}
                                 name={name}
-                                data={['MY SQL']}
+                                data={['Select DataBase Type','MY SQL']}
                             // items = {dropDownValue}
                             />
                         </div>
                     </div>
-                    {connectionDetailBottom && <div className='connectionprop_bottom_button'>
+                    {   connectionDetailBottom && <div className='connectionprop_bottom_button'>
                         <BottomButton name={"Close"} className={"previous_step"} />
                         <BottomButton name={"Test Connection"} className={"test_connection"} />
                     </div>}

@@ -6,12 +6,28 @@ import { useNavigate } from "react-router-dom";
 import Button from "../button";
 import axios from "axios";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const navigate = useNavigate()
-  const [activePage, setActivePage] = useState("jobs");
+  const [activePage, setActivePage] = useState(true);
+  const [activeConnection, setActiveConnection] = useState(false);
+  const [activeAboutus, setActiveAboutus] = useState(false);
 
-  const handlePageChange = (page) => {
-    setActivePage(page);
+  const handleJobs = () => {
+    // setActivePage();
+  }
+
+  const handleConnection = () => {
+    setActiveConnection(true)
+    setActivePage(false)
+    navigate('/connections')
+  }
+
+  const handlAboutus = () => {
+    navigate('/aboutus')
+    setActivePage(false)
+    setActiveAboutus(true)
+    setActiveConnection(false)
+
   }
 
   const handleLogOut = () => {
@@ -19,7 +35,7 @@ const Navbar = (props) => {
 
     // console.log(`logging username and password: ${emailOrUsername} ${password}`);
     axios
-      .post("http://localhost:5000/logout",null, {
+      .post("http://localhost:5000/logout", null, {
         headers: {
           "x-auth-token": accessToken,
         }
@@ -28,12 +44,12 @@ const Navbar = (props) => {
         (response) => {
           localStorage.removeItem(
             "access-token"
-
           );
           console.log(response, 'access-delete')
           localStorage.removeItem(
             "refresh-token",
           );
+          navigate('/')
           localStorage.setItem("username",
             response?.data?.result?.username)
           // navigate('/jobs')
@@ -50,28 +66,21 @@ const Navbar = (props) => {
     <header className="main-header">
       <div className="left-section">
         <div className="logo"></div>
-        <span class="LOGOIPSUM" >NEC</span>
+        <span class="nav_title" >NEC</span>
       </div>
 
       <div className="center-section">
         <nav>
           <ul>
-            <li className={activePage === 'jobs' ? 'active' : ''}>
-              <a href="/" onClick={() => handlePageChange('jobs')}>
-                Jobs
-              </a>
+            <li onClick={() => handleJobs()} className={activePage ? 'active' : ''}>
+              Jobs
             </li>
 
-            <li onClick={() => handlePageChange('connections')} className={activePage === 'connections' ? 'active' : ''}>
-              <a href="/connections" >
-                Connections
-              </a>
+            <li onClick={() => handleConnection()} className={activeConnection ? 'active' : ''}>
+              Connections
             </li>
-
-            <li className={activePage === 'aboutus' ? 'active' : ''}>
-              <a href="/aboutus" onClick={() => handlePageChange('aboutus')}>
-                About Us
-              </a>
+            <li onClick={() => handlAboutus()} className={activeAboutus ? 'active' : ''}>
+              About Us
             </li>
           </ul>
         </nav>

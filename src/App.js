@@ -10,6 +10,7 @@ import ToolSelection from './pages/toolselection';
 import ToolDetail from './pages/toolDetail';
 import MigrationInitiated from './pages/migrationStatus/MigrationInitiated';
 import PopupCard from './components/popup/popupcard';
+import AboutUs from './pages/AboutUs';
 
 
 
@@ -39,7 +40,10 @@ function App() {
           path='/popup'
           element={<PopupCard />}
         ></Route>
-
+         <Route
+          path='/aboutus'
+          element={<AboutUs />}
+        ></Route>
         <Route
           path='/tooldetail'
           element={<ToolDetail />}
