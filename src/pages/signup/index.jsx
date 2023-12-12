@@ -17,7 +17,7 @@ const SignUp = () => {
     const [password, setPassword] = useState('')
     const [showError, setShowError] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [apiResult,setApiResult] = useState('')
+    const [apiResult, setApiResult] = useState('')
 
     const handleUsername = (e) => {
         setUsername(e.target.value)
@@ -60,7 +60,7 @@ const SignUp = () => {
             (error) => {
                 console.log(error, 'error')
                 setShowError(true)
-                console.log(error.message,'apierror')
+                console.log(error.message, 'apierror')
                 setApiResult(error.response?.data?.errors)
             }
         )
@@ -70,10 +70,10 @@ const SignUp = () => {
         <div className='homeinfo'>
             <div className='left-part' >
                 <img src={Images.wallpaper} alt="" className='left_image' />
-                <h1 className='Lorem-ipsum'>NEC Project</h1>
+                <h1 className='Lorem-ipsum'>NEC</h1>
             </div>
             <div className='right-part'>
-                <Heading title={"Welcome to NEC!"} />
+                <Heading title={"Welcome to NEC"} name={'signup'} />
                 <div className='details'>
                     <Textarea label={"User Name"} placeholder={"e.g. John Joe"} typevalue={"text"} value={userName} onChange={handleUsername} />
                     <Textarea label={"Email/ User Name"} placeholder={"e.g. John Joe"} typevalue={"email"} value={UsernameOrEmail} onChange={handleNameorMail} />

@@ -49,6 +49,9 @@ nav a {
   margin: 2rem;
 }
 
+.profile-image{
+  margin-left: 4rem;
+}
 .notification-icon,
 .dropdown-icon {
   margin-left: 10px;
@@ -61,18 +64,19 @@ nav a {
   align-items: center;
 }
 
-.profile-image {
+.profile_image {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: grey;
+  /* background-color: grey; */
+
   margin-right: 12px;
 }
 
 .Oval {
   width: 15px;
   height: 15px;
-  margin: 21px 0 0 20px;
+  margin: 21px 0 0 97px;
   border: solid 1px #fff;
   background-color: #6dd400;
   position: absolute;
@@ -82,7 +86,7 @@ nav a {
 .profile-name {
   width: 97px;
   height: 18px;
-  margin: 25px 12px 27px 8px;
+  margin: 25px 0px 27px 8px;
   font-family: Helvetica;
   font-size: 15px;
   color: #222;
@@ -90,7 +94,7 @@ nav a {
 
 .center-section li.active {
   background-color: #0066eb;
-  ;
+
   border-radius: 17px;
   /* padding: 5px 10px; */
   /* width: 6rem;

@@ -9,6 +9,7 @@ import './connectionDetail.css'
 import { Images } from '../../assets/Images'
 import axios from 'axios'
 import PopupCard from '../../components/popup/popupcard'
+import { useNavigate } from 'react-router-dom'
 
 
 const ConnectionDetail = () => {
@@ -26,6 +27,9 @@ const ConnectionDetail = () => {
     const [fullConnectionProps, setFullConnectionProps] = useState(false)
     const [enableSaveButton, setenableSaveButton] = useState(false)
     const [connectionDetailBottom, setConnectionDetailBottom] = useState(true)
+
+
+    const navigate = useNavigate();
 
     const handleConnection = () => {
         const accessToken = localStorage.getItem("access-token");
@@ -168,6 +172,10 @@ const ConnectionDetail = () => {
         ),
     };
 
+    const handleClose = () =>{
+        navigate('/connections')
+    }
+
     // const dropDownValue = ['MySql']
 
     // const hello = () => {
@@ -218,7 +226,7 @@ const ConnectionDetail = () => {
                         </div>
                     </div>
                     {   connectionDetailBottom && <div className='connectionprop_bottom_button'>
-                        <BottomButton name={"Close"} className={"previous_step"} />
+                        <BottomButton name={"Close"} className={"previous_step"} onClick = {handleClose}/>
                         <BottomButton name={"Test Connection"} className={"test_connection"} />
                     </div>}
                     {fullConnectionProps && <div className='second_sub_connection_detail'>

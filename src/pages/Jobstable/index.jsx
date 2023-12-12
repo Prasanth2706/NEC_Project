@@ -14,8 +14,6 @@ import axios from 'axios'
 import { Navigate, useNavigate } from 'react-router-dom'
 // import ver from '../../Assets/delete.png'
 
-    
-
 const Jobs = () => {
     const navigate = useNavigate()
     const [jobsData, setJobsData] = useState([])
@@ -71,21 +69,25 @@ const Jobs = () => {
 
         <div >
             <Navbar />
-            <div className='jobinfo_table'>
-                <div className='joblistinfo_Table'>
-                    <div className='connectioninfno-table'>
-                        <div className='table-heading_info'>
-                            <TableHeading title={"Jobs"} />
+            <div>
+                <div className='jobinfo_table'>
+
+                    <div className='joblistinfo_Table'>
+                        <div className='connectioninfno-table'>
+                            <div className='table-heading_info'>
+                                <TableHeading title={"Jobs"} />
+                            </div>
+                            <div className='table_info_details'>
+                                <Filter />
+                                <Search />
+                                <CreateNew onClick={() => navigate('/toolselection')} />
+                            </div>
                         </div>
-                        <div className='table_info_details'>
-                            <Filter />
-                            <Search />
-                            <CreateNew onClick = {()=>navigate('/toolselection')}/>
+                        <div className='main_connection_info_table'>
+                            <Table columns={JobsColumns} dataSource={jobsData} />
                         </div>
                     </div>
-                    <div className='main_connection_info_table'>
-                        <Table columns={JobsColumns} dataSource={jobsData} />
-                    </div>
+
                 </div>
             </div>
         </div>

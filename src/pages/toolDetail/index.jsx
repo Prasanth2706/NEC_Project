@@ -70,6 +70,7 @@ const ToolDetail = (props) => {
     const handlePrevios = () => {
         setImageUploaded(false)
         setFileDetail(null)
+        // navigate('/toolselection')
     }
 
     const handleTaskname = (e) => {

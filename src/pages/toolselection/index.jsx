@@ -7,13 +7,13 @@ import './toolselection.css'
 import TableHeading from '../../components/tableHeading'
 import BottomButton from '../../components/bottomButtons'
 import StatusBar from '../../components/statusBar'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const ToolSelection = () => {
-
     const [selectedTool, setSelectedTool] = useState('');
-
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -42,6 +42,10 @@ const ToolSelection = () => {
         // })
     }
 
+    const handleClose = () => {
+        navigate('/jobs')
+    }
+
     return (
         <>
             <Navbar />
@@ -68,7 +72,7 @@ const ToolSelection = () => {
                     <div className='job_bottom_part'>
                         <p>Started creating on: 25-02-2022  |  12.00 PM</p>
                         <div className='job_bottom_button'>
-                            <BottomButton name={"Close"} />
+                            <BottomButton name={"Close"} onClick={handleClose} />
                             <BottomButton name={"Next"} className={"next"} IconSide={'right'} onClick={handleRunClick} />
                         </div>
                     </div>

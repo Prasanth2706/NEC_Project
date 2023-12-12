@@ -12,6 +12,7 @@ export const Images = {
     doneimage: require('./doneimage.png'),
     errorimage: require('./errorimage.png'),
     eye: require('./eye.png'),
+    personIcon: require('./personIcon.png'),
     awsimage: require('./awsimage.png'),
     bitmap: require('./bitmap.png'),
     animation: require('./animation.gif'),

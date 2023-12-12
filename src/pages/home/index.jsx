@@ -85,7 +85,7 @@ const Home = () => {
         <h1 className="Lorem-ipsum">NEC</h1>
       </div>
       <div className="right-part">
-        <Heading title={"Welcome to NEC"} />
+        <Heading title={"Welcome to NEC"} name= {'home'}/>
         <div className="details">
           <Textarea
             label={"Email/ User Name"}

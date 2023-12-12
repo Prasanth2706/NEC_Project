@@ -15,7 +15,8 @@
 .joblistinfo_Table{
     margin: 4rem;
     background-color: white;
-    height: 48rem;
+    height: 50rem;
+    overflow-y: hidden;
 
 }
 /* .job_table{
@@ -27,6 +28,7 @@
 .jobinfo_table{
     background-color: #f5f6f9;
     padding: 2rem;
+    overflow: hidden;
 }
 
 .main_connection_info_table{

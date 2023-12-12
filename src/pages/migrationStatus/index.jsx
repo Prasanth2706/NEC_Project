@@ -4,8 +4,10 @@ import BottomButton from '../../components/bottomButtons'
 import Navbar from '../../components/navbar/Navbar'
 import './migrationStatus.css'
 import StatusBar from "../../components/statusBar";
+import { useNavigate } from "react-router-dom";
 
 const MigrationStatus = (props) => {
+    const navigate = useNavigate()
     const hasWindow = typeof window !== 'undefined';
 
     const migrate = hasWindow && localStorage.getItem('migration')
@@ -17,6 +19,14 @@ const MigrationStatus = (props) => {
     // useEffect(()=>{
 
     // },[props.data.title])
+
+    const handleHome = () =>{
+        navigate('/')
+    }
+
+    const handlePrevious = () => {
+        navigate('/tooldetail')
+    }
     return (
         <>
             <Navbar />
@@ -49,10 +59,10 @@ const MigrationStatus = (props) => {
                         <p>Started creating on: 25-02-2022 | 12.00 PM</p>
                         <div className="migration_bottom_section">
                             {migrate && <div className="migration_bottom_button">
-                                <BottomButton name={"Previous Step"} className={"previous_step"} />
+                                <BottomButton name={"Previous Step"} className={"previous_step"} onClick = {handlePrevious}/>
                             </div>}
                             <div className="migration_bottom_button">
-                                <BottomButton name={"Back to Home"} className={"back_to_home"} />
+                                <BottomButton name={"Back to Home"} className={"back_to_home"} onClick = {handleHome}/>
                             </div>
                         </div>
                     </div>

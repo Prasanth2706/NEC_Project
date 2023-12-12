@@ -25,6 +25,9 @@ const BottomButton = (props) => {
         else if (props.name === 'Run') {
             navigate('/migration')
         }
+        else if(props.name === 'Close'){
+            navigate('/connections')
+        }
 
         else {
             props.onClick();
@@ -34,8 +37,6 @@ const BottomButton = (props) => {
 
     return (
         <div onClick={() => { handleNav(); props.onClick() }}>
-
-
             {props.IconSide === 'right' ? <Button className='next'>{props.name} <RightOutlined /> </Button > : <Button className={props.className === 'previous_step' ? 'previous_step' : props.className === 'run' ? 'run' : props.className === 'disable' ? 'disable' : props.className === 'save_connection' ? 'save_connection' : props.className === 'next' ? 'next' : props.className === 'back_to_home' ? 'back_to_home' : props.className === 'test_connection' ? 'test_connection' : 'close'
             } icon={props.name === 'Close' ? <CloseOutlined /> : props.name === 'Previous Step' ? <LeftOutlined /> : null}>{props.name}</Button>}
         </div>

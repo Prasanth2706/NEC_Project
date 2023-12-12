@@ -5,29 +5,39 @@ import { Images } from "../../assets/Images";
 import { useNavigate } from "react-router-dom";
 import Button from "../button";
 import axios from "axios";
+import { BellOutlined } from "@ant-design/icons";
 
 const Navbar = () => {
   const navigate = useNavigate()
-  const [activePage, setActivePage] = useState(true);
+  const [activeJobs, setActiveJobs] = useState(true);
   const [activeConnection, setActiveConnection] = useState(false);
   const [activeAboutus, setActiveAboutus] = useState(false);
 
   const handleJobs = () => {
     // setActivePage();
+    navigate('/jobs')
   }
 
   const handleConnection = () => {
     setActiveConnection(true)
-    setActivePage(false)
+    setActiveJobs(false)
     navigate('/connections')
   }
 
   const handlAboutus = () => {
     navigate('/aboutus')
-    setActivePage(false)
+    setActiveJobs(false)
     setActiveAboutus(true)
     setActiveConnection(false)
 
+  }
+  const pathName = window.location.pathname;
+  console.log(pathName,'pathname'); 
+
+  const getClassName = (value) => {
+    if (value === pathName){
+      return 'active'
+    }
   }
 
   const handleLogOut = () => {
@@ -72,14 +82,14 @@ const Navbar = () => {
       <div className="center-section">
         <nav>
           <ul>
-            <li onClick={() => handleJobs()} className={activePage ? 'active' : ''}>
+            <li onClick={() => handleJobs()} className={getClassName('/jobs')}>
               Jobs
             </li>
 
-            <li onClick={() => handleConnection()} className={activeConnection ? 'active' : ''}>
+            <li onClick={() => handleConnection()} className={getClassName('/connections')}>
               Connections
             </li>
-            <li onClick={() => handlAboutus()} className={activeAboutus ? 'active' : ''}>
+            <li onClick={() => handlAboutus()} className={getClassName('/aboutus')}>
               About Us
             </li>
           </ul>
@@ -92,7 +102,8 @@ const Navbar = () => {
           <img src={Images.notify} alt="" />
         </div>
         <div className="profile">
-          <div className="profile-image"> </div>
+          <BellOutlined />
+          <div className="profile-image"><img className="profile_image" src={Images.personIcon} alt="" /></div>
           <div class="Oval"></div>
           <span className="profile-name">{localStorage.getItem('username')}</span>
           <span className="dropdown-icon">
