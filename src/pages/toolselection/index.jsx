@@ -36,8 +36,10 @@ const ToolSelection = () => {
 
     const handleRunClick = () => {
         localStorage.setItem('step1', true)
+
         // setStepIndicator({
         //     ...stepIndicator,
+        navigate('/tooldetail')
         //     step1: true
         // })
     }
@@ -48,7 +50,7 @@ const ToolSelection = () => {
 
     return (
         <>
-            <Navbar />
+            <Navbar value={'/toolselection'} />
             <div className='job_wrap'>
                 <div className='job_section'>
                     <CreateJob />

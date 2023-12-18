@@ -1,19 +1,18 @@
 .aboutus-heading {
-    font-family: Futura;
-    font-size: 30px;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: bolder;
     color: #222;
-    margin-top: 1rem;
 }
 
 .aboutus-content {
     width: 503px;
     height: 108px;
     font-family: Helvetica;
-    font-size: 24px;
+    font-size: 19px;
     line-height: 1.5;
     text-align: center;
     color: #222;
+    display: contents;
     margin-left: 35rem;
     margin-top: 12rem;
 }
@@ -21,10 +20,23 @@
 .aboutus-footer {
     display: flex;
     justify-content: space-between;
-    margin-top: 20rem;
+    margin-top: auto;
+
 }
 
 .outer_layout {
     padding: 2rem 5rem;
     background-color: #f5f6f9;
+}
+
+.Rectangle-Copy{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.aboutus_info{
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #6a6a6a;
 }

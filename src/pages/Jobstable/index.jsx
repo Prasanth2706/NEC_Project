@@ -18,10 +18,11 @@ const Jobs = () => {
     const navigate = useNavigate()
     const [jobsData, setJobsData] = useState([])
 
-
+    
     useEffect(() => {
         const fetchData = async () => {
             const accessToken = localStorage.getItem("access-token");
+            console.log(accessToken,'valueofaccesstoken')
 
             try {
                 const response = await axios.get('http://localhost:5000/listjobs', {
@@ -48,7 +49,7 @@ const Jobs = () => {
         },
         {
             title: 'End Time',
-            dataIndex: 'endtime',
+            dataIndex: 'endTime',
         },
         {
             title: 'Status',
@@ -78,8 +79,8 @@ const Jobs = () => {
                                 <TableHeading title={"Jobs"} />
                             </div>
                             <div className='table_info_details'>
-                                <Filter />
-                                <Search />
+                                {/* <Filter /> */}
+                                {/* <Search /> */}
                                 <CreateNew onClick={() => navigate('/toolselection')} />
                             </div>
                         </div>

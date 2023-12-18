@@ -3,7 +3,7 @@ import TableHeading from '../../components/tableHeading'
 import Filter from '../../components/filter'
 import Search from '../../components/search/search'
 import CreateNew from '../../components/createNewButton'
-import { Table } from 'antd'
+import { Form, Input, Space, Table } from 'antd'
 import './connection.css'
 import Navbar from '../../components/navbar/Navbar'
 import { Images } from '../../assets/Images'
@@ -14,6 +14,69 @@ const Connection = () => {
 
   const navigate = useNavigate()
   const [ConnectionData, setConnectionData] = useState([])
+  const [editingRow, setEditingRow] = useState(null);
+
+  const [form] = Form.useForm();
+
+
+
+  const updateData = async (id) => {
+    const accessToken = localStorage.getItem("access-token");
+    setEditingRow(id.id);
+
+    console.log(id)
+    try {
+      const url = `http://localhost:5000/updateconnection/${id.id}`;
+
+      const response = await axios.put(url, { name: id.name }, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": accessToken,
+        },
+      });
+
+      console.log('Data updated successfully:', response.data);
+    } catch (error) {
+      console.error('Error updating data:', error);
+    }
+  };
+
+  const deleteData = async (id) => {
+    const accessToken = localStorage.getItem("access-token");
+    try {
+      const url = `http://localhost:5000/deleteconnection/${id.id}`;
+
+      const response = await axios.delete(url, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": accessToken,
+        },
+      });
+
+      console.log('Data deleted successfully:', response.data);
+    } catch (error) {
+      console.error('Error deleting data:', error);
+    }
+  }
+
+
+  const handleEdit = (record) => {
+    form.setFieldsValue({ ...record });
+  };
+
+  const handleSave = async (record) => {
+    try {
+      const values = await form.validateFields();
+      updateData({ ...record, ...values });
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
+  };
+
+
+  let image = <img src={Images.edit} className='editicon' onClick={() => console.log('enter1')} alt="edit" />
+  let deleteImage = <img src={Images.delete} className='deleteicon' onClick={() => console.log('enter2')} alt="edit" />
+
   useEffect(() => {
     const fetchData = async () => {
       const accessToken = localStorage.getItem("access-token");
@@ -22,8 +85,10 @@ const Connection = () => {
         const response = await axios.get('http://localhost:5000/connections?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MDE3NzkyNzYsImV4cCI6MTcwMTc4MDQ3Nn0.xnUqcgP3889NYQ9nkpuQzx5UMz7JzHY_H1XKkLeEs14', {
           headers: { "x-auth-token": accessToken }
         });
-        console.log(response, 'connectiondata')
+        // console.log(response?.data?.connections, 'connectivafbsnsbonda')
         setConnectionData(response?.data?.connections)
+
+        console.log(ConnectionData, 'connnectiondata')
       } catch (error) {
         console.log(error, 'connectionerror')
       }
@@ -41,7 +106,29 @@ const Connection = () => {
     {
       title: 'Name',
       dataIndex: 'name',
-      width: '45%'
+      width: '45%',
+      // editable: enabelEdit,
+      render: (text, record) => (
+        <Space size="small">
+          {editingRow === record.id ? (
+            <Form
+              form={form}
+              onFinish={() => handleSave(record)}
+              initialValues={{ name: record.name }}
+            >
+              <Form.Item
+                name="name"
+                rules={[{ required: true, message: 'Please input a name!' }]}
+              >
+                <Input style={{ border: 'none' }} autoFocus={true} />
+              </Form.Item>
+            </Form>
+          ) : (
+            <span onClick={() => setEditingRow(record.id)}>{record.name}</span>
+          )}
+        </Space>
+      ),
+
     },
     {
       title: 'Type',
@@ -51,15 +138,15 @@ const Connection = () => {
     {
       dataIndex: 'image',
       align: 'right',
-      title: 'deleteIcon',
       width: "100%",
+      render: (_, record) => (
+        <Space size="small">
+          <a onClick={() => { updateData(record) }}> {image}</a>
+          <a onClick={() => { deleteData(record) }}>{deleteImage}</a>
+        </Space>
+      ),
     },
-    {
-      dataIndex: 'image1',
-      // align: 'right'
-      title: 'deleteIcon',
 
-    }
   ]
 
   // const ConnectionDataIcon = [
@@ -67,7 +154,6 @@ const Connection = () => {
   //     // key: '1',
   //     // name: '[\\SVM0\\\SVM0\Finace\CsPolicy\CsPolicy.xml]',
   //     // type: 'FlatFile',
-  //     image: [<img src={Images.edit} className='editicon' onClick={() => console.log('enter1')} alt="edit" />, <img src={Images.delete} className='deleteicon' onClick={() => console.log('enter2')} alt="edit" />],
 
 
   //   }
@@ -86,13 +172,14 @@ const Connection = () => {
               <TableHeading title={"Connection"} />
             </div>
             <div className='table-details'>
-              <Filter />
-              <Search />
+              {/* <Filter /> */}
+              {/* <Search /> */}
               <CreateNew onClick={() => navigate('/connectiondetail')} />
             </div>
           </div>
           <div className='main_connection_table'>
-            <Table columns={conectionColumns} dataSource={ConnectionData} />
+            <Table rowKey="id"
+              pagination={false} columns={conectionColumns} dataSource={ConnectionData} />
           </div>
         </div>
       </div>
@@ -102,3 +189,6 @@ const Connection = () => {
 }
 
 export default Connection
+
+
+

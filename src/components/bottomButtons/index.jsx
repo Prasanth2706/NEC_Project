@@ -16,27 +16,27 @@ const BottomButton = (props) => {
     console.log(props, "props")
     const navigate = useNavigate();
 
-    const handleNav = () => {
-        if (props.name === 'Next') {
+    // const handleNav = () => {
+    //     if (props.name === 'Next') {
 
-            navigate('/tooldetail')
-        }
+    //         navigate('/tooldetail')
+    //     }
 
-        else if (props.name === 'Run') {
-            navigate('/migration')
-        }
-        else if(props.name === 'Close'){
-            navigate('/connections')
-        }
+    //     else if (props.name === 'Run') {
+    //         navigate('/migration')
+    //     }
+    //     else if(props.name === 'Close'){
+    //         navigate('/connections')
+    //     }
 
-        else {
-            props.onClick();
-        }
-    }
+    //     else {
+    //         props.onClick();
+    //     }
+    // }
 
 
     return (
-        <div onClick={() => { handleNav(); props.onClick() }}>
+        <div onClick={() => props.onClick()}>
             {props.IconSide === 'right' ? <Button className='next'>{props.name} <RightOutlined /> </Button > : <Button className={props.className === 'previous_step' ? 'previous_step' : props.className === 'run' ? 'run' : props.className === 'disable' ? 'disable' : props.className === 'save_connection' ? 'save_connection' : props.className === 'next' ? 'next' : props.className === 'back_to_home' ? 'back_to_home' : props.className === 'test_connection' ? 'test_connection' : 'close'
             } icon={props.name === 'Close' ? <CloseOutlined /> : props.name === 'Previous Step' ? <LeftOutlined /> : null}>{props.name}</Button>}
         </div>

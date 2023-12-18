@@ -1,41 +1,32 @@
 import React, { useState } from "react";
 import "./navbar.css";
-
 import { Images } from "../../assets/Images";
 import { useNavigate } from "react-router-dom";
 import Button from "../button";
 import axios from "axios";
 import { BellOutlined } from "@ant-design/icons";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const navigate = useNavigate()
-  const [activeJobs, setActiveJobs] = useState(true);
-  const [activeConnection, setActiveConnection] = useState(false);
-  const [activeAboutus, setActiveAboutus] = useState(false);
+
 
   const handleJobs = () => {
-    // setActivePage();
     navigate('/jobs')
   }
 
   const handleConnection = () => {
-    setActiveConnection(true)
-    setActiveJobs(false)
+
     navigate('/connections')
   }
 
   const handlAboutus = () => {
     navigate('/aboutus')
-    setActiveJobs(false)
-    setActiveAboutus(true)
-    setActiveConnection(false)
+
 
   }
   const pathName = window.location.pathname;
-  console.log(pathName,'pathname'); 
-
   const getClassName = (value) => {
-    if (value === pathName){
+    if (value === pathName) {
       return 'active'
     }
   }
@@ -43,7 +34,6 @@ const Navbar = () => {
   const handleLogOut = () => {
     const accessToken = localStorage.getItem("access-token");
 
-    // console.log(`logging username and password: ${emailOrUsername} ${password}`);
     axios
       .post("http://localhost:5000/logout", null, {
         headers: {
@@ -62,11 +52,9 @@ const Navbar = () => {
           navigate('/')
           localStorage.setItem("username",
             response?.data?.result?.username)
-          // navigate('/jobs')
           console.log(response, "response");
         },
         (error) => {
-          // alert('User does not exist, click register now for creating new id.')
           console.log(error);
         }
       );
@@ -76,7 +64,7 @@ const Navbar = () => {
     <header className="main-header">
       <div className="left-section">
         <div className="logo"></div>
-        <span class="nav_title" >NEC</span>
+        <span class="nav_title" onClick={() => navigate('/jobs')}>NEC</span>
       </div>
 
       <div className="center-section">
@@ -98,7 +86,6 @@ const Navbar = () => {
 
       <div className="right-section">
         <div className="notification-icon">
-          {/* <img src={notify} class="Group" alt="notify"/> */}
           <img src={Images.notify} alt="" />
         </div>
         <div className="profile">

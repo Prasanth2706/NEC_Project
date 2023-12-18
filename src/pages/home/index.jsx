@@ -18,7 +18,7 @@ const Home = () => {
 
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
-  const[showError,setShowError] = useState(false)
+  const [showError, setShowError] = useState(false)
 
   console.log(localStorage.getItem("access-token"), "hello")
   if (localStorage.getItem("access-token")) {
@@ -85,7 +85,7 @@ const Home = () => {
         <h1 className="Lorem-ipsum">NEC</h1>
       </div>
       <div className="right-part">
-        <Heading title={"Welcome to NEC"} name= {'home'}/>
+        <Heading title={"Welcome to NEC"} name={'home'} />
         <div className="details">
           <Textarea
             label={"Email/ User Name"}
@@ -111,13 +111,13 @@ const Home = () => {
         </div>
         <div>
 
-       
-        {showError && <div style = {{color : 'red'}} >
-          <p>*User does not exist, click register now for creating new id.</p>
-        </div>}
-        <div className="forgot-pass" onClick={handleForgotPassword}>
-          <p>Forgot Password?</p>
-        </div>
+
+          {showError && <div style={{ color: 'red' }} >
+            <p>*User does not exist, click register now for creating new id.</p>
+          </div>}
+          <div className="forgot-pass" onClick={handleForgotPassword}>
+            <p>Forgot Password?</p>
+          </div>
         </div>
         <Button name={"Login"} className={"log"} onChange={handleLogin} />
         <div className="account">

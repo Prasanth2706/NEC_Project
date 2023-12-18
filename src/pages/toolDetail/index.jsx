@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ToolDetail = (props) => {
 
+
     const [selectedFile, setSelectedFile] = useState(null)
     const [selectedDropValue, setSelectesDropValue] = useState(null)
     const [imageUploaded, setImageUploaded] = useState(false);
@@ -25,6 +26,8 @@ const ToolDetail = (props) => {
     const [fileDetail, setFileDetail] = useState(null)
     const [connectionData, setConnectionData] = useState()
     const [connection, setConnection] = useState();
+    const [apiResult, setApiResult] = useState()
+    const [pathValue, setPathValue] = useState()
     // const [migrationSuccess, setMigrationSuccess] = useState(false)
 
 
@@ -70,7 +73,8 @@ const ToolDetail = (props) => {
     const handlePrevios = () => {
         setImageUploaded(false)
         setFileDetail(null)
-        // navigate('/toolselection')
+        navigate('/toolselection')
+        // navigate('/toolselection')   
     }
 
     const handleTaskname = (e) => {
@@ -78,7 +82,7 @@ const ToolDetail = (props) => {
     }
 
     const selectedData = (value) => {
-        console.log(value,'valueofdrop')
+        console.log(value, 'valueofdrop')
         connectionData?.map((connect) => {
             if (value === connect.name) {
                 setSelectesDropValue(connect?.id)
@@ -94,50 +98,65 @@ const ToolDetail = (props) => {
         setImageUploaded(false)
     }
 
-    const url = window.location.href;
-    useEffect(() => {
-        // debugger
-        const handleVisibilityChange = async () => {
-            const accessToken = localStorage.getItem("access-token");
 
-            if (document.hidden && url !== '/migration') {
-                let formaData = new FormData()
-                formaData.append('taskName', taskName);
-                formaData.append('xmlFile', selectedFile);
-                formaData.append('sourceDbId', selectedDropValue);
-                formaData.append('destinationDbId', selectedDropValue);
-                await (axios.post('http://localhost:5000/createjob', formaData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                            "x-auth-token": accessToken,
-                        }
-                    },).then(response => {
-                        // setMigrationSuccess(true)
-                        localStorage.setItem('step3', true)
-                        navigate('/popup', { state: { migrationSuccess: 'Success' } })
-                        console.log(response, 'clhsdc')
-                    }).catch(error => {
-                        // setMigrationSuccess(false)
-                        localStorage.setItem('migration', "failed")
-                        navigate('/popup', { state: { migrationSuccess: 'Failed' } })
-                        console.log(error, 'error')
-                    }))
-            }
-            // navigate('/popup');
-        };
+    // const url = window.location.href;
+    let pathName = window.location.pathname
+    console.log(pathName, 'pathnamewrv')
+    // useEffect(() => {
+    //     const handleVisibilityChange = async () => {
+    //         const accessToken = localStorage.getItem("access-token");
+    //         console.log("Visibility changed!");
+    //         debugger
 
-        document.addEventListener('visibilitychange', handleVisibilityChange);
+    //         if (document.hidden && pathName !== '/tooldetail') {
+    //             let formaData = new FormData()
+    //             formaData.append('taskName', taskName);
+    //             formaData.append('xmlFile', selectedFile);
+    //             formaData.append('sourceDbId', selectedDropValue);
+    //             formaData.append('destinationDbId', selectedDropValue);
+    //             (axios.post('http://localhost:5000/createjob', formaData,
+    //                 {
+    //                     headers: {
+    //                         "Content-Type": "multipart/form-data",
+    //                         "x-auth-token": accessToken,
+    //                     }
+    //                 },).then(response => {
+    //                     // setMigrationSuccess(true)
+    //                     localStorage.setItem('step3', true)
+    //                     navigate('/popup', { state: { popUpSuccess: 'Success' } })
+    //                     console.log(response, 'clhsdc')
+    //                 }).catch(error => {
+    //                     // setMigrationSuccess(false)
+    //                     localStorage.setItem('migration', "failed")
+    //                     navigate('/popup', { state: { popUpSuccess: 'Failed' } })
+    //                     console.log(error, 'errorpopup')
+    //                 }))
+    //         }
+    //         // navigate('/popup');
+    //         // };
 
-        // return () => {
-        //     document.removeEventListener('visibilitychange', handleVisibilityChange);
-        // };
-    }, [url]);
+    //         document.addEventListener('visibilitychange', handleVisibilityChange);
 
+    //         return () => {
+    //             document.removeEventListener('visibilitychange', handleVisibilityChange);
+    //             console.log("Visibility removed!");
+    //         };
+    //     }
+    // }, [pathName]);
+
+    const handlePopUp = (value) => {
+
+        if (pathName === '/migration') {
+            localStorage.removeItem('pop-up')
+        }
+        else {
+            // localStorage.setItem('pop-status', value)
+            console.log(value, 'valueofpopup')
+        }
+    }
 
     const navigate = useNavigate();
     const handleRunClick = () => {
-
         const accessToken = localStorage.getItem("access-token");
         // axios.post('http://localhost:5000/createjob', {
         //     taskName:  taskName ,
@@ -162,18 +181,27 @@ const ToolDetail = (props) => {
                     "Content-Type": "multipart/form-data",
                     "x-auth-token": accessToken,
                 }
-            },).then(response => {
+            }, )
+
+            // setPathValue(localStorage.getItem('pop-up'))
+            // console.log(pathValue,'WDVC')
+            .then(response => {
                 // setMigrationSuccess(true)
+                setApiResult(response)
                 localStorage.setItem('step3', true)
-                console.log(response,'tooldetailresponse')
+                // localStorage.setItem('pop-up', true)
+                handlePopUp('success');
+                console.log(response, 'tooldetailresponse')
                 navigate('/migration', { state: { migrationSuccess: 'Success' } })
 
                 console.log(response, 'clhsdc')
             }).catch(error => {
                 // setMigrationSuccess(false)
                 localStorage.setItem('migration', "failed")
+                handlePopUp('failed')
                 navigate('/migration', { state: { migrationSuccess: 'Failed' } })
                 console.log(error, 'error')
+                // handleSetToken()
             })
         localStorage.setItem('step1', true)
         localStorage.setItem('step2', true);
@@ -183,7 +211,13 @@ const ToolDetail = (props) => {
         // }else{
         //     navigate('/signupu')
         // }
+        
     }
+
+
+
+
+
     // let response;
     const handleGetConnection = async () => {
         const accessToken = localStorage.getItem("access-token");
@@ -200,7 +234,6 @@ const ToolDetail = (props) => {
         })
         setConnection(dropDown);
         // setSelectesDropValue(response?.data?.connections?.type)
-
     }
 
     useEffect(() => {
@@ -229,7 +262,7 @@ const ToolDetail = (props) => {
                         {/* <Textarea label={"Upload XML File"} image = {Images.upload} placeholder={"Drag and Drop files here or choose file "} typevalue="file" className={"image_input"} onChange={handleImageUpload}
                         /> */}
                         {fileDetail ? (
-                            <FileUpload fileDetail={fileDetail} images={Images.delete} fileRemove = {fileRemove}/>
+                            <FileUpload fileDetail={fileDetail} images={Images.delete} fileRemove={fileRemove} />
                         ) : (
                             <FileUploadButton
                                 label={"Upload XML File"}

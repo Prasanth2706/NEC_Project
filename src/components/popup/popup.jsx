@@ -6,13 +6,20 @@ import { useLocation } from 'react-router-dom';
 
 const PopUp = () => {
 
-    const location = useLocation();
-    const migrationSuccess = location.state?.migrationSuccess;
+    // const location = useLocation();
+    // const popUpSuccess = location.state?.popUpSuccess;
+    const hasWindow = typeof window !== undefined
+
+    const steps = hasWindow && localStorage.getItem('pop-status')
+    console.log(steps,'stepsvalue')
+
     const successPopUp = {
         title: "Connection test successful.", icon: Images.tickIcon,
         image: Images.doneimage,
         paragraph: "Thanks for being patient, connection test is successfully completed"
     }
+
+
     const faliedPopUp = {
         title: "Connection test failed.", icon: Images.cutimage,
         image: Images.errorimage,
@@ -22,9 +29,11 @@ const PopUp = () => {
             </>
         ),
     }
-    return(
+
+
+    return (
         <>
-        <PopupCard data = {migrationSuccess === 'Success' ? successPopUp : migrationSuccess === 'Failed' ? faliedPopUp:null}/>
+            <PopupCard data={steps === 'Success' ? { successPopUp } : { faliedPopUp }} />
         </>
     )
 }

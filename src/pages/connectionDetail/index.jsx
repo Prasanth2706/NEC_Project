@@ -8,12 +8,10 @@ import Navbar from '../../components/navbar/Navbar'
 import './connectionDetail.css'
 import { Images } from '../../assets/Images'
 import axios from 'axios'
-import PopupCard from '../../components/popup/popupcard'
 import { useNavigate } from 'react-router-dom'
 
 
 const ConnectionDetail = () => {
-    const [PopupVisible, setPopupVisible] = useState(false);
     const [data, setData] = useState(false);
     const [isError, setIsError] = useState(false);
     const [name, setName] = useState("");
@@ -36,7 +34,7 @@ const ConnectionDetail = () => {
         console.log(accessToken, "accessToken");
         axios
             .post(
-                "http://localhost:5000/testconnection?",
+                "http://localhost:5000/testconnection",
                 {
                     name: name,
                     type: type,
@@ -75,6 +73,10 @@ const ConnectionDetail = () => {
         // setData(true);
     };
 
+    const handlePrevious = () => {
+        navigate('/connections')
+    }
+
 
 
     const handleSaveConnection = () => {
@@ -82,7 +84,7 @@ const ConnectionDetail = () => {
         console.log(accessToken, "accessToken");
         axios
             .post(
-                "http://localhost:5000/testconnection?",
+                "http://localhost:5000/saveconnection",
                 {
                     name: name,
                     type: type,
@@ -103,30 +105,21 @@ const ConnectionDetail = () => {
             .then(
                 (response) => {
                     console.log(response, "response");
-                    // if (response.status === 200) {
-                    //     // setData(true);
-                    //     setenableSaveButton(true)
-                    //     console.log("hello");
-                    // }
+
                 },
                 (error) => {
 
-                    // if (error.response.status === 400) {
                     console.log(error, "this is Error ");
-                    //     setData(true);
-                    //     setIsError(true);
-                    //     setenableSaveButton(false)
-                    // }
+
                 }
             );
-        // setData(true);
     };
 
     const handleNameChange = (e) => {
         setName(e.target.value);
     };
-    const   handleTypeChange = (value) => {
-        // setType(value);
+    const handleTypeChange = (value) => {
+        setType(value);
         setFullConnectionProps(true);
         setConnectionDetailBottom(false)
     };
@@ -172,32 +165,20 @@ const ConnectionDetail = () => {
         ),
     };
 
-    const handleClose = () =>{
+    const handleClose = () => {
         navigate('/connections')
     }
 
-    // const dropDownValue = ['MySql']
-
-    // const hello = () => {
-    //     console.log('working')
-    // }
-    // const handlePopupClose = () => {
-    //     setPopupVisible(false);
-    // };
-
-    // const getType = (value) => { };
-
-    // const clickData = () => {
-    //     setData(true);
-    //     console.log("Data ==> ", data);
-    // };
+    const handleNavConnection = () => {
+        navigate('/connections')
+    }
 
     return (
         <>
             <Navbar />
             <div className="outer_wrap">
                 <div className="connection_section">
-                    <p className="main_connection_heading">Connection</p>
+                    <p className="main_connection_heading" onClick={handleNavConnection}>Connection</p>
                     <RightOutlined className="rightarrow" />
                     <p className="new_connection"> Create New Connection</p>
                 </div>
@@ -208,7 +189,7 @@ const ConnectionDetail = () => {
                     </div>
                     <div className="connection_input">
                         <Textarea
-                            label={"Connection Name"}
+                            label={"Connection Name"}   
                             placeholder={"Lorem Connection"}
                             className={"connection"}
                             value={name}
@@ -217,16 +198,15 @@ const ConnectionDetail = () => {
                         <div className="dropdown">
                             <span className="drop_title">Database Type</span>
                             <Dropdown
-                                // value={type}
                                 selectedData={handleTypeChange}
-                                name={name}
-                                data={['Select DataBase Type','MY SQL']}
-                            // items = {dropDownValue}
+                                // name={name}
+                                // handleTypeChange = {handleTypeChange}
+                                data={['Postgres','MySQL']}
                             />
                         </div>
                     </div>
-                    {   connectionDetailBottom && <div className='connectionprop_bottom_button'>
-                        <BottomButton name={"Close"} className={"previous_step"} onClick = {handleClose}/>
+                    {connectionDetailBottom && <div className='connectionprop_bottom_button'>
+                        <BottomButton name={"Close"} className={"previous_step"} onClick={handleClose} />
                         <BottomButton name={"Test Connection"} className={"test_connection"} />
                     </div>}
                     {fullConnectionProps && <div className='second_sub_connection_detail'>
@@ -281,6 +261,7 @@ const ConnectionDetail = () => {
                                 <BottomButton
                                     name={"Previous Step"}
                                     className={"previous_step"}
+                                    onClick={handlePrevious}
                                 />
                                 <BottomButton
                                     name={"Test Connection"}
@@ -296,17 +277,7 @@ const ConnectionDetail = () => {
                         </div>
                     </div>}
                 </div>
-                {data && (
-                    <PopupCard
-                        data={isError ? connectiondataIsError : connectiondata}
-                        display={data}
-                        isError={isError}
-                        closingPopUp={() => {
-                            setData(false);
-                            setIsError(false);
-                        }}
-                    />
-                )}
+
             </div>
         </>
     );

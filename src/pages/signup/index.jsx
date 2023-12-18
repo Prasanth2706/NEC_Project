@@ -40,7 +40,6 @@ const SignUp = () => {
     }
 
     const handleSignup = () => {
-
         if (password !== confirmPassword) {
             console.log('password is not matching')
             return
@@ -51,9 +50,9 @@ const SignUp = () => {
             "email": UsernameOrEmail,
             "password": password,
         }).then((response) => {
-            localStorage.setItem("access-token", response?.result?.accessToken);
-            localStorage.setItem("refresh-token", response?.result?.refreshToken)
-
+            console.log(response, 'sigupresponse')
+            localStorage.setItem("access-token", response?.data?.result?.accessToken);
+            localStorage.setItem("refresh-token", response?.data?.result?.refreshToken)
             navigate('/jobs')
             console.log(response, 'response of api')
         },

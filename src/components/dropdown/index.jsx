@@ -9,7 +9,7 @@ const Dropdown = ({ props, data, selectedData }) => {
     
     selectedData(e.target.value)
     setSelectedOption(e.target.value);
-    // props?.handleTypeChange(e.target.value)
+    props?.handleTypeChange(e.target.value)
     // data.map((data) => {
     //   if (data.name === e.target.value) {
     //   }

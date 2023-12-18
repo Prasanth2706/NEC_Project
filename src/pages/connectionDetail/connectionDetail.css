@@ -59,6 +59,7 @@
 .user {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 2rem;
 
 }
 
@@ -75,6 +76,7 @@
 .main_connection_heading {
     font-family: Helvetica;
     font-size: 14px;
+    cursor: pointer;
     color: #222;
 }
 
@@ -122,4 +124,11 @@
     font-weight: normal;
     /* font-stretch: normal; */
     color: #000;
+}
+
+.connectionprop_bottom_button{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+
 }

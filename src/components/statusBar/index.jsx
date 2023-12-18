@@ -6,7 +6,7 @@ const StatusBar = (props) => {
     console.log(localStorage.getItem('step1'), "LOCAL")
     const hasWindow = typeof window !== 'undefined';
   const steps = hasWindow && localStorage.getItem('step3')
-  const migrate=hasWindow && localStorage.getItem('migration')
+  const migrate= hasWindow && localStorage.getItem('migration')
     const [status1, setStatus1] = useState();
     const [status2, setStatus2] = useState();
     const [status3, setStatus3] = useState();
