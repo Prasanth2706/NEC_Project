@@ -9,6 +9,7 @@ import './connectionDetail.css'
 import { Images } from '../../assets/Images'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import PasswordInput from '../../components/passwordInput'
 
 
 const ConnectionDetail = () => {
@@ -21,17 +22,23 @@ const ConnectionDetail = () => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [database, setDatabase] = useState("");
+    const [isConnectionSaved, setConnectionSaved] = useState(false)
     const [tableName, setTableName] = useState("");
     const [fullConnectionProps, setFullConnectionProps] = useState(false)
     const [enableSaveButton, setenableSaveButton] = useState(false)
     const [connectionDetailBottom, setConnectionDetailBottom] = useState(true)
-
+    const [errorValue, setErrorValue] = useState([])
+    const [isLoding, setIsLoading] = useState(false)
+    const [savedConnectionError, setSavedConnectionError] = useState([])
 
     const navigate = useNavigate();
 
     const handleConnection = () => {
+
+
         const accessToken = localStorage.getItem("access-token");
         console.log(accessToken, "accessToken");
+        setIsLoading(true)
         axios
             .post(
                 "http://localhost:5000/testconnection",
@@ -63,20 +70,23 @@ const ConnectionDetail = () => {
                 },
                 (error) => {
                     if (error.response.status === 400) {
-                        console.log(error, "this is Error ");
+                        console.log(error?.response?.data?.errors, "this is Error ");
+                        setErrorValue(error?.response?.data?.errors)
                         setData(true);
                         setIsError(true);
                         setenableSaveButton(false)
                     }
                 }
-            );
+            )
+            .finally(() => {
+                setIsLoading(false)
+            })
         // setData(true);
     };
 
     const handlePrevious = () => {
         navigate('/connections')
     }
-
 
 
     const handleSaveConnection = () => {
@@ -105,11 +115,17 @@ const ConnectionDetail = () => {
             .then(
                 (response) => {
                     console.log(response, "response");
+                    setConnectionSaved(true)
+                    navigate('/jobs')
+                    setTimeout(() => {
+                        setConnectionSaved(false);
+                    }, 7000);
 
                 },
                 (error) => {
 
-                    console.log(error, "this is Error ");
+                    console.log(error, "this is SavedError ");
+                    setSavedConnectionError(error?.response?.data?.error)
 
                 }
             );
@@ -189,7 +205,7 @@ const ConnectionDetail = () => {
                     </div>
                     <div className="connection_input">
                         <Textarea
-                            label={"Connection Name"}   
+                            label={"Connection Name"}
                             placeholder={"Lorem Connection"}
                             className={"connection"}
                             value={name}
@@ -199,9 +215,8 @@ const ConnectionDetail = () => {
                             <span className="drop_title">Database Type</span>
                             <Dropdown
                                 selectedData={handleTypeChange}
-                                // name={name}
-                                // handleTypeChange = {handleTypeChange}
-                                data={['Postgres','MySQL']}
+                                name={name}
+                                data={['Postgres', 'MySQL']}
                             />
                         </div>
                     </div>
@@ -220,12 +235,17 @@ const ConnectionDetail = () => {
                                 value={userName}
                                 onChange={handleUserNameChange}
                             />
-                            <Textarea
-                                label={"Password"}
+                            {/* <Textarea
+                                label={"password"}
                                 placeholder={"password"}
                                 value={password}
                                 onChange={handlePassChange}
-                            />
+                            /> */}
+                            <PasswordInput
+                                label={"password"}
+                                placeholder={"password"}
+                                value={password}
+                                onChange={handlePassChange} />
                         </div>
                         <div className="port">
                             <Textarea
@@ -255,6 +275,10 @@ const ConnectionDetail = () => {
                                 onChange={handleDatabaseChange}
                             />
                         </div>
+                        {/* {isError && <p className='errorValue'>*{errorValue}</p>} */}
+                        {isConnectionSaved && <p className='connection_saved'>Connection details saved!</p>}
+                        {isLoding && <div className='connection_pending' style={{ color: 'red' }}>Connection process is pending...</div>}
+                        {savedConnectionError && null && <p className='errorValue'>*{savedConnectionError}</p>}
                         <div className="connection_bottom_part">
                             <p>Started creating on: 25-02-2022 | 12.00 PM</p>
                             <div className="connection_bottom_button">

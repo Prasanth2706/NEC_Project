@@ -53,6 +53,7 @@ const SignUp = () => {
             console.log(response, 'sigupresponse')
             localStorage.setItem("access-token", response?.data?.result?.accessToken);
             localStorage.setItem("refresh-token", response?.data?.result?.refreshToken)
+            localStorage.setItem('username',userName)
             navigate('/jobs')
             console.log(response, 'response of api')
         },

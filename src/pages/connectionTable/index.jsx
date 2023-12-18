@@ -54,6 +54,9 @@ const Connection = () => {
       });
 
       console.log('Data deleted successfully:', response.data);
+      setConnectionData((prevData) =>
+      prevData.filter((record) => record.id !== id.id)
+    );
     } catch (error) {
       console.error('Error deleting data:', error);
     }

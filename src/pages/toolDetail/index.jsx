@@ -19,6 +19,7 @@ const ToolDetail = (props) => {
 
     const [selectedFile, setSelectedFile] = useState(null)
     const [selectedDropValue, setSelectesDropValue] = useState(null)
+    const [secondSelectedDropValue,setSecondSelectedDropValue] = useState(null)
     const [imageUploaded, setImageUploaded] = useState(false);
     const [taskName, setTaskname] = useState('')
     const [fileName, setFileName] = useState('no file')
@@ -81,13 +82,25 @@ const ToolDetail = (props) => {
         setTaskname(e.target.value)
     }
 
-    const selectedData = (value) => {
+    const selectedData = (value,DropDownName) => {
+
         console.log(value, 'valueofdrop')
+        if(DropDownName==='Source')
+        {
         connectionData?.map((connect) => {
             if (value === connect.name) {
                 setSelectesDropValue(connect?.id)
             }
         });
+    }
+    else if(DropDownName==='Destination')
+    {
+        connectionData?.map((connect) => {
+            if (value === connect.name) {
+                setSecondSelectedDropValue(connect?.id)
+            }
+        });
+    }
     }
     // const handleRemove = () =>{
     //     setFileDetail(null)   
@@ -157,6 +170,7 @@ const ToolDetail = (props) => {
 
     const navigate = useNavigate();
     const handleRunClick = () => {
+        navigate('/migration')
         const accessToken = localStorage.getItem("access-token");
         // axios.post('http://localhost:5000/createjob', {
         //     taskName:  taskName ,
@@ -173,7 +187,7 @@ const ToolDetail = (props) => {
         formaData.append('taskName', taskName);
         formaData.append('xmlFile', selectedFile);
         formaData.append('sourceDbId', selectedDropValue);
-        formaData.append('destinationDbId', selectedDropValue);
+        formaData.append('destinationDbId', secondSelectedDropValue);
 
         axios.post('http://localhost:5000/createjob', formaData,
             {
@@ -288,11 +302,11 @@ const ToolDetail = (props) => {
                         <div className='database_area'>
                             <div className='database_area_dropOne'>
                                 <span className="drop_title">Source Database</span>
-                                <Dropdown title={"Source Database"} data={connection} selectedData={selectedData} />
+                                <Dropdown title={"Source Database"} DropDownName='Source' data={connection} selectedData={selectedData} />
                             </div>
                             <div className='database_area_dropTwo'>
                                 <span className="drop_title">Target Database</span>
-                                <Dropdown title={"Target Database"} data={connection} selectedData={selectedData} />
+                                <Dropdown title={"Target Database"} DropDownName='Destination' data={connection} selectedData={selectedData} />
                             </div>
                         </div>
                     </div>}

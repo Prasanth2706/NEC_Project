@@ -19,6 +19,7 @@ const Home = () => {
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false)
+  const [errorvalue,setErrorValue] = useState([])
 
   console.log(localStorage.getItem("access-token"), "hello")
   if (localStorage.getItem("access-token")) {
@@ -51,7 +52,9 @@ const Home = () => {
         (error) => {
           // alert('User does not exist, click register now for creating new id.')
           setShowError(true)
-          console.log(error);
+
+          console.log(error?.response?.data?.message,'homeerror');
+          setErrorValue(error?.response?.data?.message)
         }
       );
   };
@@ -113,7 +116,7 @@ const Home = () => {
 
 
           {showError && <div style={{ color: 'red' }} >
-            <p>*User does not exist, click register now for creating new id.</p>
+            <p>{errorvalue}</p>
           </div>}
           <div className="forgot-pass" onClick={handleForgotPassword}>
             <p>Forgot Password?</p>

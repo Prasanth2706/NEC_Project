@@ -12,6 +12,27 @@
     margin-right: 6px;
 }
 
+.errorValue {
+    color: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+
+.connection_saved {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.connection_pending {
+    color: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
 .main_connection_detail {
     display: flex;
     flex-direction: row;
@@ -126,7 +147,7 @@
     color: #000;
 }
 
-.connectionprop_bottom_button{
+.connectionprop_bottom_button {
     display: flex;
     justify-content: flex-end;
     margin-top: auto;
