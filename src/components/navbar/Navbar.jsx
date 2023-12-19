@@ -57,7 +57,7 @@ const Navbar = (props) => {
         (error) => {
           console.log(error);
         }
-      );
+      ); 
   };
 
   return (
@@ -89,7 +89,7 @@ const Navbar = (props) => {
           <img src={Images.notify} alt="" />
         </div>
         <div className="profile">
-          <BellOutlined />
+          <BellOutlined  style={{fontSize: '22px'}}/>
           <div className="profile-image"><img className="profile_image" src={Images.personIcon} alt="" /></div>
           <div class="Oval"></div>
           <span className="profile-name">{localStorage.getItem('username')}</span>

@@ -19,7 +19,7 @@ const ToolDetail = (props) => {
 
     const [selectedFile, setSelectedFile] = useState(null)
     const [selectedDropValue, setSelectesDropValue] = useState(null)
-    const [secondSelectedDropValue,setSecondSelectedDropValue] = useState(null)
+    const [secondSelectedDropValue, setSecondSelectedDropValue] = useState(null)
     const [imageUploaded, setImageUploaded] = useState(false);
     const [taskName, setTaskname] = useState('')
     const [fileName, setFileName] = useState('no file')
@@ -82,25 +82,23 @@ const ToolDetail = (props) => {
         setTaskname(e.target.value)
     }
 
-    const selectedData = (value,DropDownName) => {
+    const selectedData = (value, DropDownName) => {
 
         console.log(value, 'valueofdrop')
-        if(DropDownName==='Source')
-        {
-        connectionData?.map((connect) => {
-            if (value === connect.name) {
-                setSelectesDropValue(connect?.id)
-            }
-        });
-    }
-    else if(DropDownName==='Destination')
-    {
-        connectionData?.map((connect) => {
-            if (value === connect.name) {
-                setSecondSelectedDropValue(connect?.id)
-            }
-        });
-    }
+        if (DropDownName === 'Source') {
+            connectionData?.map((connect) => {
+                if (value === connect.name) {
+                    setSelectesDropValue(connect?.id)
+                }
+            });
+        }
+        else if (DropDownName === 'Destination') {
+            connectionData?.map((connect) => {
+                if (value === connect.name) {
+                    setSecondSelectedDropValue(connect?.id)
+                }
+            });
+        }
     }
     // const handleRemove = () =>{
     //     setFileDetail(null)   
@@ -108,6 +106,7 @@ const ToolDetail = (props) => {
 
     const fileRemove = (value) => {
         setFileDetail(value)
+        setSelectedFile(null)
         setImageUploaded(false)
     }
 
@@ -167,7 +166,6 @@ const ToolDetail = (props) => {
             console.log(value, 'valueofpopup')
         }
     }
-
     const navigate = useNavigate();
     const handleRunClick = () => {
         navigate('/migration')
@@ -195,7 +193,7 @@ const ToolDetail = (props) => {
                     "Content-Type": "multipart/form-data",
                     "x-auth-token": accessToken,
                 }
-            }, )
+            },)
 
             // setPathValue(localStorage.getItem('pop-up'))
             // console.log(pathValue,'WDVC')
@@ -225,7 +223,7 @@ const ToolDetail = (props) => {
         // }else{
         //     navigate('/signupu')
         // }
-        
+
     }
 
 
@@ -322,8 +320,6 @@ const ToolDetail = (props) => {
 
                 </div>
             </div>
-
-
         </>
     )
 }

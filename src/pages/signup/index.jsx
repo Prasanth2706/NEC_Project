@@ -18,16 +18,44 @@ const SignUp = () => {
     const [showError, setShowError] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState('')
     const [apiResult, setApiResult] = useState('')
+    const [passwordCheck, setPasswordCheck] = useState(false)
+    const [userNameCheck, setUsernameCheck] = useState(false)
+    const [userNameError, serUSerNameError] = useState('')
+    const [userEmailCheck, setUserEmailcheck] = useState(false)
 
     const handleUsername = (e) => {
-        setUsername(e.target.value)
+        const userName = e.target.value;
+        setUsername(userName)
+
+        if (userName.length <= 3) {
+            setUsernameCheck(true)
+            serUSerNameError('Username must have a minimum of three characters')
+        }
+        else {
+            setUsernameCheck(false)
+            serUSerNameError('')
+        }
+
         console.log(userName, 'username')
     }
 
     const handleNameorMail = (e) => {
-        setUsernameOrEmail(e.target.value)
-        console.log(UsernameOrEmail, 'username or Email of user')
-    }
+        const userEmail = e.target.value;
+        let regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+        let isValidEmail = regex.test(userEmail);
+
+        if (isValidEmail) {
+
+            setUserEmailcheck(false)
+        } else {
+
+            setUserEmailcheck(true)
+        }
+
+        setUsernameOrEmail(userEmail);
+        console.log(UsernameOrEmail, 'username or Email of user');
+    };
+
 
     const handlePassword = (e) => {
         setPassword(e.target.value)
@@ -39,9 +67,16 @@ const SignUp = () => {
         console.log(confirmPassword, 'checking the confirm password')
     }
 
+
+
+
     const handleSignup = () => {
         if (password !== confirmPassword) {
             console.log('password is not matching')
+            setPasswordCheck(true)
+            setTimeout(() => {
+                setPasswordCheck(false)
+            }, 4000)
             return
         }
 
@@ -53,15 +88,15 @@ const SignUp = () => {
             console.log(response, 'sigupresponse')
             localStorage.setItem("access-token", response?.data?.result?.accessToken);
             localStorage.setItem("refresh-token", response?.data?.result?.refreshToken)
-            localStorage.setItem('username',userName)
+            localStorage.setItem('username', userName)
             navigate('/jobs')
             console.log(response, 'response of api')
         },
             (error) => {
                 console.log(error, 'error')
                 setShowError(true)
-                console.log(error.message, 'apierror')
-                setApiResult(error.response?.data?.errors)
+                console.log(error, 'apierror')
+                setApiResult(error.response?.data?.message)
             }
         )
     }
@@ -76,8 +111,11 @@ const SignUp = () => {
                 <Heading title={"Welcome to NEC"} name={'signup'} />
                 <div className='details'>
                     <Textarea label={"User Name"} placeholder={"e.g. John Joe"} typevalue={"text"} value={userName} onChange={handleUsername} />
+                    {userNameCheck && <div style={{ color: 'red' }}>
+                        <p>*{userNameError}</p>
+                    </div>}
                     <Textarea label={"Email/ User Name"} placeholder={"e.g. John Joe"} typevalue={"email"} value={UsernameOrEmail} onChange={handleNameorMail} />
-
+                    {userEmailCheck && <p style={{ color: 'red' }}>*{'Invalid Email Address'}</p>}
                     <PasswordInput
                         label={"Password"}
                         placeholder={"Enter Password"}
@@ -93,6 +131,9 @@ const SignUp = () => {
                 </div>
                 {showError && <div style={{ color: 'red' }}>
                     <p>*{apiResult}</p>
+                </div>}
+                {passwordCheck && <div>
+                    <p className='passwordCheck'>*{'password is not matching'}</p>
                 </div>}
                 <div className='forgot-pass'>
                     <p>Forgot Password?</p>

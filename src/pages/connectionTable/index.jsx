@@ -55,8 +55,8 @@ const Connection = () => {
 
       console.log('Data deleted successfully:', response.data);
       setConnectionData((prevData) =>
-      prevData.filter((record) => record.id !== id.id)
-    );
+        prevData.filter((record) => record.id !== id.id)
+      );
     } catch (error) {
       console.error('Error deleting data:', error);
     }
@@ -83,7 +83,6 @@ const Connection = () => {
   useEffect(() => {
     const fetchData = async () => {
       const accessToken = localStorage.getItem("access-token");
-
       try {
         const response = await axios.get('http://localhost:5000/connections?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MDE3NzkyNzYsImV4cCI6MTcwMTc4MDQ3Nn0.xnUqcgP3889NYQ9nkpuQzx5UMz7JzHY_H1XKkLeEs14', {
           headers: { "x-auth-token": accessToken }
@@ -105,7 +104,6 @@ const Connection = () => {
   // },[fetchData()])
 
   const conectionColumns = [
-
     {
       title: 'Name',
       dataIndex: 'name',
@@ -127,11 +125,10 @@ const Connection = () => {
               </Form.Item>
             </Form>
           ) : (
-            <span onClick={() => setEditingRow(record.id)}>{record.name}</span>
+            <span onClick={() => handleEdit(record)}>{record.name}</span>
           )}
         </Space>
       ),
-
     },
     {
       title: 'Type',
@@ -149,7 +146,6 @@ const Connection = () => {
         </Space>
       ),
     },
-
   ]
 
   // const ConnectionDataIcon = [

@@ -12,23 +12,22 @@ import { Images } from '../../assets/Images'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { Navigate, useNavigate } from 'react-router-dom'
-// import ver from '../../Assets/delete.png'
 
 const Jobs = () => {
     const navigate = useNavigate()
     const [jobsData, setJobsData] = useState([])
 
-    
+
     useEffect(() => {
         const fetchData = async () => {
             const accessToken = localStorage.getItem("access-token");
-            console.log(accessToken,'valueofaccesstoken')
+            console.log(accessToken, 'valueofaccesstoken')
 
             try {
                 const response = await axios.get('http://localhost:5000/listjobs', {
                     headers: { "x-auth-token": accessToken }
                 });
-                console.log(response, 'fsdfsfwervwefcwe')
+                console.log(response?.data?.jobs, 'fsdfsfwervwefcwe')
                 setJobsData(response?.data?.jobs)
             } catch (error) {
                 console.log(error, 'job-error')
@@ -41,15 +40,45 @@ const Jobs = () => {
         {
             title: 'Instance Name',
             dataIndex: 'name',
-            width: '45%'
+            width: '45%',
+            render: (text, record) => record.taskName
         },
         {
             title: 'Start Time',
             dataIndex: 'startTime',
+            render: (createdAt) => {
+                if (!createdAt) {
+                    return null;
+                }
+                const formattedDate = new Date(createdAt).toLocaleDateString();
+                const formattedTime = new Date(createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                return (
+                    <       >
+                        <div>{formattedDate}, {formattedTime}</div>
+                    </>
+                );
+            },
         },
+
         {
             title: 'End Time',
             dataIndex: 'endTime',
+            render: (updatedAt) => {
+                if (!updatedAt) {
+                    return null; // or handle it in a way that makes sense for your application
+                }
+
+                const formattedDate = new Date(updatedAt).toLocaleDateString();
+                const formattedTime = new Date(updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                return (
+                    <>
+                        <div>{formattedDate}, {formattedTime}</div>
+                    </>
+                );
+            },
+
         },
         {
             title: 'Status',
@@ -88,7 +117,6 @@ const Jobs = () => {
                             <Table columns={JobsColumns} dataSource={jobsData} />
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

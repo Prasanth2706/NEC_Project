@@ -88,7 +88,6 @@ const ConnectionDetail = () => {
         navigate('/connections')
     }
 
-
     const handleSaveConnection = () => {
         const accessToken = localStorage.getItem("access-token");
         console.log(accessToken, "accessToken");
@@ -161,25 +160,25 @@ const ConnectionDetail = () => {
 
     // setPopupVisible(true);
 
-    const connectiondata = {
-        title: "Connection test successful.",
-        icon: Images.tickIcon,
-        image: Images.doneimage,
-        paragraph:
-            "Thanks for being patient, connection test is successfully completed",
-    };
+    // const connectiondata = {
+    //     title: "Connection test successful.",
+    //     icon: Images.tickIcon,
+    //     image: Images.doneimage,
+    //     paragraph:
+    //         "Thanks for being patient, connection test is successfully completed",
+    // };
 
-    const connectiondataIsError = {
-        title: "Connection test failed.",
-        icon: Images.cutimage,
-        image: Images.errorimage,
-        paragraph: (
-            <>
-                Sorry, Due to some unfortunate error the connect test is failed. Please
-                check once or <a href="#">Create New Connection.</a>
-            </>
-        ),
-    };
+    // const connectiondataIsError = {
+    //     title: "Connection test failed.",
+    //     icon: Images.cutimage,
+    //     image: Images.errorimage,
+    //     paragraph: (
+    //         <>
+    //             Sorry, Due to some unfortunate error the connect test is failed. Please
+    //             check once or <a href="#">Create New Connection.</a>
+    //         </>
+    //     ),
+    // };
 
     const handleClose = () => {
         navigate('/connections')
