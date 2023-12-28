@@ -60,6 +60,7 @@
     margin-left: 18rem;
     font-family: Lato;
     color: #818181;
+    cursor: pointer;
     margin-top: 0;
 }
 
@@ -68,6 +69,4 @@
     display: flex;
     justify-content: center;
     color: #818181;
-
-
 }

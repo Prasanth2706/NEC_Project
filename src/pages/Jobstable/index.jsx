@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import TableHeading from '../../components/tableHeading'
 import Filter from '../../components/filter'
 import Search from '../../components/search/search'
@@ -11,18 +11,23 @@ import Navbar from '../../components/navbar/Navbar'
 import { Images } from '../../assets/Images'
 import { useEffect } from 'react'
 import axios from 'axios'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import NecPopUp from '../../components/NecFlow'
 
 const Jobs = () => {
     const navigate = useNavigate()
+    const location = useLocation();
     const [jobsData, setJobsData] = useState([])
+    const [isOpen, SetIsOpen] = useState(location.state?.showPopUp);
 
+    const handleCreateNewClick = () => {
+        navigate('/toolselection');
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             const accessToken = localStorage.getItem("access-token");
             console.log(accessToken, 'valueofaccesstoken')
-
             try {
                 const response = await axios.get('http://localhost:5000/listjobs', {
                     headers: { "x-auth-token": accessToken }
@@ -54,7 +59,7 @@ const Jobs = () => {
                 const formattedTime = new Date(createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
                 return (
-                    <       >
+                    <>
                         <div>{formattedDate}, {formattedTime}</div>
                     </>
                 );
@@ -66,7 +71,7 @@ const Jobs = () => {
             dataIndex: 'endTime',
             render: (updatedAt) => {
                 if (!updatedAt) {
-                    return null; // or handle it in a way that makes sense for your application
+                    return null;
                 }
 
                 const formattedDate = new Date(updatedAt).toLocaleDateString();
@@ -78,7 +83,6 @@ const Jobs = () => {
                     </>
                 );
             },
-
         },
         {
             title: 'Status',
@@ -90,18 +94,15 @@ const Jobs = () => {
         },
         {
             dataIndex: 'detail',
-
         }
-
     ]
 
     return (
 
-        <div >
+        <div>
             <Navbar />
             <div>
                 <div className='jobinfo_table'>
-
                     <div className='joblistinfo_Table'>
                         <div className='connectioninfno-table'>
                             <div className='table-heading_info'>
@@ -110,17 +111,17 @@ const Jobs = () => {
                             <div className='table_info_details'>
                                 {/* <Filter /> */}
                                 {/* <Search /> */}
-                                <CreateNew onClick={() => navigate('/toolselection')} />
+                                <CreateNew onClick={handleCreateNewClick} />
                             </div>
                         </div>
                         <div className='main_connection_info_table'>
                             <Table columns={JobsColumns} dataSource={jobsData} />
+                            <NecPopUp isopen={isOpen} onClose={() => SetIsOpen(!isOpen)} />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     )
 }
 

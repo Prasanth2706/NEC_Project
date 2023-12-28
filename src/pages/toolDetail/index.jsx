@@ -30,13 +30,7 @@ const ToolDetail = (props) => {
     const [apiResult, setApiResult] = useState()
     const [pathValue, setPathValue] = useState()
     // const [migrationSuccess, setMigrationSuccess] = useState(false)
-
-
-
-
     const handleFileUpload = ({ target: { files } }) => {
-
-
         console.log(imageUploaded, 'imageuplloaded')
         // setFileName(files[0].name)
         // setFileSize(files[0].size)
@@ -70,12 +64,10 @@ const ToolDetail = (props) => {
         }
 
     }
-
     const handlePrevios = () => {
         setImageUploaded(false)
         setFileDetail(null)
         navigate('/toolselection')
-        // navigate('/toolselection')   
     }
 
     const handleTaskname = (e) => {
@@ -194,7 +186,6 @@ const ToolDetail = (props) => {
                     "x-auth-token": accessToken,
                 }
             },)
-
             // setPathValue(localStorage.getItem('pop-up'))
             // console.log(pathValue,'WDVC')
             .then(response => {
@@ -226,14 +217,9 @@ const ToolDetail = (props) => {
 
     }
 
-
-
-
-
     // let response;
     const handleGetConnection = async () => {
         const accessToken = localStorage.getItem("access-token");
-
         const response = await axios.get('http://localhost:5000/connections?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MDE3NzkyNzYsImV4cCI6MTcwMTc4MDQ3Nn0.xnUqcgP3889NYQ9nkpuQzx5UMz7JzHY_H1XKkLeEs14', {
             headers: { "x-auth-token": accessToken }
         })
@@ -316,8 +302,6 @@ const ToolDetail = (props) => {
                             {/* {runButtonEnabled && <button onClick={handleRunClick}>run</button>} */}
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </>

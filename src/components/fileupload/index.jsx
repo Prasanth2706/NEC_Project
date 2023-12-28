@@ -10,7 +10,6 @@ const FileUpload = ({fileDetail,images,fileRemove}) => {
 
         <div className='file_details'>
             <div className='file_area'>
-
                 {/* <img className='file_img' src={images} alt="" /> */}
                 <div className='file_specs'>
                     <p className='file_name'>{fileDetail.fileName}</p>
@@ -18,7 +17,7 @@ const FileUpload = ({fileDetail,images,fileRemove}) => {
                 </div>
             </div>
 
-            <img className='file_img' src={images} alt="" onClick={handleRemove}/>
+            <img style={{cursor:'pointer'}} className='file_img' src={images} alt="" onClick={handleRemove}/>
         </div>
 
     )

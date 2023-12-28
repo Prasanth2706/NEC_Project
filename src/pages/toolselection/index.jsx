@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom'
 
 const ToolSelection = () => {
     const [selectedTool, setSelectedTool] = useState('');
+    // const [renderIframe, setRenderIframe] = useState(false);
+
     const navigate = useNavigate()
 
 
@@ -28,6 +30,7 @@ const ToolSelection = () => {
 
     const handleToolOptionClick = (toolTitle) => {
         setSelectedTool(toolTitle);
+
     };
 
     // const handleToolTab = () => {
@@ -36,10 +39,15 @@ const ToolSelection = () => {
 
     const handleRunClick = () => {
         localStorage.setItem('step1', true)
-
         // setStepIndicator({
         //     ...stepIndicator,
-        navigate('/tooldetail')
+        if (selectedTool === 'Data Stage to Informatica') {
+            // window.location.href = 'https://dm-ap.informaticacloud.com/identity-service/home';
+            // <iframe src="https://dm-ap.informaticacloud.com/identity-service/home" ></iframe>
+            navigate('/info')
+        } else {
+            navigate('/tooldetail')
+        }
         //     step1: true
         // })
     }
@@ -78,6 +86,7 @@ const ToolSelection = () => {
                             <BottomButton name={"Next"} className={"next"} IconSide={'right'} onClick={handleRunClick} />
                         </div>
                     </div>
+                    {/* {renderIframe && <iframe src="https://dm-ap.informaticacloud.com/identity-service/home"></iframe>} */}
                     {/* </div> */}
 
                 </div>

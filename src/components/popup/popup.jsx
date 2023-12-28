@@ -11,14 +11,13 @@ const PopUp = () => {
     const hasWindow = typeof window !== undefined
 
     const steps = hasWindow && localStorage.getItem('pop-status')
-    console.log(steps,'stepsvalue')
+    console.log(steps, 'stepsvalue')
 
     const successPopUp = {
         title: "Connection test successful.", icon: Images.tickIcon,
         image: Images.doneimage,
         paragraph: "Thanks for being patient, connection test is successfully completed"
     }
-
 
     const faliedPopUp = {
         title: "Connection test failed.", icon: Images.cutimage,

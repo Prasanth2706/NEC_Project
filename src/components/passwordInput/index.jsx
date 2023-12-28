@@ -26,7 +26,7 @@ const PasswordInput = (props) => {
                 />
                 {/* <FontAwesomeIcon */}
                 {/* //   icon={showPassword ? faEyeSlash : faEye} */}
-                <img src={Images.eye} alt="" onClick={togglePasswordVisibility} className='eye_icon' />
+                <img style={{ cursor: 'pointer' }} src={Images.eye} alt="" onClick={togglePasswordVisibility} className='eye_icon' />
 
                 {/* /> */}
             </div>

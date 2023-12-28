@@ -11,16 +11,12 @@ import MigrationInitiated from './pages/migrationStatus/MigrationInitiated';
 import PopupCard from './components/popup/popupcard';
 import AboutUs from './pages/AboutUs';
 import PopUp from './components/popup/popup';
-
-
+import Informatica from './components/informatica';
+import NecPopUp from './components/NecFlow';
 
 function App() {
-
-   
-
   return (
     <div className='App'>
-
       {/* render */}
       {/* {localStorage.getItem('pop-up') && <PopUp/>} */}
       <Routes>
@@ -33,12 +29,20 @@ function App() {
           element={<MigrationInitiated />}
         ></Route>
         <Route
+          path='/necpopup'
+          element={< NecPopUp />}
+        ></Route>
+        <Route
           path='/toolselection'
           element={<ToolSelection />}
         ></Route>
         <Route
           path='/popup'
-          element={<PopUp/>}
+          element={<PopUp />}
+        ></Route>
+        <Route
+          path='/info'
+          element={<Informatica />}
         ></Route>
         <Route
           path='/aboutus'
@@ -69,9 +73,6 @@ function App() {
   );
 }
 export default App;
-
-
-
 // change jobs data name and time in table(regex)
 // test connection dropdown issue and access token 
 // check the flow of register now

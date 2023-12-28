@@ -88,6 +88,7 @@ const ConnectionDetail = () => {
         navigate('/connections')
     }
 
+
     const handleSaveConnection = () => {
         const accessToken = localStorage.getItem("access-token");
         console.log(accessToken, "accessToken");
@@ -119,13 +120,10 @@ const ConnectionDetail = () => {
                     setTimeout(() => {
                         setConnectionSaved(false);
                     }, 7000);
-
                 },
                 (error) => {
-
                     console.log(error, "this is SavedError ");
                     setSavedConnectionError(error?.response?.data?.error)
-
                 }
             );
     };
@@ -133,6 +131,8 @@ const ConnectionDetail = () => {
     const handleNameChange = (e) => {
         setName(e.target.value);
     };
+
+
     const handleTypeChange = (value) => {
         setType(value);
         setFullConnectionProps(true);

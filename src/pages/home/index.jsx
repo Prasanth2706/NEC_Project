@@ -19,12 +19,13 @@ const Home = () => {
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false)
-  const [errorvalue,setErrorValue] = useState([])
+  const [errorvalue, setErrorValue] = useState([])
 
   console.log(localStorage.getItem("access-token"), "hello")
   if (localStorage.getItem("access-token")) {
     return <Navigate to="/jobs" />;
   }
+
 
   const handleLogin = () => {
     // console.log(`logging username and password: ${emailOrUsername} ${password}`);
@@ -42,18 +43,18 @@ const Home = () => {
           );
           localStorage.setItem(
             "refresh-token",
-            response?.data?.result?.refreshToken
+            response?.data?.result?.refreshToken,
           );
           localStorage.setItem("username",
             response?.data?.result?.username)
           navigate('/jobs')
+          alert('Logged in Successfully!')
           console.log(response, "response");
         },
         (error) => {
           // alert('User does not exist, click register now for creating new id.')
           setShowError(true)
-
-          console.log(error?.response?.data?.message,'homeerror');
+          console.log(error?.response?.data?.message, 'homeerror');
           setErrorValue(error?.response?.data?.message)
         }
       );
@@ -77,6 +78,7 @@ const Home = () => {
   const handleChange = (e) => {
     setEmailOrUsername(e.target.value);
   };
+
   const handlePassChange = (e) => {
     setPassword(e.target.value);
   };
@@ -113,8 +115,6 @@ const Home = () => {
           />
         </div>
         <div>
-
-
           {showError && <div style={{ color: 'red' }} >
             <p>{errorvalue}</p>
           </div>}
@@ -133,3 +133,4 @@ const Home = () => {
 };
 
 export default Home;
+

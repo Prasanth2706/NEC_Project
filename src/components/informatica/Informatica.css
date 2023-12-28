@@ -16,13 +16,6 @@
     margin-left: 35rem;
     margin-top: 12rem;
 }
-
-.aboutus-footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: auto;
-}
-
 .outer_layout {
     padding: 2rem 5rem;
     background-color: #f5f6f9;
@@ -32,9 +25,11 @@
     display: flex;
     flex-direction: column;
 }
-
-.aboutus_info{
-    font-family: Helvetica;
-    font-size: 14px;
-    color: #6a6a6a;
+.main{
+    height: 100%;
 }
+.iframe{
+    height: 100%;
+    width: 100%;
+}
+

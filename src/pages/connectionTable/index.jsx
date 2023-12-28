@@ -15,11 +15,8 @@ const Connection = () => {
   const navigate = useNavigate()
   const [ConnectionData, setConnectionData] = useState([])
   const [editingRow, setEditingRow] = useState(null);
-
   const [form] = Form.useForm();
-
-
-
+  
   const updateData = async (id) => {
     const accessToken = localStorage.getItem("access-token");
     setEditingRow(id.id);
@@ -34,13 +31,12 @@ const Connection = () => {
           "x-auth-token": accessToken,
         },
       });
-
+      // navigate('/connectiondetail')
       console.log('Data updated successfully:', response.data);
     } catch (error) {
       console.error('Error updating data:', error);
     }
   };
-
   const deleteData = async (id) => {
     const accessToken = localStorage.getItem("access-token");
     try {
@@ -62,6 +58,10 @@ const Connection = () => {
     }
   }
 
+  const handleCreateNewClick = () => {
+    navigate('/connectiondetail');
+  };
+
 
   const handleEdit = (record) => {
     form.setFieldsValue({ ...record });
@@ -75,7 +75,6 @@ const Connection = () => {
       console.error('Error saving data:', error);
     }
   };
-
 
   let image = <img src={Images.edit} className='editicon' onClick={() => console.log('enter1')} alt="edit" />
   let deleteImage = <img src={Images.delete} className='deleteicon' onClick={() => console.log('enter2')} alt="edit" />
@@ -133,7 +132,7 @@ const Connection = () => {
     {
       title: 'Type',
       dataIndex: 'type',
-      className: 'edit'
+      className: 'edit',
     },
     {
       dataIndex: 'image',
@@ -141,7 +140,7 @@ const Connection = () => {
       width: "100%",
       render: (_, record) => (
         <Space size="small">
-          <a onClick={() => { updateData(record) }}> {image}</a>
+          <a onClick={() => { updateData(record) }}>{image}</a>
           <a onClick={() => { deleteData(record) }}>{deleteImage}</a>
         </Space>
       ),
@@ -153,8 +152,6 @@ const Connection = () => {
   //     // key: '1',
   //     // name: '[\\SVM0\\\SVM0\Finace\CsPolicy\CsPolicy.xml]',
   //     // type: 'FlatFile',
-
-
   //   }
   // ]
 
@@ -173,7 +170,7 @@ const Connection = () => {
             <div className='table-details'>
               {/* <Filter /> */}
               {/* <Search /> */}
-              <CreateNew onClick={() => navigate('/connectiondetail')} />
+              <CreateNew onClick={handleCreateNewClick} />
             </div>
           </div>
           <div className='main_connection_table'>

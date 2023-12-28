@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './dropdown.css'
 
-const Dropdown = ({ props, data, selectedData ,DropDownName}) => {
+const Dropdown = ({ props, data, selectedData, DropDownName }) => {
   console.log(data, 'asvasdvadvaw')
   const [selectedOption, setSelectedOption] = useState('');
 
+  
+  useEffect(() => {
+    selectedData(data[0], DropDownName)
+  }, [])
 
-  useEffect(()=>{
-    selectedData(data[0],DropDownName)
-  },[])
 
   const handleSelectChange = (e) => {
-    console.log(e.target.value,"sdsdsa")
-    
-    selectedData(e.target.value,DropDownName)
+    console.log(e.target.value, "sdsdsa")
+    selectedData(e.target.value, DropDownName)
     setSelectedOption(e.target.value);
     props?.handleTypeChange(e.target.value)
     // data.map((data) => {
@@ -21,18 +21,19 @@ const Dropdown = ({ props, data, selectedData ,DropDownName}) => {
     //   }
     // })
   };
+
   useEffect(() => {
     console.log(data, "iuadhauh")
   })
+
   return (
     <div>
       <div className='drop'>
         {/* <p className='drop_title'>{props.title}</p> */}
         <select className='dropselect ' id="dropdown" value={selectedOption} onChange={handleSelectChange}>
-
           {data?.map((connection) => {
             return (
-              <option >{connection}</option>
+              <option>{connection}</option>
             )
           })}
           {/* <option value="PostgresSQL">PostgresSQL</option>

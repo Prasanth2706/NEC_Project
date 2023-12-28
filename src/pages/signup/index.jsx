@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Heading from '../../components/heading'
 import Textarea from '../../components/textbox'
 import Button from '../../components/button'
@@ -9,6 +9,9 @@ import axios from 'axios'
 import { Images } from '../../assets/Images'
 import { navigate, useNavigate } from 'react-router-dom'
 import PasswordInput from '../../components/passwordInput'
+import AboutUs from '../AboutUs'
+import NecPopUp from '../../components/NecFlow'
+
 const SignUp = () => {
     const navigate = useNavigate();
 
@@ -22,6 +25,16 @@ const SignUp = () => {
     const [userNameCheck, setUsernameCheck] = useState(false)
     const [userNameError, serUSerNameError] = useState('')
     const [userEmailCheck, setUserEmailcheck] = useState(false)
+    const [isOpen, SetIsOpen] = React.useState(false)
+
+    // useEffect(() => {
+    //     const popUpFlag = localStorage.getItem('showPopUp')
+
+    //     if (popUpFlag === 'true') {
+    //         <AboutUs />
+    //     }
+    //     localStorage.removeItem('showPopUp')
+    // },[])
 
     const handleUsername = (e) => {
         const userName = e.target.value;
@@ -67,9 +80,6 @@ const SignUp = () => {
         console.log(confirmPassword, 'checking the confirm password')
     }
 
-
-
-
     const handleSignup = () => {
         if (password !== confirmPassword) {
             console.log('password is not matching')
@@ -80,6 +90,7 @@ const SignUp = () => {
             return
         }
 
+        SetIsOpen(true)
         axios.post('http://localhost:5000/signup', {
             "username": userName,
             "email": UsernameOrEmail,
@@ -89,7 +100,12 @@ const SignUp = () => {
             localStorage.setItem("access-token", response?.data?.result?.accessToken);
             localStorage.setItem("refresh-token", response?.data?.result?.refreshToken)
             localStorage.setItem('username', userName)
-            navigate('/jobs')
+            console.log(isOpen, 'openValue')
+            // navigate('/necpopup')
+
+            // localStorage.setItem('showPopUp', 'true');
+            navigate('/jobs', { state: { showPopUp: 'true' } })
+            // alert('Account Created Successfully!')
             console.log(response, 'response of api')
         },
             (error) => {
@@ -100,7 +116,6 @@ const SignUp = () => {
             }
         )
     }
-
     return (
         <div className='homeinfo'>
             <div className='left-part' >
@@ -139,6 +154,8 @@ const SignUp = () => {
                     <p>Forgot Password?</p>
                 </div>
                 <Button name={"Sign Up"} className={"sign"} onChange={handleSignup} />
+                {/* <NecPopUp isopen={isOpen} onClose={() => SetIsOpen(false)} /> */}
+
                 <div className='account'>
                     {/* <p>Don't have an account?</p>
                     <a href="##"  >Register now</a> */}

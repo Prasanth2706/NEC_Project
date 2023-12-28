@@ -5,10 +5,8 @@ import './createnew.css';
 
 
 const CreateNew = (props) => {
-
     return (
-        
-        <Button className='createnew' type="primary" icon={<PlusOutlined />} onClick={(props.onClick)}>
+        <Button className='createnew' type="primary" icon={<PlusOutlined />} onClick={props.onClick}>
             Create New
         </Button>)
 }

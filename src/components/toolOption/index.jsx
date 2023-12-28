@@ -8,8 +8,7 @@ const ToolOption = (props) => {
     const handleRef = () => {
         ref.current.click();
     }
-
-
+    
     return (
         <div className={props.className}
             onClick={() => { props.onChange(props.title); handleRef() }}>
