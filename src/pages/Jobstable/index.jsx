@@ -98,7 +98,6 @@ const Jobs = () => {
     ]
 
     return (
-
         <div>
             <Navbar />
             <div>
@@ -116,7 +115,7 @@ const Jobs = () => {
                         </div>
                         <div className='main_connection_info_table'>
                             <Table columns={JobsColumns} dataSource={jobsData} />
-                            <NecPopUp isopen={isOpen} onClose={() => SetIsOpen(!isOpen)} />
+                            <NecPopUp isopen={isOpen} onClose={() => { SetIsOpen(!isOpen); navigate('/jobs', { state: { showPopUp: null } }); }} />
                         </div>
                     </div>
                 </div>

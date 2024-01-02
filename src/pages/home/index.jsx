@@ -20,6 +20,7 @@ const Home = () => {
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false)
   const [errorvalue, setErrorValue] = useState([])
+  const [emailUserCheck, setEmailUserCheck] = useState(false)
 
   console.log(localStorage.getItem("access-token"), "hello")
   if (localStorage.getItem("access-token")) {
@@ -48,7 +49,7 @@ const Home = () => {
           localStorage.setItem("username",
             response?.data?.result?.username)
           navigate('/jobs')
-          alert('Logged in Successfully!')
+          // alert('Logged in Successfully!')
           console.log(response, "response");
         },
         (error) => {
@@ -76,7 +77,20 @@ const Home = () => {
   };
 
   const handleChange = (e) => {
-    setEmailOrUsername(e.target.value);
+    const userEmail = e.target.value;
+    let regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+    let isValidEmail = regex.test(userEmail);
+
+    if (isValidEmail) {
+      setEmailUserCheck(false)
+    } else {
+
+      setEmailUserCheck(true)
+    }
+
+    setEmailOrUsername(userEmail);
+
+    // setEmailOrUsername(e.target.value);
   };
 
   const handlePassChange = (e) => {
@@ -99,6 +113,8 @@ const Home = () => {
             value={emailOrUsername}
             onChange={handleChange}
           />
+          {emailUserCheck && <p style={{ color: 'red' }}>*{'Invalid Email Address'}</p>}
+
           {/* <Textarea
             label={"password"}
             placeholder={"Enter Password"}

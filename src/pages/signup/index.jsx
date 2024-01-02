@@ -25,7 +25,6 @@ const SignUp = () => {
     const [userNameCheck, setUsernameCheck] = useState(false)
     const [userNameError, serUSerNameError] = useState('')
     const [userEmailCheck, setUserEmailcheck] = useState(false)
-    const [isOpen, SetIsOpen] = React.useState(false)
 
     // useEffect(() => {
     //     const popUpFlag = localStorage.getItem('showPopUp')
@@ -90,7 +89,6 @@ const SignUp = () => {
             return
         }
 
-        SetIsOpen(true)
         axios.post('http://localhost:5000/signup', {
             "username": userName,
             "email": UsernameOrEmail,
@@ -100,9 +98,7 @@ const SignUp = () => {
             localStorage.setItem("access-token", response?.data?.result?.accessToken);
             localStorage.setItem("refresh-token", response?.data?.result?.refreshToken)
             localStorage.setItem('username', userName)
-            console.log(isOpen, 'openValue')
             // navigate('/necpopup')
-
             // localStorage.setItem('showPopUp', 'true');
             navigate('/jobs', { state: { showPopUp: 'true' } })
             // alert('Account Created Successfully!')
@@ -112,8 +108,12 @@ const SignUp = () => {
                 console.log(error, 'error')
                 setShowError(true)
                 console.log(error, 'apierror')
-                setApiResult(error.response?.data?.message)
+                setApiResult(error.response?.data?.errors)
+                setTimeout(() => {
+                    setShowError(false)
+                }, 4000)
             }
+
         )
     }
     return (

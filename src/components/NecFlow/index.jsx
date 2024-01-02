@@ -3,16 +3,18 @@ import './necpopup.css'
 import BottomButton from '../bottomButtons';
 
 const NecPopUp = (props) => {
-  console.log(props.isopen, 'openpop')
-  console.log(props.onClose,'v;kjasbvisbviuawrbpwqrv;evj ')
+  // console.log(props.isopen, 'openpop')
+  // console.log(props.onClose, 'v;kjasbvisbviuawrbpwqrv;evj ')
   if (!props.isopen) {
     return null;
   }
   return (
     <div className='modal'>
-      <div className='modal-content'>
+      <div className='modal-content'>   
         This is a pop up.
-      <BottomButton name={"Close"} onClick={props.onClose} />
+        <div className='bottom_area'>
+        <BottomButton name={"Close"} onClick={props.onClose} />
+        </div>
       </div>
     </div>
   )
