@@ -10,6 +10,7 @@ import { Images } from '../../assets/Images'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import PasswordInput from '../../components/passwordInput'
+import { connectionDetail, saveconnectionDetail } from '../../action/ConnectionDetail'
 
 
 const ConnectionDetail = () => {
@@ -39,49 +40,76 @@ const ConnectionDetail = () => {
         const accessToken = localStorage.getItem("access-token");
         console.log(accessToken, "accessToken");
         setIsLoading(true)
-        axios
-            .post(
-                "http://localhost:5000/testconnection",
-                {
-                    name: name,
-                    type: type,
-                    port: port,
-                    host: host,
-                    username: userName,
-                    password: password,
-                    database: database,
-                    tableName: tableName,
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-auth-token": accessToken,
-                    },
-                }
-            )
-            .then(
-                (response) => {
-                    console.log(response, "response");
-                    if (response.status === 200) {
-                        setData(true);
-                        setenableSaveButton(true)
-                        console.log("hello");
-                    }
-                },
-                (error) => {
-                    if (error.response.status === 400) {
-                        console.log(error?.response?.data?.errors, "this is Error ");
-                        setErrorValue(error?.response?.data?.errors)
-                        setData(true);
-                        setIsError(true);
-                        setenableSaveButton(false)
-                    }
-                }
-            )
-            .finally(() => {
+        // axios
+        //     .post(
+        //         "http://localhost:5000/testconnection",
+        //         {
+        //             name: name,
+        //             type: type,
+        //             port: port,
+        //             host: host,
+        //             username: userName,
+        //             password: password,
+        //             database: database,
+        //             tableName: tableName,
+        //         },
+        //         {
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //                 "x-auth-token": accessToken,
+        //             },
+        //         }
+        //     )
+        //     .then(
+        //         (response) => {
+        //             console.log(response, "response");
+        //             if (response.status === 200) {
+        //                 setData(true);
+        //                 setenableSaveButton(true)
+        //                 console.log("hello");
+        //             }
+        //         },
+        //         (error) => {
+        //             if (error.response.status === 400) {
+        //                 console.log(error?.response?.data?.errors, "this is Error ");
+        //                 setErrorValue(error?.response?.data?.errors)
+        //                 setData(true);
+        //                 setIsError(true);
+        //                 setenableSaveButton(false)
+        //             }
+        //         }
+        //     )
+
+        const payload = {
+            name: name,
+            type: type,
+            port: port,
+            host: host,
+            username: userName,
+            password: password,
+            database: database,
+            tableName: tableName,
+        }
+
+
+        connectionDetail((response) => {
+            console.log(response, "responseconnection");
+            if (response.message === 'Connection successful') {
                 setIsLoading(false)
-            })
-        // setData(true);
+                setData(true);
+                setenableSaveButton(true)
+                console.log("hello");
+
+            }
+        }, payload)
+
+        // check the finally fucntion in fetchcall func//
+
+
+        // .finally(() => {
+        //     setIsLoading(false)
+        // })
+        setData(true);
     };
 
     const handlePrevious = () => {
@@ -92,40 +120,60 @@ const ConnectionDetail = () => {
     const handleSaveConnection = () => {
         const accessToken = localStorage.getItem("access-token");
         console.log(accessToken, "accessToken");
-        axios
-            .post(
-                "http://localhost:5000/saveconnection",
-                {
-                    name: name,
-                    type: type,
-                    port: port,
-                    host: host,
-                    username: userName,
-                    password: password,
-                    database: database,
-                    tableName: tableName,
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-auth-token": accessToken,
-                    },
-                }
-            )
-            .then(
-                (response) => {
-                    console.log(response, "response");
-                    setConnectionSaved(true)
-                    navigate('/jobs')
-                    setTimeout(() => {
-                        setConnectionSaved(false);
-                    }, 7000);
-                },
-                (error) => {
-                    console.log(error, "this is SavedError ");
-                    setSavedConnectionError(error?.response?.data?.error)
-                }
-            );
+        // axios
+        //     .post(
+        //         "http://localhost:5000/saveconnection",
+        //         {
+        //             name: name,
+        //             type: type,
+        //             port: port,
+        //             host: host,
+        //             username: userName,
+        //             password: password,
+        //             database: database,
+        //             tableName: tableName,
+        //         },
+        //         {
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //                 "x-auth-token": accessToken,
+        //             },
+        //         }
+        //     )
+        //     .then(
+        //         (response) => {
+        //             console.log(response, "response");
+        //             setConnectionSaved(true)
+        //             navigate('/jobs')
+        //             setTimeout(() => {
+        //                 setConnectionSaved(false);
+        //             }, 7000);
+        //         },
+        //         (error) => {
+        //             console.log(error, "this is SavedError ");
+        //             setSavedConnectionError(error?.response?.data?.error)
+        //         }
+        //     );
+
+        const savePayload = {
+            name: name,
+            type: type,
+            port: port,
+            host: host,
+            username: userName,
+            password: password,
+            database: database,
+            tableName: tableName,
+        }
+
+        saveconnectionDetail((response) => {
+            console.log(response, "response");
+            setConnectionSaved(true)
+            navigate('/jobs')
+            setTimeout(() => {
+                setConnectionSaved(false);
+            }, 7000);
+        },savePayload)
     };
 
     const handleNameChange = (e) => {

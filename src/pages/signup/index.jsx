@@ -11,10 +11,9 @@ import { navigate, useNavigate } from 'react-router-dom'
 import PasswordInput from '../../components/passwordInput'
 import AboutUs from '../AboutUs'
 import NecPopUp from '../../components/NecFlow'
-
+import { signUp } from '../../action/Signup'
 const SignUp = () => {
     const navigate = useNavigate();
-
     const [userName, setUsername] = useState('')
     const [UsernameOrEmail, setUsernameOrEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -63,7 +62,6 @@ const SignUp = () => {
 
             setUserEmailcheck(true)
         }
-
         setUsernameOrEmail(userEmail);
         console.log(UsernameOrEmail, 'username or Email of user');
     };
@@ -89,33 +87,55 @@ const SignUp = () => {
             return
         }
 
-        axios.post('http://localhost:5000/signup', {
+        // axios.post('http://localhost:5000/signup', {
+        //     "username": userName,
+        //     "email": UsernameOrEmail,
+        //     "password": password,
+        // }).then((response) => {
+        //     console.log(response, 'sigupresponse')
+        //     localStorage.setItem("access-token", response?.data?.result?.accessToken);
+        //     localStorage.setItem("refresh-token", response?.data?.result?.refreshToken)
+        //     localStorage.setItem('username', userName)
+        //     // navigate('/necpopup')
+        //     // localStorage.setItem('showPopUp', 'true');
+        //     navigate('/jobs', { state: { showPopUp: 'true' } })
+        //     // alert('Account Created Successfully!')
+        //     console.log(response, 'response of api')
+        // },
+        //     (error) => {
+        //         console.log(error, 'error')
+        //         setShowError(true)
+        //         console.log(error, 'apierror')
+        //         setApiResult(error.response?.data?.errors)
+        //         setTimeout(() => {
+        //             setShowError(false)
+        //         }, 4000)
+        //     }
+
+        // )
+
+
+        const payload = {
             "username": userName,
             "email": UsernameOrEmail,
             "password": password,
-        }).then((response) => {
+        };
+
+        signUp((response) => {
             console.log(response, 'sigupresponse')
-            localStorage.setItem("access-token", response?.data?.result?.accessToken);
-            localStorage.setItem("refresh-token", response?.data?.result?.refreshToken)
+            localStorage.setItem("access-token", response?.result?.accessToken);
+            localStorage.setItem("refresh-token", response?.result?.refreshToken)
             localStorage.setItem('username', userName)
             // navigate('/necpopup')
             // localStorage.setItem('showPopUp', 'true');
             navigate('/jobs', { state: { showPopUp: 'true' } })
             // alert('Account Created Successfully!')
             console.log(response, 'response of api')
-        },
-            (error) => {
-                console.log(error, 'error')
-                setShowError(true)
-                console.log(error, 'apierror')
-                setApiResult(error.response?.data?.errors)
-                setTimeout(() => {
-                    setShowError(false)
-                }, 4000)
-            }
+            // alert('Logged in Successfully!')
 
-        )
-    }
+        }, payload)
+    };
+
     return (
         <div className='homeinfo'>
             <div className='left-part' >

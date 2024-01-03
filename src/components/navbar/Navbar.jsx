@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../button";
 import axios from "axios";
 import { BellOutlined } from "@ant-design/icons";
+import { logOut } from "../../action/Logout";
 
 const Navbar = (props) => {
   const navigate = useNavigate()
@@ -34,30 +35,44 @@ const Navbar = (props) => {
   const handleLogOut = () => {
     const accessToken = localStorage.getItem("access-token");
 
-    axios
-      .post("http://localhost:5000/logout", null, {
-        headers: {
-          "x-auth-token": accessToken,
-        }
-      },)
-      .then(
-        (response) => {
-          localStorage.removeItem(
-            "access-token"
-          );
-          console.log(response, 'access-delete')
-          localStorage.removeItem(
-            "refresh-token",
-          );
-          navigate('/')
-          localStorage.setItem("username",
-            response?.data?.result?.username)
-          console.log(response, "response");
-        },
-        (error) => {
-          console.log(error);
-        }
-      ); 
+    // axios
+    //   .post("http://localhost:5000/logout", null, {
+    //     headers: {
+    //       "x-auth-token": accessToken,
+    //     }
+    //   },)
+    //   .then(
+    //     (response) => {
+    //       localStorage.removeItem(
+    //         "access-token"
+    //       );
+    //       console.log(response, 'access-delete')
+    //       localStorage.removeItem(
+    //         "refresh-token",
+    //       );
+    //       navigate('/')
+    //       localStorage.setItem("username",
+    //         response?.data?.result?.username)
+    //       console.log(response, "response");
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //     }
+    //   ); 
+
+    logOut((response) => {
+      localStorage.removeItem(
+        "access-token"
+      );
+      console.log(response, 'access-delete')
+      localStorage.removeItem(
+        "refresh-token",
+      );
+      navigate('/')
+      localStorage.setItem("username",
+        response?.result?.username)
+      console.log(response, "response");
+    })
   };
 
   return (
@@ -89,7 +104,7 @@ const Navbar = (props) => {
           <img src={Images.notify} alt="" />
         </div>
         <div className="profile">
-          <BellOutlined  style={{fontSize: '22px'}}/>
+          <BellOutlined style={{ fontSize: '22px' }} />
           <div className="profile-image"><img className="profile_image" src={Images.personIcon} alt="" /></div>
           <div class="Oval"></div>
           <span className="profile-name">{localStorage.getItem('username')}</span>

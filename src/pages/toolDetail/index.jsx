@@ -12,6 +12,7 @@ import FileUploadButton from '../../components/fileuploadbutton/FileUploadButton
 import FileUpload from '../../components/fileupload'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { toolDetail, gettoolDetail } from '../../action/ToolDetail'
 // import axios from 'axios'
 
 const ToolDetail = (props) => {
@@ -179,33 +180,48 @@ const ToolDetail = (props) => {
         formaData.append('sourceDbId', selectedDropValue);
         formaData.append('destinationDbId', secondSelectedDropValue);
 
-        axios.post('http://localhost:5000/createjob', formaData,
-            {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    "x-auth-token": accessToken,
-                }
-            },)
-            // setPathValue(localStorage.getItem('pop-up'))
-            // console.log(pathValue,'WDVC')
-            .then(response => {
-                // setMigrationSuccess(true)
-                setApiResult(response)
-                localStorage.setItem('step3', true)
-                // localStorage.setItem('pop-up', true)
-                handlePopUp('success');
-                console.log(response, 'tooldetailresponse')
-                navigate('/migration', { state: { migrationSuccess: 'Success' } })
+        // axios.post('http://localhost:5000/createjob', formaData,
+        //     {
+        //         headers: {
+        //             "Content-Type": "multipart/form-data",
+        //             "x-auth-token": accessToken,
+        //         }
+        //     },)
+        //     // setPathValue(localStorage.getItem('pop-up'))
+        //     // console.log(pathValue,'WDVC')
+        //     .then(response => {
+        //         // setMigrationSuccess(true)
+        //         setApiResult(response)
+        //         localStorage.setItem('step3', true)
+        //         // localStorage.setItem('pop-up', true)
+        //         handlePopUp('success');
+        //         console.log(response, 'tooldetailresponse')
+        //         navigate('/migration', { state: { migrationSuccess: 'Success' } })
 
-                console.log(response, 'clhsdc')
-            }).catch(error => {
-                // setMigrationSuccess(false)
-                localStorage.setItem('migration', "failed")
-                handlePopUp('failed')
-                navigate('/migration', { state: { migrationSuccess: 'Failed' } })
-                console.log(error, 'error')
-                // handleSetToken()
-            })
+        //         console.log(response, 'clhsdc')
+        //     }).catch(error => {
+        //         // setMigrationSuccess(false)
+        //         localStorage.setItem('migration', "failed")
+        //         handlePopUp('failed')
+        //         navigate('/migration', { state: { migrationSuccess: 'Failed' } })
+        //         console.log(error, 'error')
+        //         // handleSetToken()-
+        //     })
+
+        toolDetail((response) => {
+            // setMigrationSuccess(true)
+            setApiResult(response)
+            localStorage.setItem('step3', true)
+            // localStorage.setItem('pop-up', true)
+            handlePopUp('success');
+            console.log(response, 'tooldetailresponse')
+            navigate('/migration', { state: { migrationSuccess: 'Success' } })
+
+            console.log(response, 'clhsdc')
+        })
+
+
+
         localStorage.setItem('step1', true)
         localStorage.setItem('step2', true);
 
@@ -214,22 +230,36 @@ const ToolDetail = (props) => {
         // }else{
         //     navigate('/signupu')
         // }
-
     }
 
     // let response;
     const handleGetConnection = async () => {
         const accessToken = localStorage.getItem("access-token");
-        const response = await axios.get('http://localhost:5000/connections?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MDE3NzkyNzYsImV4cCI6MTcwMTc4MDQ3Nn0.xnUqcgP3889NYQ9nkpuQzx5UMz7JzHY_H1XKkLeEs14', {
-            headers: { "x-auth-token": accessToken }
-        })
-        setConnectionData(response?.data?.connections)
+
+
+        // const response = await axios.get('http://localhost:5000/connections?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MDE3NzkyNzYsImV4cCI6MTcwMTc4MDQ3Nn0.xnUqcgP3889NYQ9nkpuQzx5UMz7JzHY_H1XKkLeEs14', {
+        //     headers: { "x-auth-token": accessToken }
+        // })
+
+
         let dropDown = []
-        response?.data?.connections?.map((connect) => {
+        gettoolDetail((response) => {
+            setConnectionData(response?.connections)
+            response?.connections?.map((connect) => {
 
-            dropDown.push(connect.name);
+                dropDown.push(connect.name);
 
+            })
         })
+
+
+        // setConnectionData(response?.data?.connections)
+        // let dropDown = []
+        // response?.data?.connections?.map((connect) => {
+
+        //     dropDown.push(connect.name);
+
+        // })
         setConnection(dropDown);
         // setSelectesDropValue(response?.data?.connections?.type)
     }

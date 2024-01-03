@@ -9,6 +9,7 @@ import Login from "../../components/login";
 import { Images } from "../../assets/Images";
 import { Navigate, useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/passwordInput";
+import { login } from "../../action/login";
 // import {observer} from 'mobx-react-lite';
 // import { Observer } from 'mobx-react-lite'
 // import ProjectStore from '../../Apistore'
@@ -30,35 +31,59 @@ const Home = () => {
 
   const handleLogin = () => {
     // console.log(`logging username and password: ${emailOrUsername} ${password}`);
-    axios
-      .post("http://localhost:5000/login", {
-        email: emailOrUsername,
-        password: password,
-        username: emailOrUsername,
-      })
-      .then(
-        (response) => {
-          localStorage.setItem(
-            "access-token",
-            response?.data?.result?.accessToken
-          );
-          localStorage.setItem(
-            "refresh-token",
-            response?.data?.result?.refreshToken,
-          );
-          localStorage.setItem("username",
-            response?.data?.result?.username)
-          navigate('/jobs')
-          // alert('Logged in Successfully!')
-          console.log(response, "response");
-        },
-        (error) => {
-          // alert('User does not exist, click register now for creating new id.')
-          setShowError(true)
-          console.log(error?.response?.data?.message, 'homeerror');
-          setErrorValue(error?.response?.data?.message)
-        }
+    // axios
+    //   .post("http://localhost:5000/login", {
+    //     email: emailOrUsername,
+    //     password: password,
+    //     username: emailOrUsername,
+    //   })
+    //   .then(
+    //     (response) => {
+    //       localStorage.setItem(
+    //         "access-token",
+    //         response?.data?.result?.accessToken
+    //       );
+    //       localStorage.setItem(
+    //         "refresh-token",
+    //         response?.data?.result?.refreshToken,
+    //       );
+    //       localStorage.setItem("username",
+    //         response?.data?.result?.username)
+    //       navigate('/jobs')
+    //       // alert('Logged in Successfully!')
+    //       console.log(response, "response"); 
+    //     },)
+    //   .catch((error) => {
+    //     // alert('User does not exist, click register now for creating new id.')
+    //     setShowError(true)
+    //     console.log(error?.response?.data?.message, 'homeerror');
+    //     setErrorValue(error?.response?.data?.message)
+    //   }
+    //   );
+
+    const payload = {
+      email: emailOrUsername,
+      password: password,
+      username: emailOrUsername
+    };
+
+
+    login((response) => {
+      console.log(response, "component response");
+      localStorage.setItem(
+        "access-token",
+        response?.result?.accessToken
       );
+      localStorage.setItem(
+        "refresh-token",
+        response?.result?.refreshToken,
+      );
+      localStorage.setItem("username",
+        response?.result?.username)
+      navigate('/jobs')
+      // alert('Logged in Successfully!')
+
+    }, payload)
   };
 
   const handleForgotPassword = () => {
@@ -84,7 +109,6 @@ const Home = () => {
     if (isValidEmail) {
       setEmailUserCheck(false)
     } else {
-
       setEmailUserCheck(true)
     }
 

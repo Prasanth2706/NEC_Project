@@ -9,6 +9,7 @@ import Navbar from '../../components/navbar/Navbar'
 import { Images } from '../../assets/Images'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { connectionTable } from '../../action/ConnectionTable'
 
 const Connection = () => {
 
@@ -16,7 +17,7 @@ const Connection = () => {
   const [ConnectionData, setConnectionData] = useState([])
   const [editingRow, setEditingRow] = useState(null);
   const [form] = Form.useForm();
-  
+
   const updateData = async (id) => {
     const accessToken = localStorage.getItem("access-token");
     setEditingRow(id.id);
@@ -82,17 +83,25 @@ const Connection = () => {
   useEffect(() => {
     const fetchData = async () => {
       const accessToken = localStorage.getItem("access-token");
-      try {
-        const response = await axios.get('http://localhost:5000/connections?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MDE3NzkyNzYsImV4cCI6MTcwMTc4MDQ3Nn0.xnUqcgP3889NYQ9nkpuQzx5UMz7JzHY_H1XKkLeEs14', {
-          headers: { "x-auth-token": accessToken }
-        });
-        // console.log(response?.data?.connections, 'connectivafbsnsbonda')
-        setConnectionData(response?.data?.connections)
+      // try {
+      //   const response = await axios.get('http://localhost:5000/connections?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MDE3NzkyNzYsImV4cCI6MTcwMTc4MDQ3Nn0.xnUqcgP3889NYQ9nkpuQzx5UMz7JzHY_H1XKkLeEs14', {
+      //     headers: { "x-auth-token": accessToken }
+      //   });
+      //   // console.log(response?.data?.connections, 'connectivafbsnsbonda')
+      //   setConnectionData(response?.data?.connections)
+
+      //   console.log(ConnectionData, 'connnectiondata')
+      // } catch (error) {
+      //   console.log(error, 'connectionerror')
+      // }
+
+      connectionTable((response) => {
+        console.log(response?.connections, 'connectivafbsnsbonda')
+        setConnectionData(response?.connections)
 
         console.log(ConnectionData, 'connnectiondata')
-      } catch (error) {
-        console.log(error, 'connectionerror')
-      }
+      })
+
     }
     fetchData();
   }, [])

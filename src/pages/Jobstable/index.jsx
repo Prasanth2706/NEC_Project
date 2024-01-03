@@ -13,6 +13,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import NecPopUp from '../../components/NecFlow'
+import { jobsTable } from '../../action/JobsTable'
 
 const Jobs = () => {
     const navigate = useNavigate()
@@ -29,11 +30,16 @@ const Jobs = () => {
             const accessToken = localStorage.getItem("access-token");
             console.log(accessToken, 'valueofaccesstoken')
             try {
-                const response = await axios.get('http://localhost:5000/listjobs', {
-                    headers: { "x-auth-token": accessToken }
-                });
-                console.log(response?.data?.jobs, 'fsdfsfwervwefcwe')
-                setJobsData(response?.data?.jobs)
+                // const response = await axios.get('http://localhost:5000/listjobs', {
+                //     headers: { "x-auth-token": accessToken }
+                // });
+                // console.log(response?.data?.jobs, 'fsdfsfwervwefcwe')
+                // setJobsData(response?.data?.jobs)
+                jobsTable((response) => {
+                    console.log(response?.jobs, 'fsdfsfwervwefcwe')
+                    setJobsData(response?.jobs)
+                })
+
             } catch (error) {
                 console.log(error, 'job-error')
             }

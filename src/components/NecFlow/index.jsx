@@ -10,10 +10,10 @@ const NecPopUp = (props) => {
   }
   return (
     <div className='modal'>
-      <div className='modal-content'>   
+      <div className='modal-content'>
         This is a pop up.
         <div className='bottom_area'>
-        <BottomButton name={"Close"} onClick={props.onClose} />
+          <BottomButton name={"Close"} onClick={props.onClose} />
         </div>
       </div>
     </div>
