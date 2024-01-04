@@ -9,7 +9,7 @@ import Navbar from '../../components/navbar/Navbar'
 import { Images } from '../../assets/Images'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { connectionTable } from '../../action/ConnectionTable'
+import { connectionTable, connectionTableDelete, connectionTableUpdate } from '../../action/ConnectionTable'
 
 const Connection = () => {
 
@@ -17,47 +17,96 @@ const Connection = () => {
   const [ConnectionData, setConnectionData] = useState([])
   const [editingRow, setEditingRow] = useState(null);
   const [form] = Form.useForm();
+  const [idValue, setIdValue] = useState();
+  const [editedValue, setEditedValue] = useState('')
+
 
   const updateData = async (id) => {
+    setIdValue(id)
     const accessToken = localStorage.getItem("access-token");
     setEditingRow(id.id);
 
     console.log(id)
-    try {
-      const url = `http://localhost:5000/updateconnection/${id.id}`;
+    // try {
+    //   const url = `http://localhost:5000/updateconnection/${id.id}`;
 
-      const response = await axios.put(url, { name: id.name }, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": accessToken,
-        },
-      });
-      // navigate('/connectiondetail')
-      console.log('Data updated successfully:', response.data);
-    } catch (error) {
-      console.error('Error updating data:', error);
-    }
+
+    //   const response = await axios.put(url, { name: id.name }, {
+    //     headers: { 
+    //       "Content-Type": "application/json",
+    //       "x-auth-token": accessToken,
+    //     },
+    //   });
+    //   // navigate('/connectiondetail')
+    //   console.log('Data updated successfully:', response.data);
+    // } catch (error) {
+    //   console.error('Error updating data:', error);
+    // }
+
+
+    // connectionTableUpdate((response) => {
+    //   if (response === 'Request failed with status code 400') {
+    //     console.error('Error updating data:', response);
+    //   }
+    //   else {
+
+    //   }
+    //   // console.log('Data updated successfully:', response.data);
+    // }, payload, id.id)
   };
+
+
   const deleteData = async (id) => {
     const accessToken = localStorage.getItem("access-token");
-    try {
-      const url = `http://localhost:5000/deleteconnection/${id.id}`;
+    // try {
+    //   const url = `http://localhost:5000/deleteconnection/${id.id}`;
 
-      const response = await axios.delete(url, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": accessToken,
-        },
-      });
+    //   const response = await axios.delete(url, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "x-auth-token": accessToken,
+    //     },
+    //   });
 
-      console.log('Data deleted successfully:', response.data);
-      setConnectionData((prevData) =>
-        prevData.filter((record) => record.id !== id.id)
-      );
-    } catch (error) {
-      console.error('Error deleting data:', error);
-    }
+    //   console.log('Data deleted successfully:', response.data);
+    //   setConnectionData((prevData) =>
+    //     prevData.filter((record) => record.id !== id.id)
+    //   );
+    // } catch (error) {
+    //   console.error('Error deleting data:', error);
+    // }\
+
+    connectionTableDelete((response) => {
+      // console.log('Data deleted successfully:', response.data);
+
+      if (response.message === 'Request failed with status code 400') {
+        console.error('Error deleting data:', response);
+      }
+      else {
+        setConnectionData((prevData) =>
+          prevData.filter((record) => record.id !== id.id)
+        );
+      }
+    },
+      null,
+      id.id)
   }
+
+  useEffect(() => {
+    let payload = {
+      name: idValue?.name
+    }
+    connectionTableUpdate((response) => {
+      if (response === 'Request failed with status code 400') {
+        console.error('Error updating data:', response);
+      }
+      else {
+
+      }
+      // console.log('Data updated successfully:', response.data);
+    }, payload, idValue?.id)
+  }, [editedValue])
+
 
   const handleCreateNewClick = () => {
     navigate('/connectiondetail');
@@ -70,12 +119,14 @@ const Connection = () => {
 
   const handleSave = async (record) => {
     try {
-      const values = await form.validateFields();
+      let values = await form.validateFields();
       updateData({ ...record, ...values });
+      setEditedValue(updateData({ ...record, ...values }))
     } catch (error) {
       console.error('Error saving data:', error);
     }
   };
+
 
   let image = <img src={Images.edit} className='editicon' onClick={() => console.log('enter1')} alt="edit" />
   let deleteImage = <img src={Images.delete} className='deleteicon' onClick={() => console.log('enter2')} alt="edit" />

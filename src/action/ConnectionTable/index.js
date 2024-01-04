@@ -9,3 +9,34 @@ export const connectionTable = (callback, payload) => {
         callback(response);
     });
 };
+
+
+// export const getarea = (callback, payload, queryParams) => {
+//     const url = `${API_CONSTANTS.GETAREA}/${queryParams}`;
+//     return fetchCall(url, API_METHODS.GET, payload, (response) => {
+//       callback(response);
+//     });
+//   };
+
+
+export const connectionTableUpdate = (callback, payload, queryParams) => {
+    // const url = `${API_CONSTANTS.GETAREA}/${queryParams}`;
+    // debugger
+    console.log(queryParams,'table queryparams')
+
+    const url = `http://localhost:5000/updateconnection/${queryParams}`;
+    return fetchCall(url, 'PUT', payload, (response) => {
+        console.log(response, "fetch connection response")
+        callback(response);
+    });
+};
+
+export const connectionTableDelete = (callback,payload ,queryParams) => {
+    console.log(queryParams,'queryparams')
+    // const url = `${API_CONSTANTS.GETAREA}/${queryParams}`;
+    const url = `http://localhost:5000/deleteconnection/${queryParams}`;
+    return fetchCall(url, 'DELETE', payload,(response) => {
+        console.log(response, "fetch connection response")
+        callback(response);
+    });
+};

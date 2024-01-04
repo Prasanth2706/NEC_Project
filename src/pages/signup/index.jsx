@@ -122,16 +122,28 @@ const SignUp = () => {
         };
 
         signUp((response) => {
-            console.log(response, 'sigupresponse')
-            localStorage.setItem("access-token", response?.result?.accessToken);
-            localStorage.setItem("refresh-token", response?.result?.refreshToken)
-            localStorage.setItem('username', userName)
-            // navigate('/necpopup')
-            // localStorage.setItem('showPopUp', 'true');
-            navigate('/jobs', { state: { showPopUp: 'true' } })
-            // alert('Account Created Successfully!')
-            console.log(response, 'response of api')
-            // alert('Logged in Successfully!')
+            if (response.message === 'Request failed with status code 400') {
+                console.log(response, 'error')
+                setShowError(true)
+                console.log(response, 'apierror')
+                setApiResult(response?.errors)
+                setTimeout(() => {
+                    setShowError(false)
+                }, 4000)
+            }
+
+            else {
+                console.log(response, 'sigupresponse')
+                localStorage.setItem("access-token", response?.result?.accessToken);
+                localStorage.setItem("refresh-token", response?.result?.refreshToken)
+                localStorage.setItem('username', userName)
+                // navigate('/necpopup')
+                // localStorage.setItem('showPopUp', 'true');
+                navigate('/jobs', { state: { showPopUp: 'true' } })
+                // alert('Account Created Successfully!')
+                console.log(response, 'response of api')
+                // alert('Logged in Successfully!')
+            }
 
         }, payload)
     };

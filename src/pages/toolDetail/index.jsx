@@ -209,7 +209,14 @@ const ToolDetail = (props) => {
         //     })
 
         toolDetail((response) => {
+            if (response.message === 'Request failed with status code 400') {
+                localStorage.setItem('migration', "failed")
+                handlePopUp('failed')
+                navigate('/migration', { state: { migrationSuccess: 'Failed' } })
+                console.log(response, 'error')
+            }
             // setMigrationSuccess(true)
+            console.log(response, "toolres")
             setApiResult(response)
             localStorage.setItem('step3', true)
             // localStorage.setItem('pop-up', true)
@@ -218,7 +225,7 @@ const ToolDetail = (props) => {
             navigate('/migration', { state: { migrationSuccess: 'Success' } })
 
             console.log(response, 'clhsdc')
-        })
+        },formaData)
 
 
 

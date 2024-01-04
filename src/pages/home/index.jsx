@@ -51,7 +51,7 @@ const Home = () => {
     //         response?.data?.result?.username)
     //       navigate('/jobs')
     //       // alert('Logged in Successfully!')
-    //       console.log(response, "response"); 
+    //       console.log(response, "response");
     //     },)
     //   .catch((error) => {
     //     // alert('User does not exist, click register now for creating new id.')
@@ -69,20 +69,26 @@ const Home = () => {
 
 
     login((response) => {
-      console.log(response, "component response");
-      localStorage.setItem(
-        "access-token",
-        response?.result?.accessToken
-      );
-      localStorage.setItem(
-        "refresh-token",
-        response?.result?.refreshToken,
-      );
-      localStorage.setItem("username",
-        response?.result?.username)
-      navigate('/jobs')
-      // alert('Logged in Successfully!')
-
+      if (response.message === 'Request failed with status code 400') {
+        setShowError(true)
+        console.log(response?.message, 'homeerror');
+        setErrorValue(response?.message)
+      }
+      else {
+        console.log(response, "component response");
+        localStorage.setItem(
+          "access-token",
+          response?.result?.accessToken
+        );
+        localStorage.setItem(
+          "refresh-token",
+          response?.result?.refreshToken,
+        );
+        localStorage.setItem("username",
+          response?.result?.username)
+        navigate('/jobs')
+        // alert('Logged in Successfully!')
+      }
     }, payload)
   };
 

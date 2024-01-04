@@ -93,13 +93,24 @@ const ConnectionDetail = () => {
 
 
         connectionDetail((response) => {
-            console.log(response, "responseconnection");
-            if (response.message === 'Connection successful') {
-                setIsLoading(false)
-                setData(true);
-                setenableSaveButton(true)
-                console.log("hello");
+            if (response.message === 'Request failed with status code 400') {
+                console.log(response, "responseconnection");
+                if (response.status === 400) {
+                    console.log(response?.errors, "this is Error ");
+                    setErrorValue(response?.errors)
+                    setData(true);
+                    setIsError(true);
+                    setenableSaveButton(false)
+                }
+            }
+            else {
 
+                if (response.message === 'Connection successful') {
+                    setIsLoading(false)
+                    setData(true);
+                    setenableSaveButton(true)
+                    console.log("hello");
+                }
             }
         }, payload)
 
@@ -167,13 +178,19 @@ const ConnectionDetail = () => {
         }
 
         saveconnectionDetail((response) => {
-            console.log(response, "response");
-            setConnectionSaved(true)
-            navigate('/jobs')
-            setTimeout(() => {
-                setConnectionSaved(false);
-            }, 7000);
-        },savePayload)
+            if (response.message === 'Request failed with status code 400') {
+                console.log(response, "this is SavedError ");
+                setSavedConnectionError(response?.error)
+            }
+            else {
+                console.log(response, "response");
+                setConnectionSaved(true)
+                navigate('/jobs')
+                setTimeout(() => {
+                    setConnectionSaved(false);
+                }, 7000);
+            }
+        }, savePayload)
     };
 
     const handleNameChange = (e) => {

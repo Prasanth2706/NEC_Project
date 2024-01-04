@@ -15,7 +15,7 @@ export const fetchCall = (url, method, payload, callback) => {
         // UUID: uuid,
         // UVID: uvid,
     };
-    if (method === 'GET') {
+    if (method === 'GET' || method==='DELETE' ) {
         options = {
             method,
             headers,
