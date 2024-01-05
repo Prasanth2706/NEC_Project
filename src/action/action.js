@@ -2,7 +2,7 @@ import axios from 'axios';
 // import { API_CONSTANTS, API_METHODS } from '../constants/Api-Constants';
 // import { logout } from '../actions/login';
 
-export const fetchCall = (url, method, payload, callback) => {
+export const fetchCall = (url, method, payload, callback, contentType) => {
     debugger
     // const hasWindow = typeof window !== 'undefined';
     const accessToken = localStorage.getItem('access-token');
@@ -10,12 +10,12 @@ export const fetchCall = (url, method, payload, callback) => {
     // const uvid = hasWindow && (localStorage.getItem('visId') ?? '');
     let options = {};
     const headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': contentType ? "multipart/form-data" : 'application/json',
         "x-auth-token": accessToken,
         // UUID: uuid,
         // UVID: uvid,
     };
-    if (method === 'GET' || method==='DELETE' ) {
+    if (method === 'GET' || method === 'DELETE') {
         options = {
             method,
             headers,
@@ -104,24 +104,24 @@ export function makeHttpRequestForRefreshToken() {
                     );
 
                     resolve(response.data);
-                    // } else if (response.response.data.message === 'Token is not active' || response.response.data.message === 'Session not active') {
-                    //     logout((res) => {
-                    //         if (res.isSuccess) {
-                    //             localStorage.clear();
-                    //             localStorage.setItem('LoginPop', true);
-                    //             if (response.response.data.message === 'Token is not active') {
-                    //                 localStorage.setItem('SessionMessage', 'Session expired,Please Login');
-                    //             }
-                    //             else if (response.response.data.message === 'Session not active') {
-                    //                 localStorage.setItem('SessionMessage', 'Session not active,Please Login');
-                    //             }
-                    //             else {
-                    //                 localStorage.setItem('SessionMessage', 'Session expired,Please Login');
-                    //             }
-                    //             window.open('/', '_self');
+                } else if (response.response.data.message === 'Token is not active' || response.response.data.message === 'Session not active') {
+                    // logout((res) => {
+                    //     if (res.isSuccess) {
+                    //         localStorage.clear();
+                    //         localStorage.setItem('LoginPop', true);
+                    //         if (response.response.data.message === 'Token is not active') {
+                    //             localStorage.setItem('SessionMessage', 'Session expired,Please Login');
                     //         }
-                    //         resolve(null);
-                    //     }, payload);
+                    //         else if (response.response.data.message === 'Session not active') {
+                    //             localStorage.setItem('SessionMessage', 'Session not active,Please Login');
+                    //         }
+                    //         else {
+                    //             localStorage.setItem('SessionMessage', 'Session expired,Please Login');
+                    //         }
+                    //         window.open('/', '_self');
+                    //     }
+                    //     resolve(null);
+                    // }, payload);
                 } else {
                     resolve(null);
                 }

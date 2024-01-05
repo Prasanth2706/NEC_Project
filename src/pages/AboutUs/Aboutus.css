@@ -17,6 +17,13 @@
     margin-top: 12rem;
 }
 
+.main>p {
+    font-size: 18px;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
 .aboutus-footer {
     display: flex;
     justify-content: space-between;
@@ -28,12 +35,12 @@
     background-color: #f5f6f9;
 }
 
-.Rectangle-Copy{
+.Rectangle-Copy {
     display: flex;
     flex-direction: column;
 }
 
-.aboutus_info{
+.aboutus_info {
     font-family: Helvetica;
     font-size: 14px;
     color: #6a6a6a;

@@ -44,7 +44,7 @@
 .connection_detail {
     padding: 1rem 2rem;
     background-color: white;
-    height: 47rem;
+    height: 49rem;
     display: flex;
     flex-direction: column;
 }

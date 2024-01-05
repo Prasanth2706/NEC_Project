@@ -15,15 +15,14 @@ import { useNavigate } from 'react-router-dom'
 import { toolDetail, gettoolDetail } from '../../action/ToolDetail'
 // import axios from 'axios'
 
-const ToolDetail = (props) => {
+const ToolDetail = () => {
 
-
-    const [selectedFile, setSelectedFile] = useState(null)
+    const [selectedFile, setSelectedFile] = useState([])
     const [selectedDropValue, setSelectesDropValue] = useState(null)
     const [secondSelectedDropValue, setSecondSelectedDropValue] = useState(null)
     const [imageUploaded, setImageUploaded] = useState(false);
     const [taskName, setTaskname] = useState('')
-    const [fileName, setFileName] = useState('no file')
+    // const [fileName, setFileName] = useState('no file')
     const [fileSize, setFileSize] = useState('0kb')
     const [fileDetail, setFileDetail] = useState(null)
     const [connectionData, setConnectionData] = useState()
@@ -50,7 +49,9 @@ const ToolDetail = (props) => {
                     fileSize: formattedFileSize,
                 });
                 console.log(uploadedFile, 'file')
-                setSelectedFile(uploadedFile)
+                console.log(selectedFile,'selectedfile')
+                setSelectedFile(uploadedFile)   
+                console.log(uploadedFile,'filename')
                 setImageUploaded(true)
 
                 // setRunButtonEnabled(true)
@@ -67,7 +68,7 @@ const ToolDetail = (props) => {
     }
     const handlePrevios = () => {
         setImageUploaded(false)
-        setFileDetail(null)
+        // setFileDetail(null)
         navigate('/toolselection')
     }
 
@@ -76,7 +77,6 @@ const ToolDetail = (props) => {
     }
 
     const selectedData = (value, DropDownName) => {
-
         console.log(value, 'valueofdrop')
         if (DropDownName === 'Source') {
             connectionData?.map((connect) => {
@@ -161,6 +161,7 @@ const ToolDetail = (props) => {
     }
     const navigate = useNavigate();
     const handleRunClick = () => {
+        
         navigate('/migration')
         const accessToken = localStorage.getItem("access-token");
         // axios.post('http://localhost:5000/createjob', {
@@ -174,6 +175,7 @@ const ToolDetail = (props) => {
         //         "x-auth-token": accessToken,
         //     },
         // })
+        console.log(selectedFile,"Run click check")
         let formaData = new FormData()
         formaData.append('taskName', taskName);
         formaData.append('xmlFile', selectedFile);
@@ -208,6 +210,8 @@ const ToolDetail = (props) => {
         //         // handleSetToken()-
         //     })
 
+        const payload = formaData
+
         toolDetail((response) => {
             if (response.message === 'Request failed with status code 400') {
                 localStorage.setItem('migration', "failed")
@@ -216,16 +220,18 @@ const ToolDetail = (props) => {
                 console.log(response, 'error')
             }
             // setMigrationSuccess(true)
-            console.log(response, "toolres")
-            setApiResult(response)
-            localStorage.setItem('step3', true)
-            // localStorage.setItem('pop-up', true)
-            handlePopUp('success');
-            console.log(response, 'tooldetailresponse')
-            navigate('/migration', { state: { migrationSuccess: 'Success' } })
+            else {
+                console.log(response, "toolres")
+                setApiResult(response)
+                localStorage.setItem('step3', true)
+                // localStorage.setItem('pop-up', true)
+                handlePopUp('success');
+                console.log(response, 'tooldetailresponse')
+                navigate('/migration', { state: { migrationSuccess: 'Success' } })
 
-            console.log(response, 'clhsdc')
-        },formaData)
+                console.log(response, 'clhsdc')
+            }
+        }, payload)
 
 
 
@@ -247,8 +253,6 @@ const ToolDetail = (props) => {
         // const response = await axios.get('http://localhost:5000/connections?=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJpYXQiOjE3MDE3NzkyNzYsImV4cCI6MTcwMTc4MDQ3Nn0.xnUqcgP3889NYQ9nkpuQzx5UMz7JzHY_H1XKkLeEs14', {
         //     headers: { "x-auth-token": accessToken }
         // })
-
-
         let dropDown = []
         gettoolDetail((response) => {
             setConnectionData(response?.connections)
@@ -258,8 +262,6 @@ const ToolDetail = (props) => {
 
             })
         })
-
-
         // setConnectionData(response?.data?.connections)
         // let dropDown = []
         // response?.data?.connections?.map((connect) => {

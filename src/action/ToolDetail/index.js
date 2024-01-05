@@ -1,13 +1,12 @@
 import { fetchCall } from "../action";
 
-
 export const toolDetail = (callback, payload) => {
     debugger
     const url = "http://localhost:5000/createjob";
     return fetchCall(url, 'POST', payload, (response) => {
         console.log(response, "fetch tooldetail response")
         callback(response);
-    });
+    },true);
 };
 
 export const gettoolDetail = (callback, payload) => {

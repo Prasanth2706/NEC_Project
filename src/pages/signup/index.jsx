@@ -182,9 +182,9 @@ const SignUp = () => {
                 {passwordCheck && <div>
                     <p className='passwordCheck'>*{'password is not matching'}</p>
                 </div>}
-                <div className='forgot-pass'>
+                {/* <div className='forgot-pass'>
                     <p>Forgot Password?</p>
-                </div>
+                </div> */}
                 <Button name={"Sign Up"} className={"sign"} onChange={handleSignup} />
                 {/* <NecPopUp isopen={isOpen} onClose={() => SetIsOpen(false)} /> */}
 

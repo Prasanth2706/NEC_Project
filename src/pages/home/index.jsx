@@ -10,6 +10,7 @@ import { Images } from "../../assets/Images";
 import { Navigate, useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/passwordInput";
 import { login } from "../../action/login";
+import { forgetPassword } from "../../action/ForgetPassword";
 // import {observer} from 'mobx-react-lite';
 // import { Observer } from 'mobx-react-lite'
 // import ProjectStore from '../../Apistore'
@@ -93,18 +94,32 @@ const Home = () => {
   };
 
   const handleForgotPassword = () => {
-    axios.post('http://localhost:5000/forgotpassword', {
-      email: emailOrUsername,
-    })
-      .then(
-        (response) => {
-          console.log(response, "response");
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    console.log(`sending password reset email to ${emailOrUsername}`);
+    // axios.post('http://localhost:5000/forgotpassword', {
+    //   email: emailOrUsername,
+    // })
+    //   .then(
+    //     (response) => {
+    //       console.log(response, "response");
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //     }
+    //   );
+    // console.log(`sending password reset email to ${emailOrUsername}`);
+    const payload = {
+      email: emailOrUsername
+    }
+
+    forgetPassword((response) => {
+      if (response.message === 'Request failed with status code 400') {
+        console.log(response);
+      }
+      else {
+        console.log(response, "response");
+      }
+    }, payload)
+
+
   };
 
   const handleChange = (e) => {

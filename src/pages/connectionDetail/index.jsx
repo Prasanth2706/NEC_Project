@@ -33,10 +33,7 @@ const ConnectionDetail = () => {
     const [savedConnectionError, setSavedConnectionError] = useState([])
 
     const navigate = useNavigate();
-
     const handleConnection = () => {
-
-
         const accessToken = localStorage.getItem("access-token");
         console.log(accessToken, "accessToken");
         setIsLoading(true)

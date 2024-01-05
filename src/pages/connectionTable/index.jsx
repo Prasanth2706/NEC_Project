@@ -157,11 +157,6 @@ const Connection = () => {
     fetchData();
   }, [])
 
-  // useEffect(() => {
-  // const image = [<img src={Images.edit} className='editicon' onClick={() => console.log('enter1')} alt="edit" />, <img src={Images.delete} className='deleteicon' onClick={() => console.log('enter2')} alt="edit" />]
-
-  // },[fetchData()])
-
   const conectionColumns = [
     {
       title: 'Name',
@@ -206,15 +201,6 @@ const Connection = () => {
       ),
     },
   ]
-
-  // const ConnectionDataIcon = [
-  //   {
-  //     // key: '1',
-  //     // name: '[\\SVM0\\\SVM0\Finace\CsPolicy\CsPolicy.xml]',
-  //     // type: 'FlatFile',
-  //   }
-  // ]
-
 
 
   return (

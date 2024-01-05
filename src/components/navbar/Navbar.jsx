@@ -7,25 +7,23 @@ import axios from "axios";
 import { BellOutlined } from "@ant-design/icons";
 import { logOut } from "../../action/Logout";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const navigate = useNavigate()
-
 
   const handleJobs = () => {
     navigate('/jobs')
   }
 
   const handleConnection = () => {
-
     navigate('/connections')
   }
 
   const handlAboutus = () => {
     navigate('/aboutus')
-
-
   }
+
   const pathName = window.location.pathname;
+
   const getClassName = (value) => {
     if (value === pathName) {
       return 'active'
@@ -59,8 +57,8 @@ const Navbar = (props) => {
     //       console.log(error);
     //     }
     //   ); 
-
-    logOut((response) => {
+    
+     logOut((response) => {
       localStorage.removeItem(
         "access-token"
       );
@@ -75,20 +73,19 @@ const Navbar = (props) => {
     })
   };
 
+
   return (
     <header className="main-header">
       <div className="left-section">
         <div className="logo"></div>
         <span class="nav_title" onClick={() => navigate('/jobs')}>NEC</span>
       </div>
-
       <div className="center-section">
         <nav>
           <ul>
             <li onClick={() => handleJobs()} className={getClassName('/jobs')}>
               Jobs
             </li>
-
             <li onClick={() => handleConnection()} className={getClassName('/connections')}>
               Connections
             </li>

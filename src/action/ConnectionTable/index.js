@@ -10,19 +10,10 @@ export const connectionTable = (callback, payload) => {
     });
 };
 
-
-// export const getarea = (callback, payload, queryParams) => {
-//     const url = `${API_CONSTANTS.GETAREA}/${queryParams}`;
-//     return fetchCall(url, API_METHODS.GET, payload, (response) => {
-//       callback(response);
-//     });
-//   };
-
-
 export const connectionTableUpdate = (callback, payload, queryParams) => {
     // const url = `${API_CONSTANTS.GETAREA}/${queryParams}`;
     // debugger
-    console.log(queryParams,'table queryparams')
+    console.log(queryParams, 'table queryparams')
 
     const url = `http://localhost:5000/updateconnection/${queryParams}`;
     return fetchCall(url, 'PUT', payload, (response) => {
@@ -31,11 +22,11 @@ export const connectionTableUpdate = (callback, payload, queryParams) => {
     });
 };
 
-export const connectionTableDelete = (callback,payload ,queryParams) => {
-    console.log(queryParams,'queryparams')
+export const connectionTableDelete = (callback, payload, queryParams) => {
+    console.log(queryParams, 'queryparams')
     // const url = `${API_CONSTANTS.GETAREA}/${queryParams}`;
     const url = `http://localhost:5000/deleteconnection/${queryParams}`;
-    return fetchCall(url, 'DELETE', payload,(response) => {
+    return fetchCall(url, 'DELETE', payload, (response) => {
         console.log(response, "fetch connection response")
         callback(response);
     });
